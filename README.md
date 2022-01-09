@@ -10,8 +10,8 @@
 - Fill and/or edit environment files
 - Start Docker compose services and install dependencies
   ```
-  docker-compose up -d php mariadb adminer
   docker-compose run --rm composer install
+  docker-compose up -d php mariadb adminer
   ```
 - Open Adminer on port http://localhost:8081
 - Import `./database/schema.sql`

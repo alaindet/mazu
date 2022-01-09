@@ -12,9 +12,8 @@
     "url": "git+https://github.com/alaindet/mazu.git"
   },
   "keywords": [
-    "garnet",
-    "progress",
-    "tracker"
+    "mazu",
+    "list"
   ],
   "author": "Alain D'Ettorre <alain.det@gmail.com>",
   "license": "MIT",

@@ -4,4 +4,5 @@ export interface MazuList {
   isFavorite: boolean;
   itemsDoneCount: number;
   itemsCount: number;
+  items: string[];
 }

@@ -11,5 +11,5 @@ const selectListId = (state: RootState, listId: string) => listId;
 // const todo = useSelector(state => selectListById(state, 'myList1'))
 export const selectListById = createSelector(
   [selectListsSlice, selectListId],
-  (lists: ListsState, listId: string) => lists.byId[listId]
+  (lists: ListsState, listId: string) => lists.byId[listId],
 );

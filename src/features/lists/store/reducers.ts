@@ -4,7 +4,7 @@ import { MazuList } from 'src/common/types';
 import { ListsState } from './state';
 
 export const create = (state: ListsState, action: PayloadAction<string>) => {
-  const id = Date.now().toString();
+  const id = Date.now().toString(); // TODO: Change ID generation?
   state.byId[id] = {
     id,
     name: action.payload,
@@ -15,18 +15,12 @@ export const create = (state: ListsState, action: PayloadAction<string>) => {
   state.allIds = [...state.allIds, id].sort();
 };
 
-export const update = (
-  state: ListsState,
-  action: PayloadAction<MazuList>,
-) => {
+export const update = (state: ListsState, action: PayloadAction<MazuList>) => {
   const id = action.payload.id;
   state.byId[id] = { ...state.byId[id], ...action.payload };
 };
 
-export const markAsFavorite = (
-  state: ListsState,
-  action: PayloadAction<MazuList>,
-) => {
+export const markAsFavorite = (state: ListsState,  action: PayloadAction<MazuList>) => {
   for (const listId in state.byId) {
     if (state.byId[listId].isFavorite) {
       state.byId[listId].isFavorite = false;
@@ -37,18 +31,12 @@ export const markAsFavorite = (
   state.byId[id] = { ...state.byId[id], isFavorite: true };
 };
 
-export const unmarkAsFavorite = (
-  state: ListsState,
-  action: PayloadAction<MazuList>,
-) => {
+export const unmarkAsFavorite = (state: ListsState, action: PayloadAction<MazuList>) => {
   const id = action.payload.id;
   state.byId[id] = { ...state.byId[id], isFavorite: false };
 };
 
-export const remove = (
-  state: ListsState,
-  action: PayloadAction<MazuList>,
-) => {
+export const remove = (state: ListsState, action: PayloadAction<MazuList>) => {
   const id = action.payload.id;
   delete state.byId[id];
   state.allIds = state.allIds.filter(anId => anId !== id);

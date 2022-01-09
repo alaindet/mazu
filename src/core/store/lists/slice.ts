@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { initialState } from './state';
 import * as fromReducers from './reducers';
+import * as fromItemsActions from 'src/features/items/store';
 
 // Name
 const name = 'lists';
@@ -16,10 +17,20 @@ const reducers = {
 };
 
 // Slice
-export const listsSlice = createSlice({
+export const slice = createSlice({
   name,
   initialState,
   reducers,
+  extraReducers: (builder) => {
+    builder.addCase(fromItemsActions.create, (state, action) => {
+      const { listId, id } = action.payload;
+      state.byId[listId].items.push(id);
+    });
+    builder.addCase(fromItemsActions.remove, (state, action) => {
+      const { listId, id } = action.payload;
+      state.byId[listId].items = state.byId[listId].items.filter(anId => anId !== id);
+    });
+  }
 });
 
 // Actions
@@ -29,7 +40,7 @@ export const {
   markAsFavorite,
   unmarkAsFavorite,
   remove,
-} = listsSlice.actions;
+} = slice.actions;
 
 // Reducer
-export default listsSlice.reducer;
+export default slice.reducer;

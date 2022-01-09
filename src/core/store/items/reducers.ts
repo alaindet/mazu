@@ -3,26 +3,15 @@ import { PayloadAction } from '@reduxjs/toolkit';
 import { MazuItem } from 'src/common/types';
 import { ItemsState } from './state';
 
-export interface CreateMazuItem {
+export const create = (state: ItemsState, action: PayloadAction<{
+  id: string;
   listId: string;
   name: string;
   amount: number;
   description: string;
-}
-
-// TODO: Declare extra reducer to change lists too
-export const create = (state: ItemsState, action: PayloadAction<CreateMazuItem>) => {
-  const { listId, name, amount, description } = action.payload;
-  const id = Date.now().toString(); // TODO: Change ID generation?
-  state.byId[id] = {
-    id,
-    listId,
-    name,
-    amount,
-    description,
-    isDone: false,
-  };
-  state.allIds = [...state.allIds, id].sort();
+}>) => {
+  state.byId[action.payload.id] = { ...action.payload, isDone: false };
+  state.allIds = [...state.allIds, action.payload.id].sort();
 };
 
 export const update = (state: ItemsState, action: PayloadAction<MazuItem>) => {
@@ -35,7 +24,7 @@ export const markAsDone = (state: ItemsState, action: PayloadAction<MazuItem>) =
   state.byId[id] = { ...state.byId[id], isDone: true };
 };
 
-export const unmarkAsFavorite = (state: ItemsState, action: PayloadAction<MazuItem>) => {
+export const unmarkAsDone = (state: ItemsState, action: PayloadAction<MazuItem>) => {
   const id = action.payload.id;
   state.byId[id] = { ...state.byId[id], isDone: false };
 };

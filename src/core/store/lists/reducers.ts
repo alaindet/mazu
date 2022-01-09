@@ -3,14 +3,18 @@ import { PayloadAction } from '@reduxjs/toolkit';
 import { MazuList } from 'src/common/types';
 import { ListsState } from './state';
 
-export const create = (state: ListsState, action: PayloadAction<string>) => {
-  const id = Date.now().toString(); // TODO: Change ID generation?
+export const create = (state: ListsState, action: PayloadAction<{
+  id: string;
+  name: string;
+}>) => {
+  const { id, name } = action.payload;
   state.byId[id] = {
     id,
-    name: action.payload,
+    name,
     isFavorite: false,
     itemsDoneCount: 0,
     itemsCount: 0,
+    items: [],
   };
   state.allIds = [...state.allIds, id].sort();
 };

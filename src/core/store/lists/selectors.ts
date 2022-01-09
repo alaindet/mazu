@@ -3,7 +3,7 @@ import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from 'src/core/store';
 import { ListsState } from './state';
 
-const selectListsSlice = (state: RootState) => state.lists;
+export const selectListsSlice = (state: RootState) => state.lists;
 const selectListId = (state: RootState, listId: string) => listId;
 
 // Usage

@@ -1,7 +1,7 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 
-import listsReducer from 'src/features/lists/store';
-import itemsReducer from 'src/features/items/store';
+import listsReducer from './lists';
+import itemsReducer from './items';
 
 // TODO: Split store?
 export const store = configureStore({

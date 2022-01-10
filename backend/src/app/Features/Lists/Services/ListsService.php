@@ -8,7 +8,6 @@ use App\Features\Lists\Dtos\CreateListDto;
 use App\Features\Lists\Dtos\UpdateListDto;
 use App\Features\Lists\Dtos\GetListDto;
 use App\Features\Lists\Repositories\ListsRepository;
-use App\Shared\Utils\Time;
 
 class ListsService
 {
@@ -19,16 +18,16 @@ class ListsService
         $this->listsRepo = new ListsRepository();
     }
 
-    public function create(CreateCourseDto $dtoIn): GetListDto
+    public function create(CreateListDto $dtoIn): GetListDto
     {
         $data = $this->listsRepo->create($dtoIn);
 
         $dtoOut = new GetListDto();
         $dtoOut->listId = $data['list_id'];
         $dtoOut->userId = $data['user_id'];
-        $dtoOut->isFavorite = intval($data['is_favorite']) ? true : false;
+        $dtoOut->isFavorite = intval($data['is_favorite']) === 1 ? true : false;
         $dtoOut->name = $data['name'];
-        $dtoOut->description = $data['description'];
+        $dtoOut->description = $data['description'] ?? '';
 
         return $dtoOut;
     }
@@ -67,7 +66,7 @@ class ListsService
     /**
      * @param string|int $listId
      */
-    public function markAsFavorite($listId, $isFavorite = true): array
+    public function markAsFavorite($listId, $isFavorite = true)
     {
         $marked = $this->listsRepo->markAsFavorite($listId, $isFavorite);
 
@@ -103,9 +102,9 @@ class ListsService
         $dtoOut = new GetListDto();
         $dtoOut->listId = $list['list_id'];
         $dtoOut->userId = $list['user_id'];
-        $dtoOut->isFavorite = intval($list['is_favorite']) ? true : false;
+        $dtoOut->isFavorite = intval($list['is_favorite']) === 1 ? true : false;
         $dtoOut->name = $list['name'];
-        $dtoOut->description = $list['description'];
+        $dtoOut->description = $list['description'] ?? '';
 
         return $dtoOut;
     }
@@ -125,11 +124,11 @@ class ListsService
         }
 
         $dtoOut = new GetListDto();
-        $dtoOut->listId = $course['list_id'];
-        $dtoOut->userId = $course['user_id'];
-        $dtoOut->isFavorite = intval($list['is_favorite']) ? true : false;
-        $dtoOut->name = $course['name'];
-        $dtoOut->description = $course['description'];
+        $dtoOut->listId = $list['list_id'];
+        $dtoOut->userId = $list['user_id'];
+        $dtoOut->isFavorite = intval($list['is_favorite']) === 1 ? true : false;
+        $dtoOut->name = $list['name'];
+        $dtoOut->description = $list['description'] ?? '';
 
         return $dtoOut;
     }

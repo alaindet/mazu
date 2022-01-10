@@ -6,7 +6,7 @@ use App\Core\Exceptions\Http\BadRequestHttpException;
 use App\Core\Middleware;
 use App\Core\Http\Request\Request;
 use App\Core\Http\Response\Response;
-use App\Shared\Validation\Validator;
+use App\Common\Validation\Validator;
 use App\Features\Lists\Dtos\CreateListDto;
 
 class CreateListValidationMiddleware extends Middleware

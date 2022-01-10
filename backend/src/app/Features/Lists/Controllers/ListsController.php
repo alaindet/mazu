@@ -22,7 +22,7 @@ class ListsController extends Controller
         $dtoOut = $this->listsService->create($dtoIn);
 
         $res->setBody([
-            'message' => 'New list created',
+            'message' => 'New list was created',
             'data' => $dtoOut,
         ]);
 
@@ -36,7 +36,7 @@ class ListsController extends Controller
         $lists = $this->listsService->getAllByUserId($userId);
 
         $res->setBody([
-            'message' => "All lists of user #{$userId}",
+            'message' => "Get all lists of user #{$userId}",
             'data' => $lists,
         ]);
 
@@ -59,10 +59,10 @@ class ListsController extends Controller
     public function markAsFavorite(Request $req, Response $res): Response
     {
         $listId = $req->getUriParameter('listid');
-        $list = $this->listsService->markAsFavorite($listId, true);
+        $this->listsService->markAsFavorite($listId, true);
         $res->setBody([
-            'message' => "List #{$listId} marked as favorite",
-            'data' => $list,
+            'message' => "List #{$listId} was marked as favorite",
+            'data' => null,
         ]);
 
         return $res;
@@ -71,10 +71,10 @@ class ListsController extends Controller
     public function unmarkAsFavorite(Request $req, Response $res): Response
     {
         $listId = $req->getUriParameter('listid');
-        $list = $this->listsService->markAsFavorite($listId, false);
+        $this->listsService->markAsFavorite($listId, false);
         $res->setBody([
-            'message' => "List #{$listId} unmarked as favorite",
-            'data' => $list,
+            'message' => "List #{$listId} was unmarked as favorite",
+            'data' => null,
         ]);
 
         return $res;
@@ -86,7 +86,7 @@ class ListsController extends Controller
         $dtoOut = $this->listsService->updateById($dtoIn);
 
         $res->setBody([
-            'message' => "List #{$dtoOut->listId} updated",
+            'message' => "List #{$dtoOut->listId} was updated",
             'data' => $dtoOut,
         ]);
 
@@ -99,7 +99,7 @@ class ListsController extends Controller
         $dtoOut = $this->listsService->deleteById($listId);
 
         $res->setBody([
-            'message' => "List #{$listId} deleted",
+            'message' => "List #{$listId} was deleted",
             'data' => $dtoOut,
         ]);
 

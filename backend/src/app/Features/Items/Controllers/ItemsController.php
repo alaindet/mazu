@@ -22,7 +22,7 @@ class ItemsController extends Controller
         $dtoOut = $this->itemsService->create($dtoIn);
 
         $res->setBody([
-            'message' => "New item created on list #{$dtoIn->listId}",
+            'message' => "New item was created on list #{$dtoIn->listId}",
             'data' => $dtoOut,
         ]);
 
@@ -31,11 +31,11 @@ class ItemsController extends Controller
 
     public function getAll(Request $req, Response $res): Response
     {
-        $dtoIn = $req->getValidatedData('dto');
+        $listId = $req->getUriParameter('listid');
         $items = $this->itemsService->getAllByListId($listId);
 
         $res->setBody([
-            'message' => "All items of list #{$dtoIn->listId}",
+            'message' => "Get all items of list #{$listId}",
             'data' => $items,
         ]);
 
@@ -46,10 +46,22 @@ class ItemsController extends Controller
     {
         $listId = $req->getUriParameter('listid');
         $itemId = $req->getUriParameter('itemid');
-        $list = $this->listsService->markAsDone($itemId, true);
+        $this->itemsService->markAsDone($itemId, true);
         $res->setBody([
-            'message' => "Item #{$itemId} from list #{$listId} marked as 'done'",
-            'data' => $list,
+            'message' => "Item #{$itemId} from list #{$listId} was marked as done",
+            'data' => null,
+        ]);
+
+        return $res;
+    }
+
+    public function markAllAsDone(Request $req, Response $res): Response
+    {
+        $listId = $req->getUriParameter('listid');
+        $this->itemsService->markAllAsDone($listId, true);
+        $res->setBody([
+            'message' => "All items from list #{$listId} were marked as done",
+            'data' => null,
         ]);
 
         return $res;
@@ -59,10 +71,22 @@ class ItemsController extends Controller
     {
         $listId = $req->getUriParameter('listid');
         $itemId = $req->getUriParameter('itemid');
-        $list = $this->listsService->markAsDone($itemId, false);
+        $list = $this->itemsService->markAsDone($itemId, false);
         $res->setBody([
-            'message' => "Item #{$itemId} from list #{$listId} marked as 'todo'",
+            'message' => "Item #{$itemId} from list #{$listId} was marked as to do",
             'data' => $list,
+        ]);
+
+        return $res;
+    }
+
+    public function unmarkAllAsDone(Request $req, Response $res): Response
+    {
+        $listId = $req->getUriParameter('listid');
+        $this->itemsService->markAllAsDone($listId, false);
+        $res->setBody([
+            'message' => "All items from list #{$listId} were marked as to do",
+            'data' => null,
         ]);
 
         return $res;
@@ -70,11 +94,12 @@ class ItemsController extends Controller
 
     public function update(Request $req, Response $res): Response
     {
+        [$listId, $itemId] = $req->getUriParameters(['listid', 'itemid']);
         $dtoIn = $req->getValidatedData('dto');
-        $dtoOut = $this->listsService->updateById($dtoIn);
+        $dtoOut = $this->itemsService->updateById($dtoIn);
 
         $res->setBody([
-            'message' => "List #{$dtoOut->listId} updated",
+            'message' => "Item #{$itemId} from list #{$listId} was updated",
             'data' => $dtoOut,
         ]);
 
@@ -83,11 +108,37 @@ class ItemsController extends Controller
 
     public function delete(Request $req, Response $res): Response
     {
-        $listId = $req->getUriParameter('listid');
-        $dtoOut = $this->listsService->deleteById($listId);
+        [$listId, $itemId] = $req->getUriParameters(['listid', 'itemid']);
+        $dtoOut = $this->itemsService->deleteById($listId);
 
         $res->setBody([
-            'message' => "List #{$listId} deleted",
+            'message' => "Item #{$itemId} from list #{$itemId} was deleted",
+            'data' => $dtoOut,
+        ]);
+
+        return $res;
+    }
+
+    public function deleteAll(Request $req, Response $res): Response
+    {
+        $listId = $req->getUriParameter('listid');
+        $dtoOut = $this->itemsService->deleteByListId($listId);
+
+        $res->setBody([
+            'message' => "All items from list #{$listId} were deleted",
+            'data' => $dtoOut,
+        ]);
+
+        return $res;
+    }
+
+    public function deleteAllMarkedAsDone(Request $req, Response $res): Response
+    {
+        $listId = $req->getUriParameter('listid');
+        $dtoOut = $this->itemsService->deleteDoneItemsByListId($listId);
+
+        $res->setBody([
+            'message' => "All items marked as done were deleted from list #{$listId}",
             'data' => $dtoOut,
         ]);
 

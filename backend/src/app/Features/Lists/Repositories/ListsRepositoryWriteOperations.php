@@ -3,14 +3,11 @@
 namespace App\Features\Lists\Repositories;
 
 use App\Features\Lists\Dtos\CreateListDto;
-use App\Shared\Utils\Time;
 
 trait ListsRepositoryWriteOperations
 {
     public function create(CreateListDto $dto): array
     {
-        $now = Time::getDate();
-
         $sql = "
             INSERT INTO {$this->table}
                 (user_id, is_favorite, name, description)
@@ -61,7 +58,7 @@ trait ListsRepositoryWriteOperations
         ];
 
         $params = [
-            ':listid' => $courseId,
+            ':listid' => $listId,
         ];
 
         foreach ($fields as $field => $value) {

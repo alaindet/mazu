@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Features\Courses\Repositories;
+namespace App\Features\Lists\Repositories;
 
-trait CoursesRepositoryReadOperations
+trait ListsRepositoryReadOperations
 {
     /**
      * @param string|int $userId

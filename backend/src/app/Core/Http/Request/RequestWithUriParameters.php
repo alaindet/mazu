@@ -7,7 +7,7 @@ trait RequestWithUriParameters
     protected array $uriParameters = [];
 
     /**
-     * @param array | null $keys
+     * @param array|null $keys
      */
     public function getUriParameters($keys = null): array
     {

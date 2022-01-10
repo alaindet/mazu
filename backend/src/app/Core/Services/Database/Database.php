@@ -61,7 +61,7 @@ class Database
     }
 
     /**
-     * @return array | null
+     * @return array|null
      */
     public function selectFirst(
         string $sql,

@@ -4,7 +4,7 @@ namespace App\Core\Http\Request;
 
 trait RequestWithValidatedData
 {
-    /** @var array | null */
+    /** @var array|null */
     protected $data = null;
 
     public function addValidatedData(array $data): self
@@ -26,7 +26,7 @@ trait RequestWithValidatedData
     }
 
     /**
-     * @param string | null $key
+     * @param string|null $key
      */
     public function getValidatedData($key = null)
     {

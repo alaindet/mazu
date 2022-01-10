@@ -34,7 +34,7 @@ class ListsService
     }
 
     /**
-     * @param string | int $userId
+     * @param string|int $userId
      */
     public function getAllByUserId($userId): array
     {
@@ -42,7 +42,7 @@ class ListsService
     }
 
     /**
-     * @param string | int $listId
+     * @param string|int $listId
      */
     public function findById($listId): array
     {
@@ -57,7 +57,7 @@ class ListsService
     }
 
     /**
-     * @param string | int $listId
+     * @param string|int $listId
      */
     public function existsById($listId): bool
     {
@@ -65,11 +65,16 @@ class ListsService
     }
 
     /**
-     * @param string | int $listId
+     * @param string|int $listId
      */
     public function markAsFavorite($listId, $isFavorite = true): array
     {
-        return $this->listsRepo->markAsFavorite($listId, $isFavorite);
+        $marked = $this->listsRepo->markAsFavorite($listId, $isFavorite);
+
+        if ($marked === 0) {
+            $message = "List with id #{$listId} does not exist";
+            throw new NotFoundHttpException($message);
+        }
     }
 
     public function updateById(UpdateListDto $dtoIn): GetListDto
@@ -106,7 +111,7 @@ class ListsService
     }
 
     /**
-     * @param string | int $listId
+     * @param string|int $listId
      */
     public function deleteById($listId): GetListDto
     {
@@ -127,10 +132,5 @@ class ListsService
         $dtoOut->description = $course['description'];
 
         return $dtoOut;
-    }
-
-    public function searchByName(string $listName): array
-    {
-        return $this->listsRepo->searchByName($listName);
     }
 }

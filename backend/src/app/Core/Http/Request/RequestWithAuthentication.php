@@ -4,7 +4,7 @@ namespace App\Core\Http\Request;
 
 trait RequestWithAuthentication
 {
-    /** @var array | null */
+    /** @var array|null */
     protected $auth = null;
 
     public function addAuthenticationData(array $auth): self
@@ -26,7 +26,7 @@ trait RequestWithAuthentication
     }
 
     /**
-     * @param string | null $key
+     * @param string|null $key
      */
     public function getAuthenticationData($key = null)
     {

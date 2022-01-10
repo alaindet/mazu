@@ -39,8 +39,8 @@ class UsersRepository extends Repository
     }
 
     /**
-     * @param string | int $userId
-     * @return array | null
+     * @param string|int $userId
+     * @return array|null
      */
     public function getUserProfile($userId)
     {
@@ -67,7 +67,7 @@ class UsersRepository extends Repository
 
     /**
      * @param string $email
-     * @param string | array $_fields
+     * @param string|array $_fields
      * @return array |null
      */
     public function findUserByEmail(string $email, $_fields = '*')

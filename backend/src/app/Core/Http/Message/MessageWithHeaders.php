@@ -113,7 +113,7 @@ trait MessageWithHeaders
     }
 
     /**
-     * @return string | string[]
+     * @return string|string[]
      */
     private function splitCommaIfAny(string $value)
     {

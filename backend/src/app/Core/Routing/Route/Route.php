@@ -72,7 +72,7 @@ class Route
     /**
      * Resets all middleware to given argument
      *
-     * @param array | string $middlewareConfigs
+     * @param array|string $middlewareConfigs
      */
     public function setMiddleware($middlewareConfigs): self
     {

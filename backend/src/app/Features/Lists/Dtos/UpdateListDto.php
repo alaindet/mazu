@@ -4,7 +4,7 @@ namespace App\Features\Lists\Dtos;
 
 class UpdateListDto
 {
-    /** @var string | int */
+    /** @var string|int */
     public $listId;
     public bool $isFavorite;
     public string $name;

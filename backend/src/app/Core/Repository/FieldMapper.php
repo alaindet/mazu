@@ -1,15 +1,17 @@
 <?php
 
-namespace App\Common\Repositories;
+namespace App\Core\Repository;
 
-class FieldMapper
+use App\Common\Utils\Arrays;
+
+trait WithFieldMapper
 {
     /**
      * Ex.:
      * [
      *    'name' => 'name',
-     *    'is_done' => ['isDone', TypeCasting::toBoolean],
-     *    'amount' => ['amount', TypeCasting::toInteger],
+     *    'is_done' => ['isDone', fn($i) => TypeCasting::toBoolean($i)],
+     *    'amount' => ['amount', fn($i) => TypeCasting::toInteger($i)],
      * ]
      */
     private array $schema = [];
@@ -19,6 +21,7 @@ class FieldMapper
         $result = [];
 
         foreach ($row as $key => $value) {
+
             if (!isset($this->output[$key])) {
                 $result[$key] = $value;
                 continue;
@@ -45,9 +48,14 @@ class FieldMapper
         $result = [];
 
         foreach ($rows as $row) {
-            $result[] = $this->outputSingle($row);
+            $result[] = $this->map($row);
         }
 
         return $result;
+    }
+
+    public function toDto(string $dtoFullClassName, array $arr)
+    {
+        return Arrays::toDto($dtoFullClassName, $arr);
     }
 }

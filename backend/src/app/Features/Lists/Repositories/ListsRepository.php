@@ -3,20 +3,23 @@
 namespace App\Features\Lists\Repositories;
 
 use App\Core\Repository;
-use App\Core\Services\Database\Database;
+use App\Common\Repositories\WithFieldMapper;
 
 class ListsRepository extends Repository
 {
     use ListsRepositoryWriteOperations;
     use ListsRepositoryReadOperations;
-    use ListsRepositoryFieldMapper;
+    use WithFieldMapper;
 
     public string $table = 'lists';
-
-    protected Database $db;
-
-    public function __construct()
-    {
-        $this->db = appServiceProvider(Database::class);
-    }
+    protected $mapperSchema = [
+        'list_id' => 'listId',
+        'user_id' => 'userId',
+        'is_favorite' => [
+            'isFavorite',
+            fn($i) => TypeCasting::toBoolean($i),
+        ],
+        'name' => 'name',
+        'description' => 'description',
+    ];
 }

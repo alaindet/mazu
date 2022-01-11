@@ -73,7 +73,7 @@ abstract class Arrays
         return $result;
     }
 
-    static public function toDto(array $arr, string $dtoFullClassName)
+    static public function toDto(string $dtoFullClassName, array $arr)
     {
         $dto = new $dtoFullClassName();
         foreach ($arr as $key => $value) {

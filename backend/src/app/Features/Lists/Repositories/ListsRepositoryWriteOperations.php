@@ -3,10 +3,11 @@
 namespace App\Features\Lists\Repositories;
 
 use App\Features\Lists\Dtos\CreateListDto;
+use App\Features\Lists\Dtos\GetListDto;
 
 trait ListsRepositoryWriteOperations
 {
-    public function create(CreateListDto $dto): array
+    public function create(CreateListDto $dto): GetListDto
     {
         $sql = "
             INSERT INTO {$this->table}
@@ -24,15 +25,14 @@ trait ListsRepositoryWriteOperations
 
         $listId = $this->db->insert($sql, $params);
 
-        return [
-            'list_id' => $listId,
-            'user_id' => $dto->userId,
-            'is_favorite' => 0,
+        return $this->toDto(GetListDto::class, [
+            'listId' => $listId,
+            'userId' => $dto->userId,
+            'isFavorite' => 0,
             'name' => $dto->name,
             'description' => $dto->description,
-        ];
+        ]);
     }
-
 
     /**
      * @param string|integer $listId
@@ -46,10 +46,12 @@ trait ListsRepositoryWriteOperations
             SET is_favorite = :isfavorite
             WHERE list_id = :listid
         ";
+
         $params = [
             ':listid' => $listId,
             ':isfavorite' => $isFavorite ? 1 : 0,
         ];
+
         return $this->db->execute($sql, $params);
     }
 

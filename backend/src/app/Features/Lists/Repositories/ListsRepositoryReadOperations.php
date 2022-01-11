@@ -12,8 +12,8 @@ trait ListsRepositoryReadOperations
     {
         $sql = "SELECT * FROM {$this->table} WHERE user_id = :userid";
         $params = [':userid' => $userId];
-
-        return $this->db->select($sql, $params);
+        $results = $this->db->select($sql, $params);
+        return $this->mapMultiple($results);
     }
 
     /**
@@ -24,7 +24,8 @@ trait ListsRepositoryReadOperations
     {
         $sql = "SELECT * FROM {$this->table} WHERE list_id = :listId";
         $params = [':listId' => $listId];
-        return $this->db->selectFirst($sql, $params);
+        $result = $this->db->selectFirst($sql, $params);
+        return $this->map($result);
     }
 
     /**
@@ -35,6 +36,7 @@ trait ListsRepositoryReadOperations
     {
         $sql = "SELECT list_id FROM {$this->table} WHERE list_id = :listid";
         $params = [':listid' => $listId];
-        return $this->db->selectFirst($sql, $params) !== null;
+        $result = $this->db->selectFirst($sql, $params) !== null;
+        return $this->map($result);
     }
 }

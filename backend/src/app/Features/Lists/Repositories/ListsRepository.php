@@ -9,6 +9,7 @@ class ListsRepository extends Repository
 {
     use ListsRepositoryWriteOperations;
     use ListsRepositoryReadOperations;
+    use ListsRepositoryFieldMapper;
 
     public string $table = 'lists';
 

@@ -46,7 +46,12 @@ class ItemsService
      */
     public function markAsDone($itemId, $isDone = true): void
     {
-        $this->itemsRepo->markAsDone($itemId, $isDone);
+        $marked = $this->itemsRepo->markAsDone($itemId, $isDone);
+
+        if ($marked === 0) {
+            $message = "Item #{$itemId} does not exist";
+            throw new NotFoundHttpException($message);
+        }
     }
 
     /**
@@ -54,18 +59,22 @@ class ItemsService
      */
     public function markAllAsDone($listId, $isDone = true): void
     {
-        $this->itemsRepo->markAllAsDone($listId, $isDone);
+        $marked = $this->itemsRepo->markAllAsDone($listId, $isDone);
+        if ($marked === 0) {
+            $message = "Items from list #{$listId} do not exist";
+            throw new NotFoundHttpException($message);
+        }
     }
 
     /**
-     * @param string|int $listId
+     * @param string|int $itemId
      */
-    public function findById($listId): array
+    public function findById($itemId): array
     {
-        $list = $this->itemsRepo->findById($listId);
+        $list = $this->itemsRepo->findById($itemId);
 
         if ($list === null) {
-            $message = "List with id #{$listId} does not exist";
+            $message = "Item #{$itemId} does not exist";
             throw new NotFoundHttpException($message);
         }
 

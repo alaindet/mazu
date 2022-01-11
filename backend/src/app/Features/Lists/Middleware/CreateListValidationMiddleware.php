@@ -42,7 +42,7 @@ class CreateListValidationMiddleware extends Middleware
         $dto = new CreateListDto();
         $dto->userId = $authData['user_id'];
         $dto->name = $body['name'];
-        $dto->description = $body['description'] ?? null;
+        $dto->description = $body['description'] ?? '';
 
         $req->setValidatedData(['dto' => $dto]);
 

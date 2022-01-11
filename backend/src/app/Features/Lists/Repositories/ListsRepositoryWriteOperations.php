@@ -41,8 +41,15 @@ trait ListsRepositoryWriteOperations
      */
     public function markAsFavorite($listId, $isFavorite = true): int
     {
-        $sql = "UPDATE {$this->table} SET is_favorite = :favorite";
-        $params = [':favorite' => $isFavorite ? 1 : 0];
+        $sql = "
+            UPDATE {$this->table}
+            SET is_favorite = :isfavorite
+            WHERE list_id = :listid
+        ";
+        $params = [
+            ':listid' => $listId,
+            ':isfavorite' => $isFavorite ? 1 : 0,
+        ];
         return $this->db->execute($sql, $params);
     }
 

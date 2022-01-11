@@ -37,6 +37,17 @@ class ListsService
      */
     public function getAllByUserId($userId): array
     {
+        $result = [];
+
+        foreach ($this->listsRepo->getAllByUserId($userId) as $list) {
+            $result[] = [
+                'listId' => $list['list_id'],
+                'isFavorite' => $list['is_favorite'],
+                'name' => $list['name'],
+                'description' => $list['description'],
+            ];
+        }
+
         return $this->listsRepo->getAllByUserId($userId);
     }
 

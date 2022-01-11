@@ -7,8 +7,6 @@ class UpdateItemDto
     /** @var string|int */
     public $itemId;
     /** @var string|int */
-    public $userId;
-    /** @var string|int */
     public $listId;
     public ?string $name;
     public ?int $amount;

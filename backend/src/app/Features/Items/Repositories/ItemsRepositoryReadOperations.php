@@ -9,14 +9,18 @@ trait ItemsRepositoryReadOperations
      */
     public function getAllByListId($listId): array
     {
-        return [];
+        $sql = "SELECT * FROM {$this->table} WHERE list_id = :listid";
+        $params = [':listid' => $listId];
+        return $this->db->selectFirst($sql, $params);
     }
 
     /**
-     * @param string|int $listId
+     * @param string|int $itemId
      */
-    public function findById($listId): array
+    public function findById($itemId): array
     {
-        return [];
+        $sql = "SELECT * FROM {$this->table} WHERE item_id = :itemid";
+        $params = [':itemid' => $itemId];
+        return $this->db->selectFirst($sql, $params);
     }
 }

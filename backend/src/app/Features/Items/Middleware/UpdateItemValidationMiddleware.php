@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Features\Lists\Middleware;
+namespace App\Features\Items\Middleware;
 
 use App\Core\Exceptions\Http\BadRequestHttpException;
 use App\Core\Middleware;
 use App\Core\Http\Request\Request;
 use App\Core\Http\Response\Response;
 use App\Common\Validation\Validator;
-use App\Features\Lists\Dtos\UpdateListDto;
+use App\Features\Items\Dtos\UpdateItemDto;
 
 class UpdateListValidationMiddleware extends Middleware
 {
@@ -19,10 +19,20 @@ class UpdateListValidationMiddleware extends Middleware
             'is' => 'string',
             'minLength' => 5,
         ],
+        'amount' => [
+            'required' => true,
+            'is' => ['integer', 'string'],
+            'between' => [1, 100],
+        ],
         'description' => [
             'required' => false,
             'is' => 'string',
             'minLength' => 5,
+        ],
+        'isDone' => [
+            'required' => true,
+            'is' => ['boolean', 'integer'],
+            'in' => [true, false, 0, 1],
         ],
     ];
 
@@ -30,18 +40,21 @@ class UpdateListValidationMiddleware extends Middleware
     {
         $body = $req->getBody();
         $listId = $req->getUriParameter('listid');
+        $itemId = $req->getUriParameter('itemid');
         $validator = new Validator($body, self::VALIDATION_SCHEMA);
 
         if ($body === null || $listId === null || !$validator->validate()) {
-            $message = 'Could not update list';
+            $message = 'Could not update item';
             $data = ['validation' => $validator->getErrors()];
             throw (new BadRequestHttpException($message))->setData($data);
         }
 
-        $dto = new UpdateListDto();
+        $dto = new UpdateItemDto();
+        $dto->itemId = $itemId;
         $dto->listId = $listId;
         $dto->name = $body['name'];
-        $dto->isFavorite = $body['isFavorite'];
+        $dto->amount = intval($body['amount']);
+        $dto->isDone = $body['isDone'];
         $dto->description = $body['description'] ?? '';
 
         $req->setValidatedData(['dto' => $dto]);

@@ -52,8 +52,16 @@ class IsRuleValidator extends SingleRuleValidator
                 return strtotime($value) !== false;
             case 'alphanumeric':
                 return preg_match('/^[a-zA-Z0-9]+$/', $value);
+            case 'number':
+            case 'numeric':
+                $type = gettype($value);
+                return $type === 'integer' || $type === 'double';
             case 'file':
                 return $value['error'] !== UPLOAD_ERR_OK;
+            case 'int':
+                return gettype($value) === 'integer';
+            case 'bool':
+                return gettype($value) === 'boolean';
             case 'boolean':
             case 'integer':
             case 'double':
@@ -62,6 +70,8 @@ class IsRuleValidator extends SingleRuleValidator
             case 'object':
             case 'NULL':
                 return gettype($value) === $typeConstraint;
+            default:
+                return false;
         }
     }
 }

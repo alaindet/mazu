@@ -37,19 +37,37 @@ trait ItemsRepositoryWriteOperations
     }
 
     /**
-     * @param string|int $listId
+     * @param string|int $itemId
      */
-    public function markAsDone($listId, bool $isDone): void
+    public function markAsDone($itemId, bool $isDone): int
     {
-        // ...
+        $sql = "
+            UPDATE {$this->table}
+            SET is_done = :isdone
+            WHERE item_id = :itemid
+        ";
+        $params = [
+            ':itemid' => $itemId,
+            ':isdone' => $isDone ? 1 : 0,
+        ];
+        return $this->db->execute($sql, $params);
     }
 
     /**
      * @param string|int $listId
      */
-    public function markAllAsDone($listId, bool $isDone): void
+    public function markAllAsDone($listId, bool $isDone): int
     {
-        // ...
+        $sql = "
+            UPDATE {$this->table}
+            SET is_done = :isdone
+            WHERE list_id = :listid
+        ";
+        $params = [
+            ':listid' => $listId,
+            ':isdone' => $isDone ? 1 : 0,
+        ];
+        return $this->db->execute($sql, $params);
     }
 
     /**
@@ -57,7 +75,25 @@ trait ItemsRepositoryWriteOperations
      */
     public function updateById($itemId, array $fields): int
     {
-        return 1;
+        $updates = [
+            // Ex.: 'example_field_name = :examplefieldvalue',
+        ];
+
+        $params = [
+            ':itemid' => $itemId,
+        ];
+
+        foreach ($fields as $field => $value) {
+            $placeholder = ":{$field}";
+            $params[$placeholder] = $value;
+            $updates[] = "{$field} = {$placeholder}";
+        }
+
+        $setClause = implode(', ', $updates);
+
+        $sql = "UPDATE {$this->table} SET {$setClause} WHERE item_id = :itemid";
+
+        return $this->db->execute($sql, $params);
     }
 
     /**
@@ -65,7 +101,9 @@ trait ItemsRepositoryWriteOperations
      */
     public function deleteById($itemId): int
     {
-        return 1;
+        $sql = "DELETE FROM {$this->table} WHERE item_id = :itemid";
+        $params = [':itemid' => $itemId];
+        return $this->db->execute($sql, $params);
     }
 
     /**
@@ -73,7 +111,9 @@ trait ItemsRepositoryWriteOperations
      */
     public function deleteByListId($listId): int
     {
-        return 1;
+        $sql = "DELETE FROM {$this->table} WHERE list_id = :listid";
+        $params = [':listid' => $listId];
+        return $this->db->execute($sql, $params);
     }
 
     /**
@@ -81,6 +121,8 @@ trait ItemsRepositoryWriteOperations
      */
     public function deleteDoneItemsByListId($listId): int
     {
-        return 1;
+        $sql = "DELETE FROM {$this->table} WHERE list_id = :listid AND is_done = 1";
+        $params = [':listid' => $listId];
+        return $this->db->execute($sql, $params);
     }
 }

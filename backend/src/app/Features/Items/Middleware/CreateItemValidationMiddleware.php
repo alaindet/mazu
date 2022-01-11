@@ -1,47 +1,55 @@
 <?php
 
-namespace App\Features\Lists\Middleware;
+namespace App\Features\Items\Middleware;
 
 use App\Core\Exceptions\Http\BadRequestHttpException;
 use App\Core\Middleware;
 use App\Core\Http\Request\Request;
 use App\Core\Http\Response\Response;
 use App\Common\Validation\Validator;
-use App\Features\Lists\Dtos\UpdateListDto;
+use App\Features\Items\Dtos\CreateItemDto;
 
-class UpdateListValidationMiddleware extends Middleware
+class CreateItemValidationMiddleware extends Middleware
 {
     const TIMING = self::RUN_BEFORE;
 
     const VALIDATION_SCHEMA = [
         'name' => [
-            'required' => false,
+            'required' => true,
             'is' => 'string',
-            'minLength' => 5,
+            'minLength' => 3,
+        ],
+        'amount' => [
+            'required' => true,
+            'is' => ['integer', 'string'],
+            'between' => [1, 100],
         ],
         'description' => [
             'required' => false,
             'is' => 'string',
-            'minLength' => 5,
+            'minLength' => 3,
         ],
     ];
 
     public function process(Request $req, Response $res, ...$args): Response
     {
         $body = $req->getBody();
-        $listId = $req->getUriParameter('listid');
         $validator = new Validator($body, self::VALIDATION_SCHEMA);
+        $listId = $req->getUriParameter('listid');
 
         if ($body === null || $listId === null || !$validator->validate()) {
-            $message = 'Could not update list';
+            $message = 'Could not create a new item';
             $data = ['validation' => $validator->getErrors()];
             throw (new BadRequestHttpException($message))->setData($data);
         }
 
-        $dto = new UpdateListDto();
-        $dto->listId = $listId;
+        $authData = $req->getAuthenticationData();
+
+        $dto = new CreateItemDto();
+        $dto->userId = $authData['user_id'];
+        $dto->listID = $listId;
         $dto->name = $body['name'];
-        $dto->isFavorite = $body['isFavorite'];
+        $dto->amount = intval($body['amount']);
         $dto->description = $body['description'] ?? '';
 
         $req->setValidatedData(['dto' => $dto]);

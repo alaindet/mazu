@@ -11,7 +11,7 @@ abstract class Arrays
      * @param array $arr
      * @return boolean
      */
-    function isAssoc(array $arr)
+    static public function isAssoc(array $arr)
     {
         if ($arr === []) {
             return false;
@@ -71,5 +71,14 @@ abstract class Arrays
         }
 
         return $result;
+    }
+
+    static public function toDto(array $arr, string $dtoFullClassName)
+    {
+        $dto = new $dtoFullClassName();
+        foreach ($arr as $key => $value) {
+            $dto->$key = $value;
+        }
+        return $dto;
     }
 }

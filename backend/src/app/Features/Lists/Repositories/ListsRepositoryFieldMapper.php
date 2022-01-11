@@ -14,45 +14,6 @@ trait ListsRepositoryFieldMapper
         // 'description' => 'description',
     ];
 
-    // TODO: Move in common file
-    public function outputSingle(array $row): array
-    {
-        $result = [];
-
-        foreach ($row as $key => $value) {
-            if (!isset($this->output[$key])) {
-                $result[$key] = $value;
-                continue;
-            }
-
-            $config = $this->output[$key];
-
-            if (is_array($config)) {
-                [$mappedKey, $mapperName] = $config;
-                $mapper = $this[$mapperName];
-                $result[$mappedKey] = $mapper($value);
-                continue;
-            }
-
-            $mappedKey = $config;
-            $result[$mappedKey] = $value;
-        }
-
-        return $result;
-    }
-
-    // TODO: Move in common file
-    public function outputMultiple(array $rows): array
-    {
-        $result = [];
-
-        foreach ($rows as $row) {
-            $result[] = $this->outputSingle($row);
-        }
-
-        return $result;
-    }
-
     /**
      * @param string|int $isFavorite
      * @return boolean

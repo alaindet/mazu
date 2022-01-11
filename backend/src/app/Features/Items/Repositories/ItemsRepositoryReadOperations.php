@@ -11,7 +11,8 @@ trait ItemsRepositoryReadOperations
     {
         $sql = "SELECT * FROM {$this->table} WHERE list_id = :listid";
         $params = [':listid' => $listId];
-        return $this->db->selectFirst($sql, $params);
+        $result = $this->db->selectFirst($sql, $params);
+        return $this->map($result);
     }
 
     /**
@@ -21,6 +22,7 @@ trait ItemsRepositoryReadOperations
     {
         $sql = "SELECT * FROM {$this->table} WHERE item_id = :itemid";
         $params = [':itemid' => $itemId];
-        return $this->db->selectFirst($sql, $params);
+        $result = $this->db->selectFirst($sql, $params);
+        return $this->map($result);
     }
 }

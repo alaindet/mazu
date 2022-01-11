@@ -3,6 +3,7 @@
 namespace App\Features\Items\Repositories;
 
 use App\Features\Items\Dtos\CreateItemDto;
+use App\Features\Items\Dtos\GetItemDto;
 
 trait ItemsRepositoryWriteOperations
 {
@@ -25,15 +26,15 @@ trait ItemsRepositoryWriteOperations
 
         $itemId = $this->db->insert($sql, $params);
 
-        return [
-            'item_id' => $itemId,
-            'list_id' => $dto->listId,
-            'user_id' => $dto->userId,
-            'is_done' => 0,
+        return $this->toDto(GetItemDto::class, [
+            'itemId' => $itemId,
+            'listId' => $dto->listId,
+            'userId' => $dto->userId,
+            'isDone' => false,
             'name' => $dto->name,
             'amount' => intval($dto->amount),
             'description' => $dto->description,
-        ];
+        ]);
     }
 
     /**

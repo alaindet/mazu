@@ -28,7 +28,7 @@ trait ListsRepositoryWriteOperations
         return $this->toDto(GetListDto::class, [
             'listId' => $listId,
             'userId' => $dto->userId,
-            'isFavorite' => 0,
+            'isFavorite' => false,
             'name' => $dto->name,
             'description' => $dto->description,
         ]);

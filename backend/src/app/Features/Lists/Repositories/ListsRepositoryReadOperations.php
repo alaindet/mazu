@@ -2,6 +2,8 @@
 
 namespace App\Features\Lists\Repositories;
 
+use App\Features\Lists\Dtos\GetListDto;
+
 trait ListsRepositoryReadOperations
 {
     /**
@@ -18,14 +20,18 @@ trait ListsRepositoryReadOperations
 
     /**
      * @param string|int $listId
-     * @return array|null
+     * @return GetListDto|null
      */
-    public function findById($listId)
+    public function findById($listId): ?GetListDto
     {
         $sql = "SELECT * FROM {$this->table} WHERE list_id = :listId";
         $params = [':listId' => $listId];
         $result = $this->db->selectFirst($sql, $params);
-        return $this->map($result);
+        if ($result === null) {
+            return null;
+        }
+
+        return $this->toDto(GetListDto::class, $this->map($result));
     }
 
     /**

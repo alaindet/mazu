@@ -33,12 +33,12 @@ trait AuthenticationWithSignIn
         $user = $this->usersRepo->findUserByEmail($dto->email, $fields);
 
         if (!isset($user)) {
-            $message = 'Wrong email and/or password (missing user)';
+            $message = 'Wrong email and/or password';
             throw new UnauthorizedHttpException($message);
         }
 
         if (!password_verify($dto->password, $user['password'])) {
-            $message = 'Wrong email and/or password (wrong password)';
+            $message = 'Wrong email and/or password';
             throw new UnauthorizedHttpException($message);
         }
 

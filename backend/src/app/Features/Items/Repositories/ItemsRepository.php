@@ -2,8 +2,9 @@
 
 namespace App\Features\Items\Repositories;
 
-use App\Core\Repository;
-use App\Common\Repositories\WithFieldMapper;
+use App\Core\Repository\Repository;
+use App\Core\Repository\WithFieldMapper;
+use App\Common\Utils\TypeCasting;
 
 class ItemsRepository extends Repository
 {
@@ -12,19 +13,13 @@ class ItemsRepository extends Repository
     use WithFieldMapper;
 
     public string $table = 'items';
-    protected $mapperSchema = [
+    protected array $mapperSchema = [
         'item_id' => 'itemId',
         'user_id' => 'userId',
         'list_id' => 'listId',
         'name' => 'name',
-        'amount' => [
-            'amount',
-            fn($i) => TypeCasting::toInteger($i),
-        ],
+        'amount' => ['amount', TypeCasting::TO_INTEGER],
         'description' => 'description',
-        'is_done' => [
-            'isDone',
-            fn($i) => TypeCasting::toBoolean($i),
-        ],
+        'is_done' => ['isDone', TypeCasting::TO_BOOLEAN],
     ];
 }

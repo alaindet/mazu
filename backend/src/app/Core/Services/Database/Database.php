@@ -30,7 +30,9 @@ class Database
         $query = $this->getPreparedStatement($sql, $params);
         $executed = $query->execute();
 
-        if (!$executed) {
+        try {
+            $query->execute();
+        } catch (\Exception $e) {
             throw new DatabaseException('Could not execute query');
         }
 
@@ -45,7 +47,9 @@ class Database
     {
         $query = $this->getPreparedStatement($sql, $params);
 
-        if (!$query->execute()) {
+        try {
+            $query->execute();
+        } catch (\Exception $e) {
             throw new DatabaseException('Could not execute query');
         }
 
@@ -76,7 +80,9 @@ class Database
     {
         $query = $this->getPreparedStatement($sql, $params);
 
-        if (!$query->execute()) {
+        try {
+            $query->execute();
+        } catch (\Exception $e) {
             throw new DatabaseException('Could not insert into database');
         }
 

@@ -2,6 +2,8 @@
 
 namespace App\Features\Lists\Services;
 
+use App\Core\Exceptions\Database\DatabaseException;
+use App\Core\Exceptions\Http\ConflictHttpException;
 use App\Core\Exceptions\Http\InternalServerErrorHttpException;
 use App\Core\Exceptions\Http\NotFoundHttpException;
 use App\Features\Lists\Dtos\CreateListDto;
@@ -20,16 +22,13 @@ class ListsService
 
     public function create(CreateListDto $dtoIn): GetListDto
     {
-        $data = $this->listsRepo->create($dtoIn);
-
-        $dtoOut = new GetListDto();
-        $dtoOut->listId = $data['list_id'];
-        $dtoOut->userId = $data['user_id'];
-        $dtoOut->isFavorite = intval($data['is_favorite']) === 1 ? true : false;
-        $dtoOut->name = $data['name'];
-        $dtoOut->description = $data['description'] ?? '';
-
-        return $dtoOut;
+        try {
+            return $this->listsRepo->create($dtoIn);
+        } catch (DatabaseException $e) {
+            throw new ConflictHttpException(
+                "List with name \"{$dtoIn->name}\" already exists"
+            );
+        }
     }
 
     /**
@@ -53,8 +52,9 @@ class ListsService
 
     /**
      * @param string|int $listId
+     * @return GetListDto|null
      */
-    public function findById($listId): array
+    public function findById($listId): ?GetListDto
     {
         $list = $this->listsRepo->findById($listId);
 

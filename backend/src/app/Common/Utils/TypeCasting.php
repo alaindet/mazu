@@ -2,13 +2,16 @@
 
 namespace App\Common\Utils;
 
-abstract class TypeCasting
+class TypeCasting
 {
+    const TO_BOOLEAN = 'toBoolean';
+    const TO_INTEGER = 'toInteger';
+
     /**
      * @param string|int|double|bool $input
      * @return boolean
      */
-    static public function toBoolean($input): bool
+    public function toBoolean($input): bool
     {
         switch (gettype($input)) {
             case 'boolean':

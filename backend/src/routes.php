@@ -5,6 +5,8 @@ use App\Core\Middleware\CorsMiddleware;
 
 $routes = [
     \App\Features\Authentication\Routes::register(),
+    \App\Features\Lists\Routes::register(),
+    \App\Features\Items\Routes::register(),
     // Add route groups from feature modules here...
 ];
 

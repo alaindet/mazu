@@ -2,7 +2,7 @@
 
 namespace App\Features\Users\Repositories;
 
-use App\Core\Repository;
+use App\Core\Repository\Repository;
 use App\Core\Services\Database\Database;
 
 class UserRolesRepository extends Repository

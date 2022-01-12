@@ -2,8 +2,9 @@
 
 namespace App\Features\Lists\Repositories;
 
-use App\Core\Repository;
-use App\Common\Repositories\WithFieldMapper;
+use App\Core\Repository\Repository;
+use App\Core\Repository\WithFieldMapper;
+use App\Common\Utils\TypeCasting;
 
 class ListsRepository extends Repository
 {
@@ -12,13 +13,10 @@ class ListsRepository extends Repository
     use WithFieldMapper;
 
     public string $table = 'lists';
-    protected $mapperSchema = [
+    public array $mapperSchema = [
         'list_id' => 'listId',
         'user_id' => 'userId',
-        'is_favorite' => [
-            'isFavorite',
-            fn($i) => TypeCasting::toBoolean($i),
-        ],
+        'is_favorite' => ['isFavorite', TypeCasting::TO_BOOLEAN],
         'name' => 'name',
         'description' => 'description',
     ];

@@ -61,7 +61,8 @@ class ItemsService
     {
         $marked = $this->itemsRepo->markAllAsDone($listId, $isDone);
         if ($marked === 0) {
-            $message = "Items from list #{$listId} do not exist";
+            $markStatus = $isDone ? 'marked' : 'unmarked';
+            $message = "No items from list #{$listId} were {$markStatus} as done";
             throw new NotFoundHttpException($message);
         }
     }
@@ -140,7 +141,12 @@ class ItemsService
      */
     public function deleteByListId($listId): void
     {
-        $this->itemsRepo->deleteByListId($listId);
+        $deleted = $this->itemsRepo->deleteByListId($listId);
+
+        if ($deleted === 0) {
+            $message = "Could not delete all items from list #{$listId}";
+            throw new NotFoundHttpException($message);
+        }
     }
 
     /**
@@ -148,6 +154,11 @@ class ItemsService
      */
     public function deleteDoneItemsByListId($listId): void
     {
-        $this->itemsRepo->deleteDoneItemsByListId($listId);
+        $deleted = $this->itemsRepo->deleteDoneItemsByListId($listId);
+
+        if ($deleted === 0) {
+            $message = "Could not delete all items marked as done from list #{$listId}";
+            throw new NotFoundHttpException($message);
+        }
     }
 }

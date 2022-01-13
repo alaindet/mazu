@@ -98,12 +98,7 @@ class ListsService
             $dtoOut->description = $dtoIn->description;
         }
 
-        $updated = $this->listsRepo->updateById($dtoIn->listId, $fields);
-
-        if ($updated === 0) {
-            $message = "Could not update list #{$dtoIn->listId}";
-            throw new InternalServerErrorHttpException($message);
-        }
+        $this->listsRepo->updateById($dtoIn->listId, $fields);
 
         return $dtoOut;
     }

@@ -20,7 +20,7 @@ class UpdateListValidationMiddleware extends Middleware
             'minLength' => 5,
         ],
         'amount' => [
-            'required' => true,
+            'required' => false,
             'is' => ['integer', 'string'],
             'between' => [1, 100],
         ],
@@ -30,7 +30,7 @@ class UpdateListValidationMiddleware extends Middleware
             'minLength' => 5,
         ],
         'isDone' => [
-            'required' => true,
+            'required' => false,
             'is' => ['boolean', 'integer'],
             'in' => [true, false, 0, 1],
         ],
@@ -52,10 +52,10 @@ class UpdateListValidationMiddleware extends Middleware
         $dto = new UpdateItemDto();
         $dto->itemId = $itemId;
         $dto->listId = $listId;
-        $dto->name = $body['name'];
-        $dto->amount = intval($body['amount']);
-        $dto->isDone = $body['isDone'];
-        $dto->description = $body['description'] ?? '';
+        $dto->name = $body['name'] ?? null;
+        $dto->amount = intval($body['amount']) ?? null;
+        $dto->isDone = $body['isDone'] ?? null;
+        $dto->description = $body['description'] ?? null;
 
         $req->setValidatedData(['dto' => $dto]);
 

@@ -88,22 +88,22 @@ class ItemsService
         $fields = [];
 
         // TODO: Generalize?
-        if (isset($dtoIn->name)) {
+        if ($dtoIn->name !== null) {
             $fields['name'] = $dtoIn->name;
             $item['name'] = $dtoIn->name;
         }
 
-        if (isset($dtoIn->description)) {
+        if ($dtoIn->description !== null) {
             $fields['description'] = $dtoIn->description;
             $item['description'] = $dtoIn->description;
         }
 
-        if (isset($dtoIn->amount)) {
+        if ($dtoIn->amount !== null) {
             $fields['amount'] = $dtoIn->amount;
             $item['amount'] = $dtoIn->amount;
         }
 
-        if (isset($dtoIn->isDone)) {
+        if ($dtoIn->isDone !== null) {
             $fields['is_done'] = $dtoIn->isDone;
             $item['is_done'] = $dtoIn->isDone;
         }

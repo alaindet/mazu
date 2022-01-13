@@ -19,6 +19,11 @@ class UpdateListValidationMiddleware extends Middleware
             'is' => 'string',
             'minLength' => 5,
         ],
+        'isFavorite' => [
+            'required' => false,
+            'is' => ['boolean', 'integer', 'string'],
+            'in' => [true, false, '1', '0', 1, 0],
+        ],
         'description' => [
             'required' => false,
             'is' => 'string',
@@ -40,9 +45,9 @@ class UpdateListValidationMiddleware extends Middleware
 
         $dto = new UpdateListDto();
         $dto->listId = $listId;
-        $dto->name = $body['name'];
-        $dto->isFavorite = $body['isFavorite'];
-        $dto->description = $body['description'] ?? '';
+        $dto->name = $body['name'] ?? null;
+        $dto->isFavorite = $body['isFavorite'] ?? null;
+        $dto->description = $body['description'] ?? null;
 
         $req->setValidatedData(['dto' => $dto]);
 

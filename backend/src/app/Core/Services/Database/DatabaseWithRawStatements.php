@@ -2,26 +2,36 @@
 
 namespace App\Core\Services\Database;
 
+use App\Core\Exceptions\Database\DatabaseException;
+
 trait DatabaseWithRawStatements
 {
     public function rawExecute(string $statement): int
     {
-        return $this->connection->getConnection()->exec($statement);
+        try {
+            return $this->connection->getConnection()->exec($statement);
+        } catch (\Exception $e) {
+            throw new DatabaseException('Could not execute query');
+        }
     }
 
     public function rawSelect(string $sql): array
     {
-        $pdo = $this->connection->getConnection();
-        $stmt = $pdo->query($sql);
+        try {
+            $pdo = $this->connection->getConnection();
+            $stmt = $pdo->query($sql);
 
-        if (!$stmt) {
-            return [];
+            if (!$stmt) {
+                return [];
+            }
+
+            $results = $stmt->fetchAll();
+            $stmt->closeCursor();
+
+            return ($results === false) ? [] : $results;
+        } catch (\Exception $e) {
+            throw new DatabaseException('Could not execute query');
         }
-
-        $results = $stmt->fetchAll();
-        $stmt->closeCursor();
-
-        return ($results === false) ? [] : $results;
     }
 
     public function rawCount(
@@ -30,21 +40,28 @@ trait DatabaseWithRawStatements
         string $where = '1'
     ): int
     {
-        $sql = "
-            SELECT COUNT(`{$idField}`) as `count`
-            FROM {$table}
-            WHERE {$where}
-        ";
+        try {
+            $sql = "
+                SELECT COUNT(`{$idField}`) as `count`
+                FROM {$table}
+                WHERE {$where}
+            ";
 
-        $raw = $this->rawSelect($sql);
+            $raw = $this->rawSelect($sql);
 
-        return $raw[0]
-            ? (int) $raw[0]['count']
-            : 0;
+            return $raw[0] ? (int) $raw[0]['count'] : 0;
+        } catch (\Exception $e) {
+            throw new DatabaseException("Could not count rows on table {$table}");
+        }
     }
 
     public function resetAutoIncrement(string $table): int
     {
-        return $this->rawExecute("ALTER TABLE `{$table}` AUTO_INCREMENT = 1");
+        try {
+            return $this->rawExecute("ALTER TABLE `{$table}` AUTO_INCREMENT = 1");
+        } catch (\Exception $e) {
+            $message = "Could not reset auto increment on table {$table}";
+            throw new DatabaseException($message);
+        }
     }
 }

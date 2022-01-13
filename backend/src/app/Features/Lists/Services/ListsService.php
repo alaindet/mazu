@@ -4,6 +4,7 @@ namespace App\Features\Lists\Services;
 
 use App\Core\Exceptions\Database\DatabaseException;
 use App\Core\Exceptions\Http\ConflictHttpException;
+use App\Core\Exceptions\Http\ForbiddenHttpException;
 use App\Core\Exceptions\Http\InternalServerErrorHttpException;
 use App\Core\Exceptions\Http\NotFoundHttpException;
 use App\Features\Lists\Dtos\CreateListDto;
@@ -36,17 +37,6 @@ class ListsService
      */
     public function getAllByUserId($userId): array
     {
-        $result = [];
-
-        foreach ($this->listsRepo->getAllByUserId($userId) as $list) {
-            $result[] = [
-                'listId' => $list['list_id'],
-                'isFavorite' => $list['is_favorite'],
-                'name' => $list['name'],
-                'description' => $list['description'],
-            ];
-        }
-
         return $this->listsRepo->getAllByUserId($userId);
     }
 
@@ -82,40 +72,39 @@ class ListsService
         $marked = $this->listsRepo->markAsFavorite($listId, $isFavorite);
 
         if ($marked === 0) {
-            $message = "List with id #{$listId} does not exist";
-            throw new NotFoundHttpException($message);
+            $markStatus = $isFavorite ? 'marked' : 'not marked';
+            $message = "List #{$listId} is already {$markStatus} as favorite";
+            throw new ForbiddenHttpException($message);
         }
     }
 
     public function updateById(UpdateListDto $dtoIn): GetListDto
     {
-        $list = $this->findById($dtoIn->listId);
+        $dtoOut = $this->findById($dtoIn->listId);
 
         $fields = [];
 
-        if (isset($dtoIn->name)) {
+        if ($dtoIn->name !== null) {
             $fields['name'] = $dtoIn->name;
-            $list['name'] = $dtoIn->name;
+            $dtoOut->name = $dtoIn->name;
         }
 
-        if (isset($dtoIn->description)) {
+        if ($dtoIn->isFavorite !== null) {
+            $fields['is_favorite'] = $dtoIn->isFavorite;
+            $dtoOut->isFavorite = $dtoIn->isFavorite;
+        }
+
+        if ($dtoIn->description !== null) {
             $fields['description'] = $dtoIn->description;
-            $list['description'] = $dtoIn->description;
+            $dtoOut->description = $dtoIn->description;
         }
 
         $updated = $this->listsRepo->updateById($dtoIn->listId, $fields);
 
         if ($updated === 0) {
-            $message = "Could not update list with id #{$dtoIn->listId}";
+            $message = "Could not update list #{$dtoIn->listId}";
             throw new InternalServerErrorHttpException($message);
         }
-
-        $dtoOut = new GetListDto();
-        $dtoOut->listId = $list['list_id'];
-        $dtoOut->userId = $list['user_id'];
-        $dtoOut->isFavorite = intval($list['is_favorite']) === 1 ? true : false;
-        $dtoOut->name = $list['name'];
-        $dtoOut->description = $list['description'] ?? '';
 
         return $dtoOut;
     }
@@ -125,21 +114,14 @@ class ListsService
      */
     public function deleteById($listId): GetListDto
     {
-        $list = $this->findById($listId);
+        $dtoOut = $this->findById($listId);
 
-        $deleted = $this->listsRepo->deleteById($list);
+        $deleted = $this->listsRepo->deleteById($listId);
 
         if ($deleted === 0) {
             $message = "Could not update list with id #{$listId}";
             throw new InternalServerErrorHttpException($message);
         }
-
-        $dtoOut = new GetListDto();
-        $dtoOut->listId = $list['list_id'];
-        $dtoOut->userId = $list['user_id'];
-        $dtoOut->isFavorite = intval($list['is_favorite']) === 1 ? true : false;
-        $dtoOut->name = $list['name'];
-        $dtoOut->description = $list['description'] ?? '';
 
         return $dtoOut;
     }

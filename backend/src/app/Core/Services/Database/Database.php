@@ -27,16 +27,13 @@ class Database
 
     public function execute(string $sql, array $params = []): int
     {
-        $query = $this->getPreparedStatement($sql, $params);
-        $executed = $query->execute();
-
         try {
+            $query = $this->getPreparedStatement($sql, $params);
             $query->execute();
+            return $query->rowCount();
         } catch (\Exception $e) {
             throw new DatabaseException('Could not execute query');
         }
-
-        return $query->rowCount();
     }
 
     public function select(
@@ -45,9 +42,8 @@ class Database
         string $className = null
     ): array
     {
-        $query = $this->getPreparedStatement($sql, $params);
-
         try {
+            $query = $this->getPreparedStatement($sql, $params);
             $query->execute();
         } catch (\Exception $e) {
             throw new DatabaseException('Could not execute query');
@@ -78,9 +74,8 @@ class Database
 
     public function insert(string $sql, array $params = []): int
     {
-        $query = $this->getPreparedStatement($sql, $params);
-
         try {
+            $query = $this->getPreparedStatement($sql, $params);
             $query->execute();
         } catch (\Exception $e) {
             throw new DatabaseException('Could not insert into database');

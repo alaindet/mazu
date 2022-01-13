@@ -1,1 +1,1 @@
-- [ ] Add FieldMapper to ItemsRepository
+- [ ] BE: When updating *ANY* list to favorite, remove the other ones as favorite

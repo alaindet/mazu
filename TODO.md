@@ -1,1 +1,2 @@
 - [ ] BE: When updating *ANY* list to favorite, remove the other ones as favorite
+- [ ] BE: Add tests in Thunder Client for items bulk operations

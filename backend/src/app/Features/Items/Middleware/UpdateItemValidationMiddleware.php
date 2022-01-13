@@ -9,7 +9,7 @@ use App\Core\Http\Response\Response;
 use App\Common\Validation\Validator;
 use App\Features\Items\Dtos\UpdateItemDto;
 
-class UpdateListValidationMiddleware extends Middleware
+class UpdateItemValidationMiddleware extends Middleware
 {
     const TIMING = self::RUN_BEFORE;
 
@@ -17,7 +17,7 @@ class UpdateListValidationMiddleware extends Middleware
         'name' => [
             'required' => false,
             'is' => 'string',
-            'minLength' => 5,
+            'minLength' => 3,
         ],
         'amount' => [
             'required' => false,
@@ -27,7 +27,7 @@ class UpdateListValidationMiddleware extends Middleware
         'description' => [
             'required' => false,
             'is' => 'string',
-            'minLength' => 5,
+            'minLength' => 3,
         ],
         'isDone' => [
             'required' => false,
@@ -53,7 +53,7 @@ class UpdateListValidationMiddleware extends Middleware
         $dto->itemId = $itemId;
         $dto->listId = $listId;
         $dto->name = $body['name'] ?? null;
-        $dto->amount = intval($body['amount']) ?? null;
+        $dto->amount = isset($body['amount']) ? intval($body['amount']) : null;
         $dto->isDone = $body['isDone'] ?? null;
         $dto->description = $body['description'] ?? null;
 

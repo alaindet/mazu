@@ -109,7 +109,7 @@ class ItemsController extends Controller
     public function delete(Request $req, Response $res): Response
     {
         [$listId, $itemId] = $req->getUriParameters(['listid', 'itemid']);
-        $dtoOut = $this->itemsService->deleteById($listId);
+        $dtoOut = $this->itemsService->deleteById($itemId);
 
         $res->setBody([
             'message' => "Item #{$itemId} from list #{$itemId} was deleted",

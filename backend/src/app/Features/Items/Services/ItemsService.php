@@ -48,8 +48,9 @@ class ItemsService
         $marked = $this->itemsRepo->markAsDone($itemId, $isDone);
 
         if ($marked === 0) {
-            $message = "Item #{$itemId} does not exist";
-            throw new NotFoundHttpException($message);
+            $markStatus = $isDone ? 'marked' : 'not marked';
+            $message = "Item #{$itemId} is already {$markStatus} as done";
+            throw new ConflictHttpException($message);
         }
     }
 
@@ -68,43 +69,43 @@ class ItemsService
     /**
      * @param string|int $itemId
      */
-    public function findById($itemId): array
+    public function findById($itemId): ?GetItemDto
     {
-        $list = $this->itemsRepo->findById($itemId);
+        $item = $this->itemsRepo->findById($itemId);
 
-        if ($list === null) {
+        if ($item === null) {
             $message = "Item #{$itemId} does not exist";
             throw new NotFoundHttpException($message);
         }
 
-        return $list;
+        return $item;
     }
 
     public function updateById(UpdateItemDto $dtoIn): GetItemDto
     {
-        $item = $this->findById($dtoIn->itemId);
+        $dtoOut = $this->findById($dtoIn->itemId);
 
         $fields = [];
 
         // TODO: Generalize?
         if ($dtoIn->name !== null) {
             $fields['name'] = $dtoIn->name;
-            $item['name'] = $dtoIn->name;
+            $dtoOut->name = $dtoIn->name;
         }
 
         if ($dtoIn->description !== null) {
             $fields['description'] = $dtoIn->description;
-            $item['description'] = $dtoIn->description;
+            $dtoOut->description = $dtoIn->description;
         }
 
         if ($dtoIn->amount !== null) {
             $fields['amount'] = $dtoIn->amount;
-            $item['amount'] = $dtoIn->amount;
+            $dtoOut->amount = $dtoIn->amount;
         }
 
         if ($dtoIn->isDone !== null) {
             $fields['is_done'] = $dtoIn->isDone;
-            $item['is_done'] = $dtoIn->isDone;
+            $dtoOut->isDone = $dtoIn->isDone;
         }
 
         $updated = $this->itemsRepo->updateById($dtoIn->itemId, $fields);
@@ -113,15 +114,6 @@ class ItemsService
             $message = "Could not update item #{$dtoIn->itemId} from list #{$dtoIn->listId}";
             throw new InternalServerErrorHttpException($message);
         }
-
-        $dtoOut = new GetItemDto();
-        $dtoOut->itemId = $item['item_id'];
-        $dtoOut->listId = $item['list_id'];
-        $dtoOut->userId = $item['user_id'];
-        $dtoOut->isFavorite = intval($item['is_done']) === 1 ? true : false;
-        $dtoOut->name = $item['name'];
-        $dtoOut->description = $item['description'] ?? '';
-        $dtoOut->amount = $item['amount'];
 
         return $dtoOut;
     }
@@ -140,16 +132,7 @@ class ItemsService
             throw new InternalServerErrorHttpException($message);
         }
 
-        $dtoOut = new GetItemDto();
-        $dtoOut->itemId = $item['item_id'];
-        $dtoOut->listId = $item['list_id'];
-        $dtoOut->userId = $item['user_id'];
-        $dtoOut->isFavorite = intval($item['is_done']) === 1 ? true : false;
-        $dtoOut->name = $item['name'];
-        $dtoOut->amount = $item['amount'];
-        $dtoOut->description = $item['description'] ?? '';
-
-        return $dtoOut;
+        return $item;
     }
 
     /**

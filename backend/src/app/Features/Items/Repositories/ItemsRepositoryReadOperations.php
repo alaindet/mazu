@@ -2,6 +2,8 @@
 
 namespace App\Features\Items\Repositories;
 
+use App\Features\Items\Dtos\GetItemDto;
+
 trait ItemsRepositoryReadOperations
 {
     /**
@@ -11,18 +13,23 @@ trait ItemsRepositoryReadOperations
     {
         $sql = "SELECT * FROM {$this->table} WHERE list_id = :listid";
         $params = [':listid' => $listId];
-        $result = $this->db->selectFirst($sql, $params);
-        return $this->map($result);
+        $result = $this->db->select($sql, $params);
+        return $this->mapMultiple($result);
     }
 
     /**
      * @param string|int $itemId
      */
-    public function findById($itemId): array
+    public function findById($itemId): ?GetItemDto
     {
         $sql = "SELECT * FROM {$this->table} WHERE item_id = :itemid";
         $params = [':itemid' => $itemId];
         $result = $this->db->selectFirst($sql, $params);
-        return $this->map($result);
+
+        if ($result === null) {
+            return  null;
+        }
+
+        return $this->toDto(GetItemDto::class, $this->map($result));
     }
 }

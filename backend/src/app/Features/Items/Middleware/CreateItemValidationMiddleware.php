@@ -47,7 +47,7 @@ class CreateItemValidationMiddleware extends Middleware
 
         $dto = new CreateItemDto();
         $dto->userId = $authData['user_id'];
-        $dto->listID = $listId;
+        $dto->listId = $listId;
         $dto->name = $body['name'];
         $dto->amount = intval($body['amount']);
         $dto->description = $body['description'] ?? '';

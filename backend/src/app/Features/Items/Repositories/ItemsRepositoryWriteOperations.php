@@ -2,12 +2,14 @@
 
 namespace App\Features\Items\Repositories;
 
+use App\Core\Exceptions\Database\DatabaseException;
+use App\Core\Exceptions\Http\ConflictHttpException;
 use App\Features\Items\Dtos\CreateItemDto;
 use App\Features\Items\Dtos\GetItemDto;
 
 trait ItemsRepositoryWriteOperations
 {
-    public function create(CreateItemDto $dto): array
+    public function create(CreateItemDto $dto): GetItemDto
     {
         $sql = "
             INSERT INTO {$this->table}
@@ -18,7 +20,7 @@ trait ItemsRepositoryWriteOperations
 
         $params = [
             ':userid' => $dto->userId,
-            ':listid' => $dto->lsitId,
+            ':listid' => $dto->listId,
             ':name' => $dto->name,
             ':amount' => $dto->amount,
             ':description' => $dto->description ?? '',

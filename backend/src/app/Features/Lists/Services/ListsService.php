@@ -4,7 +4,6 @@ namespace App\Features\Lists\Services;
 
 use App\Core\Exceptions\Database\DatabaseException;
 use App\Core\Exceptions\Http\ConflictHttpException;
-use App\Core\Exceptions\Http\ForbiddenHttpException;
 use App\Core\Exceptions\Http\InternalServerErrorHttpException;
 use App\Core\Exceptions\Http\NotFoundHttpException;
 use App\Features\Lists\Dtos\CreateListDto;
@@ -74,7 +73,7 @@ class ListsService
         if ($marked === 0) {
             $markStatus = $isFavorite ? 'marked' : 'not marked';
             $message = "List #{$listId} is already {$markStatus} as favorite";
-            throw new ForbiddenHttpException($message);
+            throw new ConflictHttpException($message);
         }
     }
 

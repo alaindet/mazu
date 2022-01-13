@@ -2,6 +2,8 @@
 
 namespace App\Features\Items\Services;
 
+use App\Core\Exceptions\Database\DatabaseException;
+use App\Core\Exceptions\Http\ConflictHttpException;
 use App\Core\Exceptions\Http\InternalServerErrorHttpException;
 use App\Core\Exceptions\Http\NotFoundHttpException;
 use App\Features\Items\Dtos\CreateItemDto;
@@ -20,17 +22,14 @@ class ItemsService
 
     public function create(CreateItemDto $dtoIn): GetItemDto
     {
-        $data = $this->itemsRepo->create($dtoIn);
-
-        $dtoOut = new GetItemDto();
-        $dtoOut->itemId = $data['item_id'];
-        $dtoOut->userId = $data['user_id'];
-        $dtoOut->listId = $data['list_id'];
-        $dtoOut->name = $data['name'];
-        $dtoOut->isDone = intval($data['is_done']) ? true : false;
-        $dtoOut->description = $data['description'] ?? '';
-
-        return $dtoOut;
+        try {
+            return $this->itemsRepo->create($dtoIn);
+        } catch (DatabaseException $e) {
+            throw new ConflictHttpException(
+                "Item with name \"{$dtoIn->name}\" already exists " .
+                "on list #{$dtoIn->listId}"
+            );
+        }
     }
 
     /**

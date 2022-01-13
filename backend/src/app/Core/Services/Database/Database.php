@@ -77,10 +77,9 @@ class Database
         try {
             $query = $this->getPreparedStatement($sql, $params);
             $query->execute();
+            return $this->connection->getConnection()->lastInsertId();
         } catch (\Exception $e) {
             throw new DatabaseException('Could not insert into database');
         }
-
-        return $this->connection->getConnection()->lastInsertId();
     }
 }

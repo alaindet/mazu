@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Icon } from 'src/common/components';
+import './navigation-item.css';
 
 export interface NavigationItemProps {
   icon: string;
@@ -15,7 +16,7 @@ export const NavigationItem: FC<NavigationItemProps> = ({
   url,
 }) => {
   return (
-    <button type="button">
+    <button type="button" className="navigation-item">
       <Icon name={icon} />
       <Link to={url}>{label}</Link>
     </button>

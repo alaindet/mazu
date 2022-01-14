@@ -1,10 +1,12 @@
 .app {
   max-width: var(--width-container-max);
-  background-color: var(--color-background-contrast-low);
+  margin: 1vh auto;
+  height: 98vh;
   border-radius: 1rem;
-  padding: 1rem;
+  border: 1px solid #00000033;
+  position: relative;
 }
 
 .app-content {
-  border: 2px dashed red;
+
 }

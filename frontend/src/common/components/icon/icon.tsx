@@ -1,5 +1,7 @@
 import { FC } from 'react';
 
+import './icon.css';
+
 export interface IconProps {
   name: string;
 }

@@ -1,5 +1,5 @@
 :root {
-  --width-container-max: min(960px, 100%);
+  --width-container-max: min(960px, 96vw);
 
   --color-background: #fff;
   --color-background-contrast-low: #f0f0f0;

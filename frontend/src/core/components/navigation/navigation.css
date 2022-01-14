@@ -1,0 +1,21 @@
+.app-navigation {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.app-navigation ul {
+  border-top: 2px solid #ddd;
+  list-style: none;
+  padding: 0;
+  margin: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-navigation li {
+  display: block;
+  flex-grow: 1;
+}

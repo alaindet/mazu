@@ -1,7 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import { Navigation } from 'src/core/components';
+import { Navigation, RouterSpinner } from 'src/core/components';
 import { NAVIGATION_LINKS } from 'src/core/routing';
 import './app.css';
 
@@ -14,7 +14,7 @@ export const App = () => {
     <main className="app">
       <BrowserRouter>
         <div className="app-content">
-          <Suspense fallback={() => <p>Loading...</p>}>
+          <Suspense fallback={<RouterSpinner />}>
             <Routes>
               <Route path="/" element={<SignInPage />} />
               <Route path="/lists" element={<ListsPage />} />

@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { initialState } from './state';
 import * as fromReducers from './reducers';
-import * as fromItemsActions from 'src/features/items/store';
+import * as fromItemsActions from '../items';
 
 // Name
 const name = 'lists';

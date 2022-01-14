@@ -1,7 +1,7 @@
-import { createSelector } from '@reduxjs/toolkit';
+// import { createSelector } from '@reduxjs/toolkit';
 
 import { RootState } from 'src/core/store';
-import { ItemsState } from './state';
+// import { ItemsState } from './state';
 
 export const selectItemsSlice = (state: RootState) => state.items;
 // TODO

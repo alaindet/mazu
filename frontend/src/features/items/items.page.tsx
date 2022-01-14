@@ -6,7 +6,7 @@ export const ItemsPage: FC<{}> = () => {
 
   return (
     <>
-      <h2>Items</h2>
+      <h2>Items from list #{id}</h2>
       <p>Items here...</p>
     </>
   );

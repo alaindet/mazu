@@ -1,2 +1,2 @@
 export * from './navigation/navigation';
-export * from './spinner/spinner';
+export * from './router-spinner/router-spinner';

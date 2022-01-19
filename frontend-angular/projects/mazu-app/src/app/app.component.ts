@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+
+import { signIn } from './core/store';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +9,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'mazu-app';
+
+  constructor(
+    private store: Store,
+  ) {}
+
+  onSignIn(): void {
+    const username = 'john.doe@example.com'; // TODO
+    const password = 'john.doe@example.com'; // TODO
+    this.store.dispatch(signIn({ username, password }));
+  }
 }

@@ -43,10 +43,3 @@ export enum ItemsActionType {
   DeleteAllMarkedFailure = '[Items] Delete all marked failure',
 
 }
-
-export const createItem = createAction(ItemsActionType.Create, props<{
-  listId: string;
-  name: string;
-  amount: number;
-  description?: string;
-}>());

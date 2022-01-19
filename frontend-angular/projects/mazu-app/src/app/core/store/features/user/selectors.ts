@@ -1,8 +1,16 @@
-import { createFeatureSelector } from '@ngrx/store';
+import { createSelector, createFeatureSelector } from '@ngrx/store';
 
 import { UserState } from './state';
 import { userFeature } from './feature';
 
 export const selectUserFeature = createFeatureSelector<UserState>(userFeature);
 
-// TODO...
+export const selectJwt = createSelector(
+  selectUserFeature,
+  user => user.jwt,
+);
+
+export const selectUserIsLoading = createSelector(
+  selectUserFeature,
+  user => user.isLoading,
+);

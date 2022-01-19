@@ -5,13 +5,13 @@ import { of } from 'rxjs';
 import { mergeMap, catchError, map } from 'rxjs/operators';
 
 import { AuthService } from '../../../services';
-import { UserActionType, signInSuccess, signInFailure } from './actions';
+import { signIn, signInSuccess, signInFailure } from './actions';
 
 @Injectable()
 export class UserEffects {
 
   signIn$ = createEffect(() => this.actions$.pipe(
-    ofType(UserActionType.SignIn),
+    ofType(signIn.type),
     mergeMap(action => {
       const { username, password } = action;
       return this.authService.signIn(username, password).pipe(

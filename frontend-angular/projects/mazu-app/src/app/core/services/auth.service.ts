@@ -13,9 +13,9 @@ export class AuthService {
     private http: HttpClient,
   ) {}
 
-  signIn(username: string, password: string): Observable<{ jwt: string }> {
+  signIn(email: string, password: string): Observable<{ jwt: string }> {
     const url = `${environment.apiUrl}/auth/sign-in`;
-    const body = { username, password };
+    const body = { email, password };
     return this.http.post<{ jwt: string }>(url, body);
   }
 }

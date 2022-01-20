@@ -1,44 +1,111 @@
 import { createAction, props } from '@ngrx/store';
 
-export enum ListsActionType {
+import {
+  CreateListDto,
+  UpdateListDto,
+  ImplicitUpdateListDto,
+  List,
+  TextFeedback,
+} from '../../../types';
 
-  Create = '[Lists] Create',
-  CreateSuccess = '[Lists] Create success',
-  CreateFailure = '[Lists] Create failure',
+export const createList = createAction(
+  '[Lists] Create',
+  props<CreateListDto>(),
+);
+export const createListSuccess = createAction(
+  '[Lists] Create success',
+  props<List>(),
+);
+export const createListFailure = createAction(
+  '[Lists] Create failure',
+  props<TextFeedback>(),
+);
 
-  GetAll = '[Lists] Get all',
-  GetAllSuccess = '[Lists] Get all success',
-  GetAllFailure = '[Lists] Get all failure',
 
-  GetOne = '[Lists] Get one',
-  GetOneSuccess = '[Lists] Get one success',
-  GetOneFailure = '[Lists] Get one failure',
 
-  MarkAsFavorite = '[Lists] Mark as favorite',
-  MarkAsFavoriteSuccess = '[Lists] Mark as favorite success',
-  MarkAsFavoriteFailure = '[Lists] Mark as favorite failure',
+export const getAllLists = createAction(
+  '[Lists] Get all',
+);
+export const getAllListsSuccess = createAction(
+  '[Lists] Get all success',
+  props<{ lists: List[] }>(),
+);
+export const getAllListsFailure = createAction(
+  '[Lists] Get all failure',
+  props<TextFeedback>(),
+);
 
-  UnmarkAsFavorite = '[Lists] Unmark as favorite',
-  UnmarkAsFavoriteSuccess = '[Lists] Unmark as favorite success',
-  UnmarkAsFavoriteFailure = '[Lists] Unmark as favorite failure',
 
-  Update = '[Lists] Update',
-  UpdateSuccess = '[Lists] Update success',
-  UpdateFailure = '[Lists] Update failure',
 
-  Delete = '[Items] Delete',
-  DeleteSuccess = '[Items] Delete success',
-  DeleteFailure = '[Items] Delete failure',
+export const getList = createAction(
+  '[Lists] Get one',
+  props<{ listId: List['listId']; }>(),
+);
+export const getListSuccess = createAction(
+  '[Lists] Get one success',
+  props<List>(),
+);
+export const getListFailure = createAction(
+  '[Lists] Get one failure',
+  props<TextFeedback>(),
+);
 
-}
 
-export const createList = createAction(ListsActionType.Create, props<{
-  name: string;
-  description: string;
-}>());
 
-export const createListSuccess = createAction(ListsActionType.CreateSuccess, props<{
-  name: string;
-  description: string;
-  isFavorite: boolean;
-}>());
+export const markListAsFavorite = createAction(
+  '[Lists] Mark as favorite',
+  props<{ listId: List['listId']; }>(),
+);
+export const markListAsFavoriteSuccess = createAction(
+  '[Lists] Mark as favorite success',
+  props<TextFeedback>(),
+);
+export const markListAsFavoriteFailure = createAction(
+  '[Lists] Mark as favorite failure',
+  props<TextFeedback>(),
+);
+
+
+
+export const unmrkListAsFavorite = createAction(
+  '[Lists] Unmark as favorite',
+  props<ImplicitUpdateListDto>(),
+);
+export const unmarkListAsFavoriteSuccess = createAction(
+  '[Lists] Unmark as favorite success',
+  props<TextFeedback>(),
+);
+export const unmarkListAsFavoriteFailure = createAction(
+  '[Lists] Unmark as favorite failure',
+  props<TextFeedback>(),
+);
+
+
+
+export const updateList = createAction(
+  '[Lists] Update list',
+  props<UpdateListDto>(),
+);
+export const updateListSuccess = createAction(
+  '[Lists] Update list success',
+  props<TextFeedback>(),
+);
+export const updateListFailure = createAction(
+  '[Lists] Update list failure',
+  props<TextFeedback>(),
+);
+
+
+
+export const deleteList = createAction(
+  '[Lists] Delete list',
+  props<ImplicitUpdateListDto>(),
+);
+export const deleteListSuccess = createAction(
+  '[Lists] Delete list success',
+  props<TextFeedback>(),
+);
+export const deleteListFailure = createAction(
+  '[Lists] Delete list failure',
+  props<TextFeedback>(),
+);

@@ -13,8 +13,8 @@ export class UserEffects {
   signIn$ = createEffect(() => this.actions$.pipe(
     ofType(signIn.type),
     mergeMap(action => {
-      const { username, password } = action;
-      return this.authService.signIn(username, password).pipe(
+      const { email, password } = action;
+      return this.authService.signIn(email, password).pipe(
         map(response => {
           const { jwt } = response;
           return signInSuccess({ jwt });

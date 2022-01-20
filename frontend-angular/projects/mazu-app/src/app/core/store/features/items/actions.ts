@@ -1,43 +1,13 @@
 import { createAction, props } from '@ngrx/store';
 
-// TODO: Move interfaces away
-export interface CreateItemDto {
-  listId: string;
-  name: string;
-  amount: number;
-  description?: string;
-}
-
-export interface UpdateItemDto {
-  itemId: string;
-  listId: string;
-  name?: string;
-  amount?: number;
-  description?: string;
-  isDone?: boolean;
-}
-
-export interface Item {
-  itemId: string;
-  listId: string;
-  name: string;
-  amount: number;
-  description: string;
-  isDone: boolean;
-}
-
-export interface ImplicitUpdateItemDto {
-  listId: string;
-  itemId: string;
-}
-
-export interface ImplicitUpdateListDto {
-  listId: string;
-}
-
-export interface TextFeedback {
-  message: string;
-}
+import {
+  CreateItemDto,
+  UpdateItemDto,
+  ImplicitUpdateItemDto,
+  ImplicitUpdateListDto,
+  Item,
+  TextFeedback,
+} from '../../../types';
 
 export const createItem = createAction(
   '[Items] Create',

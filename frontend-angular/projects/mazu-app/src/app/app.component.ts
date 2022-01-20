@@ -15,8 +15,8 @@ export class AppComponent {
   ) {}
 
   onSignIn(): void {
-    const username = 'john.doe@example.com'; // TODO
+    const email = 'john.doe@example.com'; // TODO
     const password = 'john.doe@example.com'; // TODO
-    this.store.dispatch(signIn({ username, password }));
+    this.store.dispatch(signIn({ email, password }));
   }
 }

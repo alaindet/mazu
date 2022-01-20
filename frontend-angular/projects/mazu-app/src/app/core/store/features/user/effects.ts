@@ -11,7 +11,7 @@ import { signIn, signInSuccess, signInFailure } from './actions';
 export class UserEffects {
 
   signIn$ = createEffect(() => this.actions$.pipe(
-    ofType(signIn.type),
+    ofType(signIn),
     mergeMap(action => {
       const { email, password } = action;
       return this.authService.signIn(email, password).pipe(

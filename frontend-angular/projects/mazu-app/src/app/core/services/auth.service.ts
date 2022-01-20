@@ -3,13 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from 'projects/mazu-app/src/environments/environment';
-
-// TODO: Move away
-export interface ServerResponse<T = any> {
-  message: string;
-  data?: T;
-}
-
+import { ServerResponse } from '../types';
 
 @Injectable({
   providedIn: 'root',

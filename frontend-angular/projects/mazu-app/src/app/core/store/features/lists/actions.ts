@@ -67,7 +67,7 @@ export const markListAsFavoriteFailure = createAction(
 
 
 
-export const unmrkListAsFavorite = createAction(
+export const unmarkListAsFavorite = createAction(
   '[Lists] Unmark as favorite',
   props<ImplicitUpdateListDto>(),
 );

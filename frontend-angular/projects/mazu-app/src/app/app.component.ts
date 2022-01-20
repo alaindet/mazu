@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { signIn } from './core/store';
+import { signIn, selectUserIsLoading, selectJwt } from './core/store';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +9,9 @@ import { signIn } from './core/store';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
+  userIsLoading$ = this.store.select(selectUserIsLoading);
+  userJwt$ = this.store.select(selectJwt);
 
   constructor(
     private store: Store,

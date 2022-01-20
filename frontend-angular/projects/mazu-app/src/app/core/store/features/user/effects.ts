@@ -16,7 +16,7 @@ export class UserEffects {
       const { email, password } = action;
       return this.authService.signIn(email, password).pipe(
         map(response => {
-          const { jwt } = response;
+          const jwt = response.data?.jwt as string;
           return signInSuccess({ jwt });
         }),
         catchError(() => of(signInFailure())),

@@ -1,3 +1,11 @@
 <h1>Mazu App</h1>
 
-<button (click)="onSignIn()">Sign In</button>
+<div *ngIf="userIsLoading$ | async; else signInTemplate">
+  Loading...
+</div>
+
+<ng-template #signInTemplate>
+  <button (click)="onSignIn()">Sign In</button>
+</ng-template>
+
+<pre *ngIf="userJwt$ | async as jwt">JWT: {{ jwt | json }}</pre>

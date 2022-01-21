@@ -7,50 +7,46 @@ export const listsFeature = 'lists';
 
 const reducer = createReducer(
   listsInitialState,
+
+  // Create
   on(fromActions.createListSuccess, (state, action) => {
     const { type, ...list } = action;
     const lists = [...state.lists, list];
     return { ...state, lists, isLoading: false };
   }),
+
+  // Get all
   on(fromActions.getAllListsSuccess, (state, action) => {
     const { lists } = action;
     return { ...state, lists, isLoading: false };
   }),
-  // Populate items instead
+
+  // Get one
+  // TODO: Populate items instead
   // on(fromActions.getListSuccess, (state, action) => {
   //   const { type, ...list } = action;
   //   return { ...state, lists: [...state.lists, list], isLoading: false };
   // }),
-  on(fromActions.markListAsFavoriteSuccess, (state, action) => {
-    return {
-      ...state,
-      isLoading: false,
-      lists: state.lists.map(list => list.listId !== action.listId ? list : {
-        ...list,
-        isFavorite: true
-      }),
-    };
-  }),
-  on(fromActions.unmarkListAsFavoriteSuccess, (state, action) => {
-    return {
-      ...state,
-      isLoading: false,
-      lists: state.lists.map(list => list.listId !== action.listId ? list : {
-        ...list,
-        isFavorite: false
-      }),
-    };
-  }),
-  on(fromActions.updateListSuccess, (state, action) => {
+
+  // Update
+  on(
+    fromActions.markListAsFavoriteSuccess,
+    fromActions.unmarkListAsFavoriteSuccess,
+    fromActions.updateListSuccess,
+    (state, action) => {
     const { type, ...list } = action;
-    const { listId } = list;
+    const listId = list.listId;
     const lists = state.lists.map(aList => aList.listId === listId ? list : aList);
     return { ...state, lists, isLoading: false };
   }),
+
+  // Delete
   on(fromActions.deleteListSuccess, (state, action) => {
     const lists = state.lists.filter(list => list.listId !== action.listId);
     return { ...state, lists, isLoading: false };
   }),
+
+  // Start async
   on(
     fromActions.createList,
     fromActions.getAllLists,
@@ -61,6 +57,8 @@ const reducer = createReducer(
     fromActions.deleteList,
     state => ({ ...state, isLoading: true })
   ),
+
+  // Stop async
   on(
     fromActions.createListFailure,
     fromActions.getAllListsFailure,

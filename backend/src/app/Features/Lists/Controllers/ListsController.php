@@ -59,10 +59,10 @@ class ListsController extends Controller
     public function markAsFavorite(Request $req, Response $res): Response
     {
         $listId = $req->getUriParameter('listid');
-        $this->listsService->markAsFavorite($listId, true);
+        $dtoOut = $this->listsService->markAsFavorite($listId, true);
         $res->setBody([
             'message' => "List #{$listId} was marked as favorite",
-            'data' => null,
+            'data' => $dtoOut,
         ]);
 
         return $res;
@@ -71,10 +71,10 @@ class ListsController extends Controller
     public function unmarkAsFavorite(Request $req, Response $res): Response
     {
         $listId = $req->getUriParameter('listid');
-        $this->listsService->markAsFavorite($listId, false);
+        $dtoOut = $this->listsService->markAsFavorite($listId, false);
         $res->setBody([
             'message' => "List #{$listId} was unmarked as favorite",
-            'data' => null,
+            'data' => $dtoOut,
         ]);
 
         return $res;

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from 'projects/mazu-app/src/environments/environment';
-import { CreateListDto, UpdateListDto, List, ServerResponse, ServerResponseWithoutData } from '../types';
+import { CreateListDto, UpdateListDto, List, ServerResponse } from '../types';
 
 @Injectable({
   providedIn: 'root',
@@ -29,14 +29,14 @@ export class ListsService {
     return this.http.get<ServerResponse<List>>(url);
   }
 
-  markAsFavorite(listId: List['listId']): Observable<ServerResponseWithoutData> {
+  markAsFavorite(listId: List['listId']): Observable<ServerResponse<List>> {
     const url = `${this.baseUrl}/${listId}/mark`;
-    return this.http.patch<ServerResponseWithoutData>(url, {});
+    return this.http.patch<ServerResponse<List>>(url, {});
   }
 
-  unmarkAsFavorite(listId: List['listId']): Observable<ServerResponseWithoutData> {
+  unmarkAsFavorite(listId: List['listId']): Observable<ServerResponse<List>> {
     const url = `${this.baseUrl}/${listId}/unmark`;
-    return this.http.patch<ServerResponseWithoutData>(url, {});
+    return this.http.patch<ServerResponse<List>>(url, {});
   }
 
   update(dto: UpdateListDto): Observable<ServerResponse<List>> {

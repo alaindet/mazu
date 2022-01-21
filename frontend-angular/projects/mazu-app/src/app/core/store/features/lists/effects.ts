@@ -40,10 +40,7 @@ export class ListsEffects {
   markAsFavorite$ = createEffect(() => this.actions$.pipe(
     ofType(fromActions.markListAsFavorite),
     mergeMap(action => this.listsService.markAsFavorite(action.listId).pipe(
-      map(res => fromActions.markListAsFavoriteSuccess({
-        listId: action.listId,
-        message: res.message,
-      })),
+      map(res => fromActions.markListAsFavoriteSuccess(res.data)),
       catchError(res => of(fromActions.markListAsFavoriteFailure(res))),
     )),
   ));
@@ -51,10 +48,7 @@ export class ListsEffects {
   unmarkAsFavorite$ = createEffect(() => this.actions$.pipe(
     ofType(fromActions.unmarkListAsFavorite),
     mergeMap(action => this.listsService.unmarkAsFavorite(action.listId).pipe(
-      map(res => fromActions.unmarkListAsFavoriteSuccess({
-        listId: action.listId,
-        message: res.message,
-      })),
+      map(res => fromActions.unmarkListAsFavoriteSuccess(res.data)),
       catchError(res => of(fromActions.unmarkListAsFavoriteFailure(res))),
     )),
   ));

@@ -52,7 +52,7 @@ export const markListAsFavorite = createAction(
 );
 export const markListAsFavoriteSuccess = createAction(
   '[Lists] Mark as favorite success',
-  props<{ listId: List['listId']; message: string; }>(),
+  props<List>(),
 );
 export const markListAsFavoriteFailure = createAction(
   '[Lists] Mark as favorite failure',
@@ -67,7 +67,7 @@ export const unmarkListAsFavorite = createAction(
 );
 export const unmarkListAsFavoriteSuccess = createAction(
   '[Lists] Unmark as favorite success',
-  props<{ listId: List['listId']; message: string; }>(),
+  props<List>(),
 );
 export const unmarkListAsFavoriteFailure = createAction(
   '[Lists] Unmark as favorite failure',

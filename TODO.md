@@ -1,1 +1,3 @@
 - [ ] BE: When updating *ANY* list to favorite, remove the other ones as favorite
+- [ ] BE: Use findById when marking lists, return full entity
+- [ ] FE: Change payloads of mark list actions to return full entity

@@ -66,7 +66,7 @@ class ListsService
     /**
      * @param string|int $listId
      */
-    public function markAsFavorite($listId, $isFavorite = true)
+    public function markAsFavorite($listId, $isFavorite = true): void
     {
         $marked = $this->listsRepo->markAsFavorite($listId, $isFavorite);
 

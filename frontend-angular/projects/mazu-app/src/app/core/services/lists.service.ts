@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from 'projects/mazu-app/src/environments/environment';
-import { CreateListDto, ImplicitUpdateListDto, UpdateListDto } from '../types';
+import { CreateListDto, UpdateListDto, List, ServerResponse, ServerResponseWithoutData } from '../types';
 
-// TODO: Entier service
 @Injectable({
   providedIn: 'root',
 })
@@ -17,39 +16,36 @@ export class ListsService {
     private http: HttpClient,
   ) {}
 
-  create(dto: CreateListDto): Observable<any> {
-    const url = 'TODO';
-    return this.http.post(url, dto);
+  create(dto: CreateListDto): Observable<ServerResponse<List>> {
+    return this.http.post<ServerResponse<List>>(this.baseUrl, dto);
   }
 
-  getAll(): Observable<any> {
-    const url = 'TODO';
-    return this.http.get(url);
+  getAll(): Observable<ServerResponse<List[]>> {
+    return this.http.get<ServerResponse<List[]>>(this.baseUrl);
   }
 
-  getOne(listId: string): Observable<any> {
-    const url = 'TODO';
-    const params = new HttpParams();
-    return this.http.get(url, { params });
+  getOne(listId: List['listId']): Observable<ServerResponse<List>> {
+    const url = `${this.baseUrl}/${listId}`;
+    return this.http.get<ServerResponse<List>>(url);
   }
 
-  markAsFavorite(dto: ImplicitUpdateListDto): Observable<any> {
-    const url = 'TODO';
-    return this.http.patch(url, dto);
+  markAsFavorite(listId: List['listId']): Observable<ServerResponseWithoutData> {
+    const url = `${this.baseUrl}/${listId}/mark`;
+    return this.http.patch<ServerResponseWithoutData>(url, {});
   }
 
-  unmarkAsFavorite(dto: ImplicitUpdateListDto): Observable<any> {
-    const url = 'TODO';
-    return this.http.patch(url, dto);
+  unmarkAsFavorite(listId: List['listId']): Observable<ServerResponseWithoutData> {
+    const url = `${this.baseUrl}/${listId}/unmark`;
+    return this.http.patch<ServerResponseWithoutData>(url, {});
   }
 
-  update(dto: UpdateListDto): Observable<any> {
-    const url = 'TODO';
-    return this.http.patch(url, dto);
+  update(dto: UpdateListDto): Observable<ServerResponse<List>> {
+    const url = `${this.baseUrl}/${dto.listId}`;
+    return this.http.patch<ServerResponse<List>>(url, dto);
   }
 
-  delete(dto: ImplicitUpdateListDto): Observable<any> {
-    const url = 'TODO';
-    return this.http.delete(url);
+  delete(listId: List['listId']): Observable<ServerResponse<List>> {
+    const url = `${this.baseUrl}/${listId}`;
+    return this.http.delete<ServerResponse<List>>(url);
   }
 }

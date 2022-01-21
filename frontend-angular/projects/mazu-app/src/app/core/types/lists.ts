@@ -1,19 +1,18 @@
 export interface CreateListDto {
   name: string;
-  // TODO
+  description?: string;
 }
 
 export interface UpdateListDto {
+  listId: string;
   name?: string;
-  // TODO
+  isFavorite?: boolean;
+  description?: string;
 }
 
 export interface List {
   listId: string;
   name: string;
-  // TODO
-}
-
-export interface ImplicitUpdateListDto {
-  listId: string;
+  isFavorite: boolean;
+  description: string;
 }

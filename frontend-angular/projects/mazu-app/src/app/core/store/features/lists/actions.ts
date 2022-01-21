@@ -1,12 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-import {
-  CreateListDto,
-  UpdateListDto,
-  ImplicitUpdateListDto,
-  List,
-  TextFeedback,
-} from '../../../types';
+import { CreateListDto, UpdateListDto, List, TextFeedback } from '../../../types';
 
 export const createList = createAction(
   '[Lists] Create',
@@ -58,7 +52,7 @@ export const markListAsFavorite = createAction(
 );
 export const markListAsFavoriteSuccess = createAction(
   '[Lists] Mark as favorite success',
-  props<TextFeedback>(),
+  props<{ listId: List['listId']; message: string; }>(),
 );
 export const markListAsFavoriteFailure = createAction(
   '[Lists] Mark as favorite failure',
@@ -69,11 +63,11 @@ export const markListAsFavoriteFailure = createAction(
 
 export const unmarkListAsFavorite = createAction(
   '[Lists] Unmark as favorite',
-  props<ImplicitUpdateListDto>(),
+  props<{ listId: List['listId']; }>(),
 );
 export const unmarkListAsFavoriteSuccess = createAction(
   '[Lists] Unmark as favorite success',
-  props<TextFeedback>(),
+  props<{ listId: List['listId']; message: string; }>(),
 );
 export const unmarkListAsFavoriteFailure = createAction(
   '[Lists] Unmark as favorite failure',
@@ -88,7 +82,7 @@ export const updateList = createAction(
 );
 export const updateListSuccess = createAction(
   '[Lists] Update list success',
-  props<TextFeedback>(),
+  props<List>(),
 );
 export const updateListFailure = createAction(
   '[Lists] Update list failure',
@@ -99,11 +93,11 @@ export const updateListFailure = createAction(
 
 export const deleteList = createAction(
   '[Lists] Delete list',
-  props<ImplicitUpdateListDto>(),
+  props<{ listId: List['listId']; }>(),
 );
 export const deleteListSuccess = createAction(
   '[Lists] Delete list success',
-  props<TextFeedback>(),
+  props<{ listId: List['listId']; message: string; }>(),
 );
 export const deleteListFailure = createAction(
   '[Lists] Delete list failure',

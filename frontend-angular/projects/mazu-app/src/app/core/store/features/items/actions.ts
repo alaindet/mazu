@@ -4,8 +4,8 @@ import {
   CreateItemDto,
   UpdateItemDto,
   ImplicitUpdateItemDto,
-  ImplicitUpdateListDto,
   Item,
+  List,
   TextFeedback,
 } from '../../../types';
 
@@ -100,7 +100,7 @@ export const deleteItemFailure = createAction(
 
 export const markAllItemsAsDone = createAction(
   '[Items] Mark all as done',
-  props<ImplicitUpdateListDto>(),
+  props<{ listId: List['listId']; }>(),
 );
 export const markAllItemsAsDoneSuccess = createAction(
   '[Items] Mark all as done success',
@@ -115,7 +115,7 @@ export const markAllItemsAsDoneFailure = createAction(
 
 export const unmarkAllItemsAsDone = createAction(
   '[Items] Unmark all as done',
-  props<ImplicitUpdateListDto>(),
+  props<{ listId: List['listId']; }>(),
 );
 export const unmarkAllItemsAsDoneSuccess = createAction(
   '[Items] Unmark all as done success',
@@ -130,7 +130,7 @@ export const unmarkAllItemsAsDoneFailure = createAction(
 
 export const deleteAllItems = createAction(
   '[Items] Delete all',
-  props<ImplicitUpdateListDto>(),
+  props<{ listId: List['listId']; }>(),
 );
 export const deleteAllItemsSuccess = createAction(
   '[Items] Delete all success',
@@ -145,7 +145,7 @@ export const deleteAllItemsFailure = createAction(
 
 export const deleteAllDoneItems = createAction(
   '[Items] Delete all done',
-  props<ImplicitUpdateListDto>(),
+  props<{ listId: List['listId']; }>(),
 );
 export const deleteAllDoneItemsSuccess = createAction(
   '[Items] Delete all done success',

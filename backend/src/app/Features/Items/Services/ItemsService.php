@@ -152,7 +152,7 @@ class ItemsService
     /**
      * @param string|int $listId
      */
-    public function deleteDoneItemsByListId($listId): void
+    public function deleteDoneItemsByListId($listId): int
     {
         $deleted = $this->itemsRepo->deleteDoneItemsByListId($listId);
 
@@ -160,5 +160,7 @@ class ItemsService
             $message = "Could not delete all items marked as done from list #{$listId}";
             throw new NotFoundHttpException($message);
         }
+
+        return $deleted;
     }
 }

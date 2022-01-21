@@ -34,11 +34,12 @@ const reducer = createReducer(
     fromActions.unmarkListAsFavoriteSuccess,
     fromActions.updateListSuccess,
     (state, action) => {
-    const { type, ...list } = action;
-    const listId = list.listId;
-    const lists = state.lists.map(aList => aList.listId === listId ? list : aList);
-    return { ...state, lists, isLoading: false };
-  }),
+      const { type, ...list } = action;
+      const listId = list.listId;
+      const lists = state.lists.map(aList => aList.listId === listId ? list : aList);
+      return { ...state, lists, isLoading: false };
+    }
+  ),
 
   // Delete
   on(fromActions.deleteListSuccess, (state, action) => {

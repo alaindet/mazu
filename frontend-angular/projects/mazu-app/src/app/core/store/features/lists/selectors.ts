@@ -7,10 +7,10 @@ export const selectListsFeature = createFeatureSelector<ListsState>(listsFeature
 
 export const selectLists = createSelector(
   selectListsFeature,
-  lists => lists.lists,
+  feat => feat.lists,
 );
 
 export const selectListsAreLoading = createSelector(
   selectListsFeature,
-  lists => lists.isLoading,
+  feat => feat.isLoading,
 );

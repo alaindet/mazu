@@ -26,6 +26,7 @@ export const createItemFailure = createAction(
 
 export const getAllItems = createAction(
   '[Items] Get all',
+  props<{ listId: Item['listId']; }>(),
 );
 export const getAllItemsSuccess = createAction(
   '[Items] Get all success',
@@ -33,6 +34,36 @@ export const getAllItemsSuccess = createAction(
 );
 export const getAllItemsFailure = createAction(
   '[Items] Get all failure',
+  props<TextFeedback>(),
+);
+
+
+
+export const markItemAsDone = createAction(
+  '[Items] Mark as done',
+  props<ImplicitUpdateItemDto>(),
+);
+export const markItemAsDoneSuccess = createAction(
+  '[Items] Mark as done success',
+  props<{ itemId: Item['itemId']; message: string; }>(),
+);
+export const markItemAsDoneFailure = createAction(
+  '[Items] Mark as done failure',
+  props<TextFeedback>(),
+);
+
+
+
+export const unmarkItemAsDone = createAction(
+  '[Items] Unmark as done',
+  props<ImplicitUpdateItemDto>(),
+);
+export const unmarkItemAsDoneSuccess = createAction(
+  '[Items] Unmark as done success',
+  props<{ itemId: Item['itemId']; message: string; }>(),
+);
+export const unmarkItemAsDoneFailure = createAction(
+  '[Items] Unmark as done failure',
   props<TextFeedback>(),
 );
 
@@ -53,43 +84,13 @@ export const updateItemFailure = createAction(
 
 
 
-export const markItemAsDone = createAction(
-  '[Items] Mark as done',
-  props<ImplicitUpdateItemDto>(),
-);
-export const markItemAsDoneSuccess = createAction(
-  '[Items] Mark as done success',
-  props<TextFeedback>(),
-);
-export const markItemAsDoneFailure = createAction(
-  '[Items] Mark as done failure',
-  props<TextFeedback>(),
-);
-
-
-
-export const unmarkItemAsDone = createAction(
-  '[Items] Unmark as done',
-  props<ImplicitUpdateItemDto>(),
-);
-export const unmarkItemAsDoneSuccess = createAction(
-  '[Items] Unmark as done success',
-  props<TextFeedback>(),
-);
-export const unmarkItemAsDoneFailure = createAction(
-  '[Items] Unmark as done failure',
-  props<TextFeedback>(),
-);
-
-
-
 export const deleteItem = createAction(
   '[Items] Delete',
   props<ImplicitUpdateItemDto>(),
 );
 export const deleteItemSuccess = createAction(
   '[Items] Delete success',
-  props<TextFeedback>(),
+  props<{ itemId: Item['itemId']; message: string; }>(),
 );
 export const deleteItemFailure = createAction(
   '[Items] Delete failure',

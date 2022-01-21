@@ -10,6 +10,7 @@
 </section>
 
 <ng-template #loggedUserRef>
+
   <section>
     <h2>Lists</h2>
     <button (click)="onCreateList()">Create list</button>
@@ -20,4 +21,10 @@
     <button (click)="onDeleteList()">Delete list</button>
     <pre>{{ ((lists$ | async) || []) | json }}</pre>
   </section>
+
+  <section>
+    <h2>Items</h2>
+    TODO...
+  </section>
+
 </ng-template>

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from 'projects/mazu-app/src/environments/environment';
-import { CreateItemDto, UpdateItemDto, Item, List, ServerResponse, ServerResponseWithoutData } from '../types';
+import { CreateItemDto, UpdateItemDto, Item, List, ServerResponse, ServerResponseWithoutData, ImplicitUpdateItemDto } from '../types';
 
 @Injectable({
   providedIn: 'root',
@@ -28,17 +28,17 @@ export class ItemsService {
     return this.http.get<ServerResponse<Item[]>>(url);
   }
 
-  markAsDone(item: Item): Observable<ServerResponse<Item>> {
+  markAsDone(dto: ImplicitUpdateItemDto): Observable<ServerResponse<Item>> {
     const url = `${this.baseUrl}/:itemid/mark`
-      .replace('listid', item.itemId)
-      .replace('itemId', item.itemId);
+      .replace('listid', dto.itemId)
+      .replace('itemId', dto.itemId);
     return this.http.patch<ServerResponse<Item>>(url, {});
   }
 
-  unmarkAsDone(item: Item): Observable<ServerResponse<Item>> {
+  unmarkAsDone(dto: ImplicitUpdateItemDto): Observable<ServerResponse<Item>> {
     const url = `${this.baseUrl}/:itemid/unmark`
-      .replace('listid', item.itemId)
-      .replace('itemId', item.itemId);
+      .replace('listid', dto.itemId)
+      .replace('itemId', dto.itemId);
     return this.http.patch<ServerResponse<Item>>(url, {});
   }
 
@@ -49,10 +49,10 @@ export class ItemsService {
     return this.http.patch<ServerResponse<Item>>(url, dto);
   }
 
-  delete(item: Item): Observable<ServerResponse<Item>> {
+  delete(dto: UpdateItemDto): Observable<ServerResponse<Item>> {
     const url = `${this.baseUrl}/:itemid`
-      .replace('listid', item.listId)
-      .replace('itemid', item.itemId);
+      .replace('listid', dto.listId)
+      .replace('itemid', dto.itemId);
     return this.http.delete<ServerResponse<Item>>(url);
   }
 

@@ -109,7 +109,7 @@ export class ItemsEffects {
   deleteAllDone$ = createEffect(() => this.actions$.pipe(
     ofType(fromActions.deleteAllDoneItems),
     mergeMap(action => this.itemsService.deleteAllMarkedAsDone(action.listId).pipe(
-      map(res => fromActions.deleteAllDoneItemsFailure(res)),
+      map(res => fromActions.deleteAllDoneItemsSuccess(res)),
       catchError(res => of(fromActions.deleteAllDoneItemsFailure(res))),
     )),
   ));

@@ -1,0 +1,60 @@
+<h1>Lab: Store</h1>
+
+<div *ngIf="anythingIsLoading$ | async">
+  Loading...
+</div>
+
+<section *ngIf="!(userIsLogged$ | async); else loggedUserRef">
+  <h2>Sign In</h2>
+  <button (click)="onSignIn()">Sign In</button>
+</section>
+
+<ng-template #loggedUserRef>
+
+  <section>
+    <h2>Lists</h2>
+    <button (click)="onCreateList()">Create list</button>
+    <button (click)="onGetAllLists()">Get all lists</button>
+    <button (click)="onMarkAsFavorite()">Mark as favorite list</button>
+    <button (click)="onUnmarkAsFavorite()">Unmark as favorite list</button>
+    <button (click)="onUpdateList()">Update list</button>
+    <button (click)="onDeleteList()">Delete list</button>
+
+    <pre>{{ ((lists$ | async) || []) | json }}</pre>
+  </section>
+
+  <section>
+    <h2>Items</h2>
+
+    <section>
+      <button (click)="onCreateItemOne()">Create item one</button>
+      <button (click)="onMarkItemOneAsDone()">Mark item one as done</button>
+      <button (click)="onUnmarkItemOneAsDone()">Unmark item one as done</button>
+      <button (click)="onUpdateItemOne()">Update item one</button>
+      <button (click)="onDeleteItemOne()">Delete item done</button>
+    </section>
+
+    <hr>
+
+    <section>
+      <button (click)="onCreateItemTwo()">Create item two</button>
+      <button (click)="onMarkItemTwoAsDone()">Mark item two as done</button>
+      <button (click)="onUnmarkItemTwoAsDone()">Unmark item two as done</button>
+      <button (click)="onUpdateItemTwo()">Update item two</button>
+      <button (click)="onDeleteItemTwo()">Delete item two</button>
+    </section>
+
+    <hr>
+
+    <section>
+      <button (click)="onGetItemsFromList()">Get items from list</button>
+      <button (click)="onMarkAllAsDone()">Mark all items on list as done</button>
+      <button (click)="onUnmarkAllAsDone()">Unmark all items on list as done</button>
+      <button (click)="onDeleteAllDone()">Delete all done items on list</button>
+      <button (click)="onDeleteAll()">Delete all items on list</button>
+    </section>
+
+    <pre>{{ ((items$ | async) || []) | json }}</pre>
+  </section>
+
+</ng-template>

@@ -28,31 +28,31 @@ export class ListsService {
 
   getOne(listId: List['listId']): Observable<ServerResponse<List>> {
     const url = `${this.baseUrl}/:listid`
-      .replace('listid', listId);
+      .replace(':listid', listId);
     return this.http.get<ServerResponse<List>>(url);
   }
 
   markAsFavorite(listId: List['listId']): Observable<ServerResponse<List>> {
     const url = `${this.baseUrl}/:listid/mark`
-      .replace('listid', listId);;
+      .replace(':listid', listId);
     return this.http.patch<ServerResponse<List>>(url, null);
   }
 
   unmarkAsFavorite(listId: List['listId']): Observable<ServerResponse<List>> {
     const url = `${this.baseUrl}/:listid/unmark`
-      .replace('listid', listId);
+      .replace(':listid', listId);
     return this.http.patch<ServerResponse<List>>(url, null);
   }
 
   update(dto: UpdateListDto): Observable<ServerResponse<List>> {
     const url = `${this.baseUrl}/:listid`
-      .replace('listid', dto.listId);
+      .replace(':listid', dto.listId);
     return this.http.patch<ServerResponse<List>>(url, dto);
   }
 
   delete(listId: List['listId']): Observable<ServerResponse<List>> {
     const url = `${this.baseUrl}/:listid`
-      .replace('listId', listId)
+      .replace(':listid', listId)
     return this.http.delete<ServerResponse<List>>(url);
   }
 }

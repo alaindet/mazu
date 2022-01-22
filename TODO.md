@@ -1,1 +1,3 @@
 - [ ] BE: When updating *ANY* list to favorite, remove the other ones as favorite
+- [ ] FE: Change environment apiUrl in production
+- [ ] FE: https://demos.creative-tim.com/purity-ui-dashboard/#/admin/dashboard

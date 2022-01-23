@@ -1,0 +1,106 @@
+:host {
+
+  // TODO: Move away
+  --color-primary: #0000ff;
+  --color-primary-dark: #0000cc;
+  --color-background: #ffffff;
+  --color-grey: #ccc;
+  --color-grey-dark: #aaa;
+  --color-foreground: #303030;
+
+
+	font: inherit;
+	font-weight: 600;
+	cursor: pointer;
+	transition: 0.15s all ease-in-out;
+	box-sizing: border-box;
+	border: 2px solid transparent;
+
+	&.--size {
+
+    &-small {
+			font-size: 13px;
+			line-height: 14px;
+			padding: 0.4rem 0.75rem;
+      border-radius: 0.4rem;
+		}
+
+		&-medium {
+			font-size: 14px;
+			line-height: 16px;
+			padding: 0.66rem 1.33rem;
+      border-radius: 0.5rem;
+		}
+
+    &-large {
+			font-size: 16px;
+			line-height: 18px;
+			padding: 1rem 1.66rem;
+      border-radius: 0.66rem;
+      border-width: 3px;
+		}
+	}
+
+  &.--color {
+
+    &-primary {
+      background-color: var(--color-primary);
+      color: var(--color-background);
+
+      &:hover,
+      &:focus {
+        outline: none;
+        background-color: var(--color-primary-dark);
+      }
+    }
+
+    &-primary-outline {
+      color: var(--color-primary);
+      border-color: var(--color-primary);
+      background-color: var(--color-background);
+
+      &:hover,
+      &:focus {
+        outline: none;
+        background-color: var(--primary);
+        color: var(--color-background);
+      }
+    }
+
+    &-secondary {
+      background-color: var(--color-grey);
+      color: var(--color-foreground);
+
+      &:hover,
+      &:focus {
+        outline: none;
+        background-color: var(--color-grey-dark);
+      }
+    }
+  }
+
+  &.--full-width {
+    width: 100%;
+  }
+
+  &.--with-icon {
+    display: flex;
+		align-items: center;
+		justify-content: center;
+
+    &-left i {
+      margin-right: 0.5rem;
+    }
+
+    &-right i {
+      margin-left: 0.5rem;
+    }
+  }
+
+  &.--disabled,
+	&[disabled] {
+		pointer-events: none;
+		cursor: not-allowed;
+		opacity: 0.5;
+	}
+}

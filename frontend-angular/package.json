@@ -7,6 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "start:ui": "ng build ui --watch",
+    "start:demo": "ng server --project ui-demo",
     "build:ui": "ng build ui",
     "test": "ng test"
   },

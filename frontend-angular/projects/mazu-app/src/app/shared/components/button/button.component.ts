@@ -1,11 +1,13 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
 
+import { InputBoolean } from '@/shared/decorators';
+
 export interface MazuButtonInput {
   color: 'primary' | 'primary-outline' | 'secondary';
   size: 'small' | 'medium' | 'large';
-  withFullWidth?: boolean;
+  withFullWidth?: boolean | string;
   withIcon?: 'left' | 'right';
-  isDisabled?: boolean;
+  isDisabled?: boolean | string;
 }
 
 @Component({
@@ -19,12 +21,9 @@ export class MazuButtonComponent {
 
   @Input() color: MazuButtonInput['color'] = 'primary';
   @Input() size: MazuButtonInput['size'] = 'medium';
-  @Input() withFullWidth?: MazuButtonInput['withFullWidth'] = false;
   @Input() withIcon?: MazuButtonInput['withIcon'];
-
-  @Input()
-  @HostBinding('class.--disabled')
-  isDisabled: MazuButtonInput['isDisabled'] = false;
+  @Input() @InputBoolean() isDisabled?: MazuButtonInput['withFullWidth'] = false;
+  @Input() @InputBoolean() withFullWidth?: MazuButtonInput['isDisabled'] = false;
 
   @HostBinding('class')
   cssClasses!: string;
@@ -36,6 +35,7 @@ export class MazuButtonComponent {
       `--size-${this.size}`,
       this.withFullWidth ? '--full-width' : null,
       this.withIcon ? `--with-icon-${this.withIcon}` : null,
+      this.isDisabled ? '--disabled' : null,
 		];
 
     this.cssClasses = cssClasses.filter(cssClass => cssClass !== null).join(' ');

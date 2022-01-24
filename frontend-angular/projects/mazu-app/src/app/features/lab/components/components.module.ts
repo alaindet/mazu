@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { MazuButtonComponentModule } from '@/shared/components/button';
 
 import { LabComponentsIndexComponent } from './index/index.component';
 import { LabComponentsFeatureComponent } from './components.component';
+import { LabComponentsButtonComponent } from './components/button/button.component';
 import { LAB_COMPONENTS_ROUTES } from './routes';
 
 const routes: Routes = [
@@ -25,11 +26,13 @@ const routes: Routes = [
 @NgModule({
 	imports: [
 		CommonModule,
+    RouterModule.forChild(routes),
     MazuButtonComponentModule,
 	],
 	declarations: [
 		LabComponentsFeatureComponent,
 		LabComponentsIndexComponent,
+    LabComponentsButtonComponent,
 	],
 })
 export class LabComponentsFeatureModule {}

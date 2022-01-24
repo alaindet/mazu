@@ -2,11 +2,11 @@
 
 :root {
   // TODO: Update colors
-  --color-primary: #0000ff;
-  --color-primary-dark: #0000cc;
+  --color-primary: #6B46C1;
+  --color-primary-dark: #553C9A;
   --color-background: #ffffff;
-  --color-grey: #ccc;
-  --color-grey-dark: #aaa;
+  --color-grey: #EDF2F7;
+  --color-grey-dark: #CBD5E0;
   --color-foreground: #303030;
 }
 
@@ -15,5 +15,9 @@
 }
 
 html {
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  margin: 0;
 }

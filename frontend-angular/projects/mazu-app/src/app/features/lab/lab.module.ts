@@ -9,7 +9,13 @@ const routes: Routes = [
   },
   {
     path: 'store',
-    loadChildren: () => import('./store/store.module').then(m => m.TestStoreModule),
+    loadChildren: () => import('./store/store.module')
+      .then(m => m.LabStoreModule),
+  },
+  {
+    path: 'components',
+    loadChildren: () => import('./components/components.module')
+      .then(m => m.LabComponentsFeatureModule),
   },
 ];
 

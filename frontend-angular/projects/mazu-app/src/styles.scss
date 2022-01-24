@@ -1,5 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 
+:root {
+  // TODO: Update colors
+  --color-primary: #0000ff;
+  --color-primary-dark: #0000cc;
+  --color-background: #ffffff;
+  --color-grey: #ccc;
+  --color-grey-dark: #aaa;
+  --color-foreground: #303030;
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
 }

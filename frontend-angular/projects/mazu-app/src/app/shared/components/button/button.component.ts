@@ -31,6 +31,7 @@ export class MazuButtonComponent {
 
   ngOnInit(): void {
     const cssClasses = [
+      'mz-button',
       `--color-${this.color}`,
       `--size-${this.size}`,
       this.withFullWidth ? '--full-width' : null,

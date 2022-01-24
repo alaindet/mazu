@@ -22,6 +22,9 @@
       "dom"
     ],
     "paths": {
+      "@/*": [
+        "projects/mazu-app/src/app/*"
+      ],
       "@/ui/*": [
         "dist/ui/*",
         "dist/ui/ui/*"

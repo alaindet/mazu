@@ -25,10 +25,13 @@
       "@/*": [
         "projects/mazu-app/src/app/*"
       ],
-      "@/ui/*": [
+      "@ui/*": [
         "dist/ui/*",
         "dist/ui/ui/*"
-      ]
+      ],
+      "@ui-demo/*": [
+        "projects/ui-demo/src/app/*"
+      ],
     }
   },
   "angularCompilerOptions": {

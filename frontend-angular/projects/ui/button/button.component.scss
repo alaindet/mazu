@@ -1,11 +1,98 @@
-:host {
-  border: 2px solid red;
-  background-color: transparent;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  transition: background-color 0.15s ease-out;
+.mz-button {
+	font: inherit;
+	font-weight: 600;
+	cursor: pointer;
+	transition: 0.15s all ease-in-out;
+	box-sizing: border-box;
+	border: 3px solid transparent;
+  letter-spacing: 1px;
 
-  &:hover {
-    background-color: rgba(0,0,0,0.1);
+	&.--size {
+
+    &-small {
+			font-size: 13px;
+			line-height: 14px;
+			padding: 0.4rem 0.75rem;
+      border-radius: 0.4rem;
+		}
+
+		&-medium {
+			font-size: 14px;
+			line-height: 16px;
+			padding: 0.66rem 1.33rem;
+      border-radius: 0.5rem;
+		}
+
+    &-large {
+			font-size: 18px;
+			line-height: 20px;
+			padding: 0.8rem 1.4rem;
+      border-radius: 0.66rem;
+      border-width: 3px;
+		}
+	}
+
+  &.--color {
+
+    &-primary {
+      background-color: var(--color-primary);
+      color: var(--color-background);
+
+      &:hover,
+      &:focus {
+        outline: none;
+        background-color: var(--color-primary-dark);
+      }
+    }
+
+    &-primary-outline {
+      color: var(--color-primary);
+      border-color: var(--color-primary);
+      background-color: var(--color-background);
+
+      &:hover,
+      &:focus {
+        outline: none;
+        background-color: var(--color-primary-dark);
+        border-color: var(--color-primary-dark);
+        color: var(--color-background);
+      }
+    }
+
+    &-secondary {
+      background-color: var(--color-grey);
+      color: var(--color-foreground);
+
+      &:hover,
+      &:focus {
+        outline: none;
+        background-color: var(--color-grey-dark);
+      }
+    }
   }
+
+  &.--full-width {
+    width: 100%;
+  }
+
+  &.--with-icon {
+    display: flex;
+		align-items: center;
+		justify-content: center;
+
+    &-left i {
+      margin-right: 0.5rem;
+    }
+
+    &-right i {
+      margin-left: 0.5rem;
+    }
+  }
+
+  &.--disabled,
+	&[disabled] {
+		pointer-events: none;
+		cursor: not-allowed;
+		opacity: 0.5;
+	}
 }

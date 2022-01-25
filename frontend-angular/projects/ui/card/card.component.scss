@@ -1,13 +1,24 @@
 .mz-card {
+  border: 2px solid transparent;
   border-radius: 1rem;
   box-shadow: 2px 2px 7px rgba(0,0,0,0.2);
   position: relative;
   display: flex;
   align-items: center;
   justify-content: flex-start;
+
+  &.--selected {
+    border-color: var(--color-primary-600);
+  }
 }
 
-h1, h2, h3, h4, h5, h6, p {
+.mz-card h1,
+.mz-card h2,
+.mz-card h3,
+.mz-card h4,
+.mz-card h5,
+.mz-card h6,
+.mz-card p {
   margin: 0;
   padding: 0;
 }

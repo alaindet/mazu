@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
 
 export interface MazuCardInput {
-  // ...
+  isSelected?: boolean;
 }
 
 @Component({
@@ -12,5 +12,5 @@ export interface MazuCardInput {
   encapsulation: ViewEncapsulation.None,
 })
 export class MazuCardComponent {
-  // ...
+  @Input() isSelected?: MazuCardInput['isSelected'] = false;
 }

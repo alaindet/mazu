@@ -6,8 +6,4 @@ import packageJson from '../../../../package.json';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-  ngOnInit(): void {
-    console.log('Version', packageJson.version);
-  }
-}
+export class AppComponent {}

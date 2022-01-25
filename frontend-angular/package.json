@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --project mazu-app",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
+    "start": "ng serve --project app",
+    "start:common": "ng build common --watch",
     "start:ui": "ng build ui --watch",
     "start:demo": "ng serve --project ui-demo",
+    "build": "ng build",
     "build:ui": "ng build ui",
     "build:common": "ng build common",
+    "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
   "private": true,

@@ -25,7 +25,10 @@
     ],
     "paths": {
       "@/app/*": [
-        "projects/mazu-app/src/app/*"
+        "projects/app/src/app/*"
+      ],
+      "@/app/environment": [
+        "projects/app/src/environments/environment.ts"
       ],
       "@/ui-demo/*": [
         "projects/ui-demo/src/app/*"
@@ -33,10 +36,6 @@
       "@/ui/*": [
         "dist/ui/*",
         "dist/ui/ui/*"
-      ],
-      "@/common/*": [
-        "dist/common/*",
-        "dist/common/common/*"
       ],
       "@/common": [
         "dist/common/common",

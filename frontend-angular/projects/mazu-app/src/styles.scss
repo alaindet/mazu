@@ -1,0 +1,23 @@
+/* You can add global styles to this file, and also import other style files */
+
+:root {
+  // TODO: Update colors
+  --color-primary: #6B46C1;
+  --color-primary-dark: #553C9A;
+  --color-background: #ffffff;
+  --color-grey: #EDF2F7;
+  --color-grey-dark: #CBD5E0;
+  --color-foreground: #303030;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  margin: 0;
+}

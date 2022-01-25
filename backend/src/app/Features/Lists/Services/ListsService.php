@@ -66,8 +66,11 @@ class ListsService
     /**
      * @param string|int $listId
      */
-    public function markAsFavorite($listId, $isFavorite = true)
+    public function markAsFavorite($listId, $isFavorite = true): GetListDto
     {
+        $dtoOut = $this->findById($listId);
+        $dtoOut->isFavorite = $isFavorite;
+
         $marked = $this->listsRepo->markAsFavorite($listId, $isFavorite);
 
         if ($marked === 0) {
@@ -75,6 +78,8 @@ class ListsService
             $message = "List #{$listId} is already {$markStatus} as favorite";
             throw new ConflictHttpException($message);
         }
+
+        return $dtoOut;
     }
 
     public function updateById(UpdateListDto $dtoIn): GetListDto

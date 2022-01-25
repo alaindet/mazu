@@ -1,0 +1,16 @@
+import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
+
+export interface MazuCardInput {
+  // ...
+}
+
+@Component({
+  selector: 'mz-card',
+  templateUrl: './card.component.html',
+  styleUrls: ['./card.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
+})
+export class MazuCardComponent {
+  // ...
+}

@@ -122,11 +122,11 @@ class ItemsController extends Controller
     public function deleteAll(Request $req, Response $res): Response
     {
         $listId = $req->getUriParameter('listid');
-        $dtoOut = $this->itemsService->deleteByListId($listId);
+        $this->itemsService->deleteByListId($listId);
 
         $res->setBody([
             'message' => "All items from list #{$listId} were deleted",
-            'data' => $dtoOut,
+            'data' => null,
         ]);
 
         return $res;

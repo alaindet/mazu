@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
 
-import { InputBoolean } from '@ui/common';
+import { InputBoolean } from '@/common';
 
 export interface MazuButtonInput {
   color: 'primary' | 'primary-outline' | 'secondary';

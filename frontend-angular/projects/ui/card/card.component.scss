@@ -1,5 +1,37 @@
 .mz-card {
-  // ...
-  border: 2px solid var(--color-primary);
-  border-radius: 0.5rem;
+  border-radius: 1rem;
+  box-shadow: 2px 2px 7px rgba(0,0,0,0.2);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+  padding: 0;
+}
+
+.mz-card__left {
+  padding: 1rem;
+  padding-right: 0;
+}
+
+.mz-card__content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.mz-card__top-right {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.mz-card__bottom-right {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
 }

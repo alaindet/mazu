@@ -1,3 +1,27 @@
 <div class="mz-card">
-  <ng-content></ng-content>
+
+  <aside class="mz-card__left">
+    <ng-content select="[slot='left']"></ng-content>
+  </aside>
+
+  <main class="mz-card__content">
+    <div class="mz-card__content__top">
+      <ng-content select="[slot='top']"></ng-content>
+    </div>
+    <div class="mz-card__content__main">
+      <ng-content select="[slot='main']"></ng-content>
+    </div>
+    <div class="mz-card__content__bottom">
+      <ng-content select="[slot='bottom']"></ng-content>
+    </div>
+  </main>
+
+  <div class="mz-card__top-right">
+    <ng-content select="[slot='top-right']"></ng-content>
+  </div>
+
+  <div class="mz-card__bottom-right">
+    <ng-content select="[slot='bottom-right']"></ng-content>
+  </div>
+
 </div>

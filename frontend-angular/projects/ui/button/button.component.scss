@@ -35,38 +35,38 @@
   &.--color {
 
     &-primary {
-      background-color: var(--color-primary);
+      background-color: var(--color-primary-600);
       color: var(--color-background);
 
       &:hover,
       &:focus {
         outline: none;
-        background-color: var(--color-primary-dark);
+        background-color: var(--color-primary-700);
       }
     }
 
     &-primary-outline {
-      color: var(--color-primary);
-      border-color: var(--color-primary);
+      color: var(--color-primary-600);
+      border-color: var(--color-primary-600);
       background-color: var(--color-background);
 
       &:hover,
       &:focus {
         outline: none;
-        background-color: var(--color-primary-dark);
-        border-color: var(--color-primary-dark);
+        background-color: var(--color-primary-700);
+        border-color: var(--color-primary-700);
         color: var(--color-background);
       }
     }
 
     &-secondary {
-      background-color: var(--color-grey);
+      background-color: var(--color-grey-100);
       color: var(--color-foreground);
 
       &:hover,
       &:focus {
         outline: none;
-        background-color: var(--color-grey-dark);
+        background-color: var(--color-grey-300);
       }
     }
   }

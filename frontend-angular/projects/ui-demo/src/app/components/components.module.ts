@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
-// import { MazuButtonComponentModule } from '@/shared/components/button';
-// import { MazuCardComponentModule } from '@/shared/components/card';
+import { MazuButtonComponentModule } from '@/ui/button';
+import { MazuCardComponentModule } from '@/ui/card';
 
 import { DemoComponentsIndexComponent } from './index/index.component';
 import { DemoComponentsFeatureComponent } from './components.component';
@@ -29,8 +29,8 @@ const routes: Routes = [
 	imports: [
 		CommonModule,
     RouterModule.forChild(routes),
-    // MazuButtonComponentModule,
-    // MazuCardComponentModule,
+    MazuButtonComponentModule,
+    MazuCardComponentModule,
 	],
 	declarations: [
 		DemoComponentsFeatureComponent,

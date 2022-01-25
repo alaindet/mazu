@@ -17,20 +17,30 @@
     "importHelpers": true,
     "target": "es2017",
     "module": "es2020",
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
     "lib": [
       "es2020",
       "dom"
     ],
     "paths": {
-      "@/*": [
+      "@/app/*": [
         "projects/mazu-app/src/app/*"
       ],
-      "@ui/*": [
+      "@/ui-demo/*": [
+        "projects/ui-demo/src/app/*"
+      ],
+      "@/ui/*": [
         "dist/ui/*",
         "dist/ui/ui/*"
       ],
-      "@ui-demo/*": [
-        "projects/ui-demo/src/app/*"
+      "@/common/*": [
+        "dist/common/*",
+        "dist/common/common/*"
+      ],
+      "@/common": [
+        "dist/common/common",
+        "dist/common"
       ],
     }
   },

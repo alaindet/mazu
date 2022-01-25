@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import packageJson from '../../../../../package.json';
 
 import { LAB_COMPONENTS_ROUTES } from './routes';
 
@@ -8,10 +9,12 @@ import { LAB_COMPONENTS_ROUTES } from './routes';
 })
 export class DemoComponentsFeatureComponent implements OnInit {
 
+  version!: string;
 	routes: { label: string; url: string; }[] = [];
 	isNavVisible = false;
 
 	ngOnInit(): void {
+    this.version = packageJson.version;
 		this.routes = LAB_COMPONENTS_ROUTES.map(route => ({
 			label: route.data.label,
 			url: `/components/${route.path}`,

@@ -1,6 +1,6 @@
 {
   "name": "frontend-angular",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --project mazu-app",
@@ -9,6 +9,7 @@
     "start:ui": "ng build ui --watch",
     "start:demo": "ng serve --project ui-demo",
     "build:ui": "ng build ui",
+    "build:common": "ng build common",
     "test": "ng test"
   },
   "private": true,

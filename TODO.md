@@ -2,5 +2,5 @@
 - [ ] FE: Change environment apiUrl in production
 - [ ] FE: https://demos.creative-tim.com/purity-ui-dashboard/#/admin/dashboard
 - [ ] FE: https://www.wework4days.com/
-- [ ] FE: Move components from mazu-app to ui
-- [ ] FE: Init ui-demo
+- [ ] FE: Add checkbox component
+- [ ] FE: Add dropdown menu

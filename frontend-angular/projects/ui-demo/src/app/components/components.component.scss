@@ -21,6 +21,10 @@ header {
 	border-bottom: 2px solid var(--color-grey-300);
 	display: flex;
 	align-items: center;
+
+  .left {
+    flex-grow: 1;
+  }
 }
 
 .menu-handle {
@@ -99,17 +103,4 @@ main {
 	flex-grow: 1;
 	padding: 0.66rem;
 	height: 100%;
-}
-
-::ng-deep .mz-demo-section {
-	box-sizing: border-box;
-	margin: 2rem 0;
-	padding: 1rem;
-	border: 1px solid var(--color-grey-300);
-	border-radius: 1rem;
-}
-
-::ng-deep .mz-demo-case {
-	margin: 1rem 0;
-	box-sizing: border-box;
 }

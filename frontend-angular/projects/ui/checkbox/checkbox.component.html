@@ -1,4 +1,7 @@
 <label>
-  <input type="checkbox">
-  <ng-content></ng-content>
+	<input #inputRef type="checkbox" (change)="onInputChange($event)">
+	<div class="-icon {{ iconCssClass }}" [class.--selected]="isChecked"></div>
+	<span class="-text">
+    <ng-content></ng-content>
+	</span>
 </label>

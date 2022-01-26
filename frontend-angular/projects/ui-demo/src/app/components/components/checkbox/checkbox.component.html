@@ -3,9 +3,29 @@
 <section class="mz-demo-section">
 
   <section class="mz-demo-case">
-    <mz-checkbox>
-      Checkbox label
+    <h3>Basic</h3>
+    <mz-checkbox [value]="42" (changed)="consoleLog('changed', $event)">
+      Check this out!
     </mz-checkbox>
+  </section>
+
+  <section class="mz-demo-case">
+    <h3>Large</h3>
+    <mz-checkbox [value]="42" size="large" (changed)="consoleLog('changed', $event)">
+      Check this out!
+    </mz-checkbox>
+  </section>
+
+  <section class="mz-demo-case">
+    <h3>Custom size</h3>
+    <mz-checkbox [value]="42" size="64px" (changed)="consoleLog('changed', $event)">
+      Custom size = 64px
+    </mz-checkbox>
+  </section>
+
+  <section class="mz-demo-case">
+    <h3>Without label</h3>
+    <mz-checkbox [value]="42" (changed)="consoleLog('changed', $event)"></mz-checkbox>
   </section>
 
 </section>

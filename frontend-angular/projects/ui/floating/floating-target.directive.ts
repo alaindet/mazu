@@ -2,7 +2,7 @@ import { Directive, ElementRef, HostBinding, HostListener, Input, OnInit } from 
 import { ComputePositionReturn, ComputePositionConfig } from '@floating-ui/core';
 import { computePosition, flip } from '@floating-ui/dom';
 
-import { CssRules } from '@/common';
+import { CssRules, millisecondsToCss } from '@/common';
 import { MazuFloatingReferenceDirective } from './floating-reference.directive';
 
 @Directive({
@@ -12,11 +12,12 @@ import { MazuFloatingReferenceDirective } from './floating-reference.directive';
 export class MazuFloatingTargetDirective implements OnInit {
 
   @Input('refersTo') floatingReference!: MazuFloatingReferenceDirective;
-  @Input() clickStrategy: 'close' | 'none' = 'none';
   @Input() isOpen?: boolean;
+  @Input() clickStrategy: 'close' | 'none' = 'none';
+  @Input() animationDuration = 150;
 
   @HostBinding('style')
-  cssStyle?: CssRules;
+  cssStyle: CssRules = {};
 
   constructor(
     public host: ElementRef,
@@ -36,27 +37,33 @@ export class MazuFloatingTargetDirective implements OnInit {
   // Public API
   open(): void {
     this.isOpen = true;
-    this.computePosition();
+    setTimeout(() => {
+      this.computePosition();
+      this.cssStyle['opacity'] = '1';
+    });
   }
 
   // Public API
   close(): void {
+    this.cssStyle['opacity'] = '0';
     this.isOpen = false;
   }
 
   // Public API
   toggle(): void {
-    if (!!this.isOpen) {
-      this.close();
-      return;
-    }
-
-    this.open();
+    !!this.isOpen
+      ? this.close()
+      : this.open();
   }
 
-  private computeCssStyle(): CssRules | undefined {
+  private computeCssStyle(): CssRules {
+
+    const duration = millisecondsToCss(this.animationDuration);
+
     return {
       position: 'fixed',
+      opacity: this.isOpen ? '0' : '1',
+      transition: `${duration} all ease-in-out`,
     };
   }
 
@@ -64,13 +71,11 @@ export class MazuFloatingTargetDirective implements OnInit {
     const ref = this.floatingReference.host.nativeElement;
     const target = this.host.nativeElement;
 
-    const middleware = [
-      flip(),
-    ];
-
     const options: Partial<ComputePositionConfig> = {
       placement: 'bottom-start',
-      middleware,
+      middleware: [
+        flip(),
+      ],
     };
 
     const pos: ComputePositionReturn = await computePosition(ref, target, options);

@@ -1,0 +1,11 @@
+.target {
+  border: 1px dashed red;
+
+  &.--show {
+    display: block;
+  }
+
+  &.--hide {
+    display: none;
+  }
+}

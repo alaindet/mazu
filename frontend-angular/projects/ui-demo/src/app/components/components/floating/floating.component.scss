@@ -1,5 +1,6 @@
 .target {
-  border: 1px dashed red;
+  border: 1px dashed var(--color-primary-600);
+  background-color: var(--color-background);
 
   &.--show {
     display: block;

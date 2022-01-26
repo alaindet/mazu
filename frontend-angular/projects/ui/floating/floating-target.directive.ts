@@ -69,16 +69,15 @@ export class MazuFloatingTargetDirective implements OnInit {
     ];
 
     const options: Partial<ComputePositionConfig> = {
-      placement: 'bottom',
+      placement: 'bottom-start',
       middleware,
     };
 
     const pos: ComputePositionReturn = await computePosition(ref, target, options);
 
-    const cssStyle: CssRules = {};
-    cssStyle['top'] = `${pos.x}px`;
-    cssStyle['left'] = `${pos.y}px`;
-    if (!this.cssStyle) this.cssStyle = {};
-    this.cssStyle = { ...this.cssStyle, ...cssStyle };
+    Object.assign(target.style, {
+      left: `${pos.x}px`,
+      top: `${pos.y}px`,
+    });
   }
 }

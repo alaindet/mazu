@@ -1,42 +1,40 @@
-import { Directive, Input, ElementRef, Renderer2, HostListener, Output, EventEmitter, Inject } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import { Directive, Input, ElementRef, Renderer2, HostListener, Output, EventEmitter } from '@angular/core';
 import { computePosition, offset, flip } from '@floating-ui/dom';
 
 import { InputBoolean } from '@/common';
-import { MazuFloatingTargetInput } from './floating-target.input';
 import { MazuFloatingTriggerDirective } from './floating-trigger.directive';
+import { DocumentClickService } from './document-click.service';
 
 @Directive({
   selector: '[mzFloatingTarget]',
   exportAs: 'mzFloatingTarget',
+  providers: [DocumentClickService],
 })
 export class MazuFloatingTargetDirective {
 
-  // TODO: Remove input interface?
-  @Input('mzFloatingTarget') triggerRef!: MazuFloatingTargetInput['triggerRef'];
-  @Input() offset: MazuFloatingTargetInput['offset'] = 5; // 5px
-  @Input() clickStrategy: MazuFloatingTargetInput['clickStrategy'] = 'close';
-  @Input() scrollStrategy: MazuFloatingTargetInput['scrollStrategy'] = 'none'; // TODO
-  @Input() @InputBoolean() closeOnClickAway: MazuFloatingTargetInput['closeOnClickAway'] = true;
-  @Input() cssClassBase?: MazuFloatingTargetInput['cssClassBase'];
-  @Input() cssClassClose?: MazuFloatingTargetInput['cssClassClose'];
-  @Input() cssClassOpen?: MazuFloatingTargetInput['cssClassOpen'];
+  @Input('mzFloatingTarget') triggerRef!: MazuFloatingTriggerDirective;
+  @Input() offset: number = 5; // 5px
+  @Input() clickStrategy: 'close' | 'none' = 'close';
+  @Input() scrollStrategy: 'close' | 'none' = 'none'; // TODO
+  @Input() @InputBoolean() closeOnClickAway: boolean | string = true;
+  @Input() cssClassBase?: string;
+  @Input() cssClassClose?: string;
+  @Input() cssClassOpen?: string;
 
   @Output() opened = new EventEmitter<void>();
   @Output() closed = new EventEmitter<void>();
 
   isOpen = false;
 
-  private backdropElementId = 'mazu-floating-backdrop';
-
   constructor(
     private host: ElementRef,
     private renderer: Renderer2,
-    @Inject(DOCUMENT) private readonly documentRef: Document,
+    private documentClick: DocumentClickService,
   ) {}
 
   ngOnInit(): void {
     this.setBaseStyle();
+    this.initCloseOnClickAway();
     this.isOpen ? this.setOpenStyle() : this.setCloseStyle();
   }
 
@@ -57,9 +55,6 @@ export class MazuFloatingTargetDirective {
     this.isOpen = true;
     this.setOpenStyle();
     this.updatePosition();
-    if (this.closeOnClickAway) {
-      this.addBackdropElement();
-    }
     this.opened.emit();
   }
 
@@ -67,9 +62,6 @@ export class MazuFloatingTargetDirective {
   close(): void {
     this.isOpen = false;
     this.setCloseStyle();
-    if (this.closeOnClickAway) {
-      this.removeBackdropElement();
-    }
     this.closed.emit();
   }
 
@@ -86,6 +78,21 @@ export class MazuFloatingTargetDirective {
     });
 
     this.setPositionStyle(x, y);
+  }
+
+  // TODO: Inject conditionally (https://stackoverflow.com/questions/37482460/)
+  private initCloseOnClickAway(): void {
+    if (this.closeOnClickAway) {
+      this.documentClick.getOutsideClick(this.host.nativeElement)
+        .subscribe(event => {
+
+          // TODO
+          console.log('click target', event);
+          console.log('clicked outside', this.host.nativeElement.contains(event.target));
+
+          this.close();
+        });
+    }
   }
 
   private setBaseStyle(): void {
@@ -128,31 +135,5 @@ export class MazuFloatingTargetDirective {
   private setPositionStyle(x: number, y: number): void {
     this.renderer.setStyle(this.host.nativeElement, 'left', `${x}px`);
     this.renderer.setStyle(this.host.nativeElement, 'top', `${y}px`);
-  }
-
-  /**
-	 * The backdrop element is a runtime temporary element to help catch clicks
-	 * outside of the floating target, in order to close the target on click away
-	 */
-  private addBackdropElement(): void {
-    this.renderer.setStyle(this.host.nativeElement, 'z-index', '2');
-		const backdropElement = this.documentRef.createElement('div');
-    backdropElement.id = this.backdropElementId;
-		backdropElement.textContent = '';
-		backdropElement.style.position = 'fixed';
-		backdropElement.style.zIndex = '1';
-		backdropElement.style.top = '0';
-		backdropElement.style.right = '0';
-		backdropElement.style.bottom = '0';
-		backdropElement.style.left = '0';
-    this.documentRef.body.appendChild(backdropElement);
-		backdropElement.addEventListener('click', this.close.bind(this));
-  }
-
-  private removeBackdropElement(): void {
-    const cssQuery = `#${this.backdropElementId}`;
-		const backdropElement = this.documentRef.querySelector(cssQuery);
-		backdropElement?.parentNode?.removeChild(backdropElement);
-		this.renderer.setStyle(this.host.nativeElement, 'z-index', 'initial');
   }
 }

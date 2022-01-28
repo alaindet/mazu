@@ -41,6 +41,10 @@
         "dist/common/common",
         "dist/common"
       ],
+      "@/common/*": [
+        "dist/common/*",
+        "dist/common/common/*"
+      ],
     }
   },
   "angularCompilerOptions": {

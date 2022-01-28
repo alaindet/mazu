@@ -31,8 +31,7 @@
     <button
       #triggerRef="mzFloatingTrigger"
       mzFloatingTrigger
-      (mouseenter)="targetRef.open()"
-      (mouseleave)="targetRef.close()"
+      (click)="targetRef.toggle()"
     >
       My button
     </button>

@@ -1,5 +1,6 @@
 import { Directive, Input, ElementRef, Renderer2, HostListener, Output, EventEmitter } from '@angular/core';
 import { computePosition, offset, flip } from '@floating-ui/dom';
+import { filter } from 'rxjs/operators';
 
 import { InputBoolean } from '@/common';
 import { MazuFloatingTriggerDirective } from './floating-trigger.directive';
@@ -25,6 +26,7 @@ export class MazuFloatingTargetDirective {
   @Output() closed = new EventEmitter<void>();
 
   isOpen = false;
+  skipClickAway = true;
 
   constructor(
     private host: ElementRef,
@@ -40,9 +42,10 @@ export class MazuFloatingTargetDirective {
 
   @HostListener('click')
   onClick(): void {
-    if (this.clickStrategy === 'close') {
-      this.close();
-    }
+    // TODO: Use document click instead with isSameNode()
+    // if (this.clickStrategy === 'close') {
+    //   this.close();
+    // }
   }
 
   // Public API
@@ -52,10 +55,12 @@ export class MazuFloatingTargetDirective {
 
   // Public API
   open(): void {
+    this.skipClickAway = true;
     this.isOpen = true;
     this.setOpenStyle();
     this.updatePosition();
     this.opened.emit();
+    setTimeout(() => this.skipClickAway = false);
   }
 
   // Public API
@@ -84,13 +89,13 @@ export class MazuFloatingTargetDirective {
   private initCloseOnClickAway(): void {
     if (this.closeOnClickAway) {
       this.documentClick.getOutsideClick(this.host.nativeElement)
+        .pipe(filter(() => !this.skipClickAway))
         .subscribe(event => {
-
-          // TODO
-          console.log('click target', event);
-          console.log('clicked outside', this.host.nativeElement.contains(event.target));
-
-          this.close();
+          console.log('any click', event.target); // TODO
+          if (this.isOpen && !this.host.nativeElement.contains(event.target)) {
+            console.log('Closing for clicking away'); // TODO
+            this.close();
+          }
         });
     }
   }

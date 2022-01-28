@@ -27,28 +27,23 @@
 
     <!-- Handle -->
     <button
-      mzButton
-      mzFloatingReference
-      #menuReference="mzFloatingReference"
-      (click)="menuTarget.toggle()"
+      #triggerRef="mzFloatingTrigger"
+      mzFloatingTrigger
+      (mouseenter)="targetRef.open()"
+      (mouseleave)="targetRef.close()"
     >
-      {{ menuTarget.isOpen ? 'Close' : 'Open' }} Menu
+      My button
     </button>
 
-    <!-- Floating menu -->
-    <ul
-      mzFloatingTarget
-      class="target"
-      [class.--show]="menuTarget.isOpen"
-      [class.--hide]="!menuTarget.isOpen"
-      [refersTo]="menuReference"
-      clickStrategy="none"
-      #menuTarget="mzFloatingTarget"
+    <div
+      #targetRef="mzFloatingTarget"
+      [mzFloatingTarget]="triggerRef"
+      closeOnClickAway
+      clickStrategy="close"
+      cssClassBase="tooltip"
     >
-      <li>Foo</li>
-      <li>Bar</li>
-      <li>Baz</li>
-    </ul>
+      My tooltip
+    </div>
 
     <p>
       Nostrud id exercitation sint magna labore incididunt nisi incididunt enim exercitation non. Do anim laborum labore labore ut dolore nostrud magna nulla consectetur incididunt. Sit consequat non elit deserunt. Veniam sit laborum occaecat officia minim culpa laborum commodo adipisicing commodo.

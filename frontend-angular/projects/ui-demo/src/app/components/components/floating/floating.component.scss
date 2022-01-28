@@ -1,16 +1,10 @@
-.target {
-  border: 1px solid var(--color-primary-600);
-  background-color: var(--color-background);
-  padding: 1rem;
-  border-radius: 0.5rem;
-  list-style: none;
-  min-width: 150px;
-
-  &.--show {
-    display: block;
-  }
-
-  &.--hide {
-    display: none;
-  }
+.tooltip {
+  position: absolute;
+  background: #222;
+  color: white;
+  font-weight: bold;
+  padding: 5px;
+  border-radius: 4px;
+  font-size: 90%;
+  pointer-events: none;
 }

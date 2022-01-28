@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 
-import { MazuFloatingReferenceDirective } from './floating-reference.directive';
+import { MazuFloatingTriggerDirective } from './floating-trigger.directive';
 import { MazuFloatingTargetDirective } from './floating-target.directive';
 
 @NgModule({
   imports: [],
   declarations: [
-    MazuFloatingReferenceDirective,
+    MazuFloatingTriggerDirective,
     MazuFloatingTargetDirective,
   ],
   exports: [
-    MazuFloatingReferenceDirective,
+    MazuFloatingTriggerDirective,
     MazuFloatingTargetDirective,
   ],
 })

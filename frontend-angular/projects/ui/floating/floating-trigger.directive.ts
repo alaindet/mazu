@@ -1,10 +1,10 @@
 import { Directive, ElementRef } from '@angular/core';
 
 @Directive({
-  selector: '[mzFloatingReference]',
-  exportAs: 'mzFloatingReference',
+  selector: '[mzFloatingTrigger]',
+  exportAs: 'mzFloatingTrigger',
 })
-export class MazuFloatingReferenceDirective {
+export class MazuFloatingTriggerDirective {
   constructor(
     public host: ElementRef,
   ) {}

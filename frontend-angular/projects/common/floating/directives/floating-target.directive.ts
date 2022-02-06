@@ -1,5 +1,5 @@
 import { Directive, Input, ElementRef, Renderer2, OnInit, OnDestroy } from '@angular/core';
-import { Subject } from 'rxjs';
+import { fromEvent, Subject } from 'rxjs';
 import { filter, map, takeUntil } from 'rxjs/operators';
 
 import { MazuFloatingService } from '../services/floating.service';
@@ -15,6 +15,7 @@ export class MazuFloatingTargetDirective implements OnInit, OnDestroy {
   @Input() placement?: string = MazuFloatingTargetPlacement.BottomRight;
   @Input() offsetY?: number | string = 0;
   @Input() offsetX?: number | string = 0;
+  @Input() closeOnClick?: boolean = true;
 
   isOpen = false;
 
@@ -27,38 +28,10 @@ export class MazuFloatingTargetDirective implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-
-    this.renderer.setStyle(this.host.nativeElement, 'position', 'fixed');
-    this.renderer.setStyle(this.host.nativeElement, 'display', 'block');
-    this.renderer.setStyle(this.host.nativeElement, 'visibility', 'hidden');
-
-    this.floatingService.setTarget(this.name, {
-      targetElement: this.host.nativeElement,
-      placement: this.placement as MazuFloatingTargetPlacement,
-      offsetX: +(this.offsetX ?? 0),
-      offsetY: +(this.offsetY ?? 0),
-    });
-
-    this.floatingService.getFloatingPair(this.name).data
-      .pipe(
-        takeUntil(this.destroy$),
-        filter(data => data !== null),
-        map(data => data as MazuFloatingTargetData),
-      )
-      .subscribe(data => {
-
-        if (data.isOpen && !this.isOpen) {
-          this.open(data);
-          return;
-        }
-
-        if (!data.isOpen && this.isOpen) {
-          this.close();
-          return;
-        }
-
-        this.updatePosition(data.x, data.y);
-      });
+    this.initStyle();
+    this.initCloseOnClick();
+    this.initTarget();
+    this.updateOnDataChange();
   }
 
   ngOnDestroy(): void {
@@ -86,5 +59,51 @@ export class MazuFloatingTargetDirective implements OnInit, OnDestroy {
     if (y !== null) {
       this.renderer.setStyle(this.host.nativeElement, 'top', `${y}px`);
     }
+  }
+
+  private initStyle(): void {
+    this.renderer.setStyle(this.host.nativeElement, 'position', 'fixed');
+    this.renderer.setStyle(this.host.nativeElement, 'display', 'block');
+    this.renderer.setStyle(this.host.nativeElement, 'visibility', 'hidden');
+  }
+
+  private initTarget(): void {
+    this.floatingService.setTarget(this.name, {
+      targetElement: this.host.nativeElement,
+      placement: this.placement as MazuFloatingTargetPlacement,
+      offsetX: +(this.offsetX ?? 0),
+      offsetY: +(this.offsetY ?? 0),
+    });
+  }
+
+  private initCloseOnClick(): void {
+    if (this.closeOnClick) {
+      fromEvent(this.host.nativeElement, 'click')
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(() => this.floatingService.closeTarget(this.name));
+    }
+  }
+
+  private updateOnDataChange(): void {
+    this.floatingService.getFloatingPair(this.name).data
+    .pipe(
+      takeUntil(this.destroy$),
+      filter(data => data !== null),
+      map(data => data as MazuFloatingTargetData),
+    )
+    .subscribe(data => {
+
+      if (data.isOpen && !this.isOpen) {
+        this.open(data);
+        return;
+      }
+
+      if (!data.isOpen && this.isOpen) {
+        this.close();
+        return;
+      }
+
+      this.updatePosition(data.x, data.y);
+    });
   }
 }

@@ -6,9 +6,8 @@
 
 ## Frontend
 - [ ] Change environment apiUrl in production
-- [ ] https://demos.creative-tim.com/purity-ui-dashboard/#/admin/dashboard
-- [ ] https://www.wework4days.com/
-- [x] Add floating base component for dropdown, modal and autocomplete?
+- [ ] Inspiration UI: https://demos.creative-tim.com/purity-ui-dashboard/#/admin/dashboard
+- [ ] Inspiration UI: https://www.wework4days.com/
 - [ ] Add dropdown menu
 - [ ] Add modal component
 - [ ] Add search input component
@@ -18,6 +17,4 @@
 - [ ] Add autocomplete component
 - [ ] Add list component?
 - [ ] Add footer navbar component
-- [ ] Add modal component
-- [ ] Add closeOnClick to common/floating
 - [ ] Add closeOnClickOutside to common/floating

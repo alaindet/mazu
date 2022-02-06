@@ -1,73 +1,123 @@
 <h2>Floating</h2>
 
+<!-- IMPORTANT: Floating host -->
+<mz-floating-host></mz-floating-host>
+
 <section class="mz-demo-section">
+  <h3>Basic</h3>
 
   <section class="mz-demo-case">
-    <h3>Basic</h3>
 
-    <section>
-      <p>
-        Nostrud id exercitation sint magna labore incididunt nisi incididunt enim exercitation non. Do anim laborum labore labore ut dolore nostrud magna nulla consectetur incididunt. Sit consequat non elit deserunt. Veniam sit laborum occaecat officia minim culpa laborum commodo adipisicing commodo.
-      </p>
-
-      <p>
-        Deserunt laboris est minim adipisicing reprehenderit dolor voluptate sit sint irure minim. Ipsum minim in culpa fugiat eu commodo est enim dolor tempor quis nostrud. Minim enim proident incididunt deserunt culpa non nostrud excepteur magna duis. Duis incididunt nisi excepteur reprehenderit cupidatat est non anim quis in. Nulla ea id qui aliqua nulla enim sunt et ullamco laborum sint sint nulla. Amet ad ex exercitation mollit in. Quis ea nulla aute ex.
-      </p>
-
-      <p>
-        Dolor cupidatat id aliqua consectetur Lorem cupidatat eu. Nisi quis eiusmod eiusmod aliqua mollit pariatur ex et ut irure velit ex esse sunt. Officia occaecat pariatur occaecat ullamco laboris excepteur irure mollit sunt ut. Commodo et deserunt sint magna deserunt esse proident ut. Esse ullamco in ea laboris. Ex culpa fugiat magna qui cillum tempor duis deserunt mollit proident.
-      </p>
-
-      <p>
-        Laborum mollit nisi eu mollit laborum. Laboris ipsum ut ex tempor ullamco irure esse sunt amet nostrud eiusmod in. Aliqua sit proident ullamco ex deserunt nostrud nulla magna aliquip sint.
-      </p>
-
-      <p>
-        Proident magna minim occaecat consequat ad dolor amet quis culpa commodo pariatur qui Lorem. Cupidatat eiusmod elit cupidatat et sint magna Lorem irure esse aute. Enim occaecat culpa nulla duis consequat ut incididunt et sint mollit labore duis laborum magna. Fugiat occaecat reprehenderit ullamco enim eiusmod eiusmod ex sit veniam.
-      </p>
-    </section>
-
-    <!-- Handle -->
-    <button
-      #triggerRef="mzFloatingTrigger"
-      mzFloatingTrigger
-      (click)="targetRef.toggle()"
-    >
-      My button
+    <!-- Floating trigger #1 -->
+    <button mzFloatingTrigger="first" mzButton>
+      Click me!
     </button>
 
-    <div
-      #targetRef="mzFloatingTarget"
-      [mzFloatingTarget]="triggerRef"
-      closeOnClickAway
-      clickStrategy="close"
-      cssClassBase="tooltip"
-    >
-      My tooltip
-    </div>
+    <!-- Floating target #1 -->
+    <ng-template mzFloatingTemplate="first">
+      <div
+        mzFloatingTarget="first"
+        placement="bottom-right"
+        offsetY="5"
+        class="demo-target"
+      >
+        This is a somewhat long tooltip content.
+      </div>
+    </ng-template>
 
-    <section>
-      <p>
-        Nostrud id exercitation sint magna labore incididunt nisi incididunt enim exercitation non. Do anim laborum labore labore ut dolore nostrud magna nulla consectetur incididunt. Sit consequat non elit deserunt. Veniam sit laborum occaecat officia minim culpa laborum commodo adipisicing commodo.
-      </p>
+  </section>
 
-      <p>
-        Deserunt laboris est minim adipisicing reprehenderit dolor voluptate sit sint irure minim. Ipsum minim in culpa fugiat eu commodo est enim dolor tempor quis nostrud. Minim enim proident incididunt deserunt culpa non nostrud excepteur magna duis. Duis incididunt nisi excepteur reprehenderit cupidatat est non anim quis in. Nulla ea id qui aliqua nulla enim sunt et ullamco laborum sint sint nulla. Amet ad ex exercitation mollit in. Quis ea nulla aute ex.
-      </p>
+</section>
 
-      <p>
-        Dolor cupidatat id aliqua consectetur Lorem cupidatat eu. Nisi quis eiusmod eiusmod aliqua mollit pariatur ex et ut irure velit ex esse sunt. Officia occaecat pariatur occaecat ullamco laboris excepteur irure mollit sunt ut. Commodo et deserunt sint magna deserunt esse proident ut. Esse ullamco in ea laboris. Ex culpa fugiat magna qui cillum tempor duis deserunt mollit proident.
-      </p>
+<section class="mz-demo-section">
+  <h3>Placement</h3>
 
-      <p>
-        Laborum mollit nisi eu mollit laborum. Laboris ipsum ut ex tempor ullamco irure esse sunt amet nostrud eiusmod in. Aliqua sit proident ullamco ex deserunt nostrud nulla magna aliquip sint.
-      </p>
+  <!-- Top left -->
+  <section class="mz-demo-case">
+    <h4><code>placement="top-left"</code></h4>
+    <button mzFloatingTrigger="top-left" mzButton>Top Left</button>
+    <ng-template mzFloatingTemplate="top-left">
+      <div mzFloatingTarget="top-left" placement="top-left" class="demo-target">
+        This is a somewhat long tooltip content.
+      </div>
+    </ng-template>
+  </section>
 
-      <p>
-        Proident magna minim occaecat consequat ad dolor amet quis culpa commodo pariatur qui Lorem. Cupidatat eiusmod elit cupidatat et sint magna Lorem irure esse aute. Enim occaecat culpa nulla duis consequat ut incididunt et sint mollit labore duis laborum magna. Fugiat occaecat reprehenderit ullamco enim eiusmod eiusmod ex sit veniam.
-      </p>
-    </section>
+  <!-- Top center -->
+  <section class="mz-demo-case">
+    <h4><code>placement="top"</code></h4>
+    <button mzFloatingTrigger="top" mzButton>Top (center)</button>
+    <ng-template mzFloatingTemplate="top">
+      <div mzFloatingTarget="top" placement="top" class="demo-target">
+        This is a somewhat long tooltip content.
+      </div>
+    </ng-template>
+  </section>
 
+  <!-- Top right -->
+  <section class="mz-demo-case">
+    <h4><code>placement="top-right"</code></h4>
+    <button mzFloatingTrigger="top-right" mzButton>Top Right</button>
+    <ng-template mzFloatingTemplate="top-right">
+      <div mzFloatingTarget="top-right" placement="top-right" class="demo-target">
+        This is a somewhat long tooltip content.
+      </div>
+    </ng-template>
+  </section>
+
+  <!-- Bottom left -->
+  <section class="mz-demo-case">
+    <h4><code>placement="bottom-left"</code></h4>
+    <button mzFloatingTrigger="bottom-left" mzButton>Bottom Left</button>
+    <ng-template mzFloatingTemplate="bottom-left">
+      <div mzFloatingTarget="bottom-left" placement="bottom-left" class="demo-target">
+        This is a somewhat long tooltip content.
+      </div>
+    </ng-template>
+  </section>
+
+  <!-- Bottom center -->
+  <section class="mz-demo-case">
+    <h4><code>placement="bottom"</code></h4>
+    <button mzFloatingTrigger="bottom" mzButton>Bottom (center)</button>
+    <ng-template mzFloatingTemplate="bottom">
+      <div mzFloatingTarget="bottom" placement="bottom" class="demo-target">
+        This is a somewhat long tooltip content.
+      </div>
+    </ng-template>
+  </section>
+
+  <!-- Bottom right -->
+  <section class="mz-demo-case">
+    <h4><code>placement="bottom-right"</code></h4>
+    <button mzFloatingTrigger="bottom-right" mzButton>Bottom Right</button>
+    <ng-template mzFloatingTemplate="bottom-right">
+      <div mzFloatingTarget="bottom-right" placement="bottom-right" class="demo-target">
+        This is a somewhat long tooltip content.
+      </div>
+    </ng-template>
+  </section>
+
+  <!-- Left -->
+  <section class="mz-demo-case">
+    <h4><code>placement="left"</code></h4>
+    <button mzFloatingTrigger="left" mzButton>Left</button>
+    <ng-template mzFloatingTemplate="left">
+      <div mzFloatingTarget="left" placement="left" class="demo-target">
+        This is a somewhat long tooltip content.
+      </div>
+    </ng-template>
+  </section>
+
+  <!-- Right -->
+  <section class="mz-demo-case">
+    <h4><code>placement="right"</code></h4>
+    <button mzFloatingTrigger="right" mzButton>Right</button>
+    <ng-template mzFloatingTemplate="right">
+      <div mzFloatingTarget="right" placement="right" class="demo-target">
+        This is a somewhat long tooltip content.
+      </div>
+    </ng-template>
   </section>
 
 </section>

@@ -1,6 +1,0 @@
-{
-  "peerDependencies": {
-    "@floating-ui/core": "^0.4.0",
-    "@floating-ui/dom": "^0.2.0"
-  }
-}

@@ -5,7 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MazuButtonComponentModule } from '@/ui/button';
 import { MazuCardComponentModule } from '@/ui/card';
 import { MazuCheckboxComponentModule } from '@/ui/checkbox';
-import { MazuFloatingComponentModule } from '@/ui/floating';
+import { MazuFloatingModule } from '@/common/floating';
 
 import { DemoComponentsIndexComponent } from './index/index.component';
 import { DemoComponentsFeatureComponent } from './components.component';
@@ -13,7 +13,7 @@ import { DemoButtonComponent } from './components/button/button.component';
 import { DemoCardComponent } from './components/card/card.component';
 import { DemoCheckboxComponent } from './components/checkbox/checkbox.component';
 import { DemoFloatingComponent } from './components/floating/floating.component';
-import { LAB_COMPONENTS_ROUTES } from './routes';
+import { DEMO_COMPONENTS_ROUTES } from './routes';
 
 const routes: Routes = [
 	{
@@ -24,7 +24,7 @@ const routes: Routes = [
         path: '',
         component: DemoComponentsIndexComponent
       },
-			...LAB_COMPONENTS_ROUTES,
+			...DEMO_COMPONENTS_ROUTES,
 		]
 	}
 ];
@@ -36,7 +36,7 @@ const routes: Routes = [
     MazuButtonComponentModule,
     MazuCardComponentModule,
     MazuCheckboxComponentModule,
-    MazuFloatingComponentModule,
+    MazuFloatingModule,
 	],
 	declarations: [
 		DemoComponentsFeatureComponent,

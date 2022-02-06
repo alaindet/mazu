@@ -3,7 +3,7 @@ import { DemoCardComponent } from './components/card/card.component';
 import { DemoCheckboxComponent } from './components/checkbox/checkbox.component';
 import { DemoFloatingComponent } from './components/floating/floating.component';
 
-export const LAB_COMPONENTS_ROUTES = [
+export const DEMO_COMPONENTS_ROUTES = [
   {
     path: 'button',
     component: DemoButtonComponent,

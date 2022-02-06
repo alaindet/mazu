@@ -1,10 +1,11 @@
-.tooltip {
-  position: absolute;
-  background: #222;
-  color: white;
-  font-weight: bold;
-  padding: 5px;
-  border-radius: 4px;
-  font-size: 90%;
-  pointer-events: none;
+.noise {
+  color: #ccc;
+  font-style: italic;
+}
+
+.demo-target {
+  background-color: #ffffff;
+  border-radius: 0.33rem;
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--color-primary-600);
 }

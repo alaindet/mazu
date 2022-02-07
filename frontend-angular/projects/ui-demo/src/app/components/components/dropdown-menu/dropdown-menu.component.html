@@ -3,6 +3,22 @@
 <section class="mz-demo-section">
   <section class="mz-demo-case">
     <h3>Basic</h3>
-    TODO
+
+    <mz-dropdown-menu-trigger name="my-menu" triggerOn="click">
+      <button mzButton>Menu</button>
+    </mz-dropdown-menu-trigger>
+
+    <mz-dropdown-menu
+      name="my-menu"
+      placement="left"
+      [offsetY]="10"
+      [actionSelected]="actionSelected"
+      (actionClicked)="onActionClicked($event)"
+    >
+      <mz-dropdown-menu-action name="one">One</mz-dropdown-menu-action>
+      <mz-dropdown-menu-action name="two">Two</mz-dropdown-menu-action>
+      <mz-dropdown-menu-action name="three">Three</mz-dropdown-menu-action>
+    </mz-dropdown-menu>
+
   </section>
 </section>

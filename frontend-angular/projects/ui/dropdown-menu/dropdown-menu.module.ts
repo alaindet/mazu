@@ -1,13 +1,21 @@
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
 
-import { MazuDropdownMenuComponent } from './dropdown-menu.component';
+import { MazuFloatingModule } from '@/common/floating';
+import { MazuDropdownMenuActionComponent, MazuDropdownMenuTriggerComponent } from './components';
 
 @NgModule({
   imports: [
-    ReactiveFormsModule,
+    MazuFloatingModule,
   ],
-  declarations: [MazuDropdownMenuComponent],
-  exports: [MazuDropdownMenuComponent],
+  declarations: [
+    MazuDropdownMenuTriggerComponent,
+    MazuDropdownMenuComponent,
+    MazuDropdownMenuActionComponent,
+  ],
+  exports: [
+    MazuDropdownMenuTriggerComponent,
+    MazuDropdownMenuComponent,
+    MazuDropdownMenuActionComponent,
+  ],
 })
 export class MazuDropdownMenuComponentModule {}

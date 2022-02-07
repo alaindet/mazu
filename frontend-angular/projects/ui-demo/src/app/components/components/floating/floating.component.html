@@ -1,8 +1,5 @@
 <h2>Floating</h2>
 
-<!-- IMPORTANT: Floating host -->
-<mz-floating-host></mz-floating-host>
-
 <section class="mz-demo-section">
   <h3>Basic</h3>
 
@@ -14,16 +11,14 @@
     </button>
 
     <!-- Floating target #1 -->
-    <ng-template mzFloatingTemplate="first-example">
-      <div
-        mzFloatingTarget="first-example"
-        placement="bottom-right"
-        offsetY="5"
-        class="demo-target"
-      >
-        This is a somewhat long tooltip content.
-      </div>
-    </ng-template>
+    <div
+      mzFloatingTarget="first-example"
+      placement="bottom-right"
+      offsetY="5"
+      class="demo-target"
+    >
+      This is a somewhat long tooltip content.
+    </div>
 
   </section>
 
@@ -36,88 +31,72 @@
   <section class="mz-demo-case">
     <h4><code>placement="top-left"</code></h4>
     <button mzFloatingTrigger="top-left-example" mzButton>Top Left</button>
-    <ng-template mzFloatingTemplate="top-left-example">
-      <div mzFloatingTarget="top-left-example" placement="top-left" class="demo-target">
-        This is a somewhat long tooltip content.
-      </div>
-    </ng-template>
+    <div mzFloatingTarget="top-left-example" placement="top-left" class="demo-target">
+      This is a somewhat long tooltip content.
+    </div>
   </section>
 
   <!-- Top center -->
   <section class="mz-demo-case">
     <h4><code>placement="top"</code></h4>
     <button mzFloatingTrigger="top-example" mzButton>Top (center)</button>
-    <ng-template mzFloatingTemplate="top-example">
-      <div mzFloatingTarget="top-example" placement="top" class="demo-target">
-        This is a somewhat long tooltip content.
-      </div>
-    </ng-template>
+    <div mzFloatingTarget="top-example" placement="top" class="demo-target">
+      This is a somewhat long tooltip content.
+    </div>
   </section>
 
   <!-- Top right -->
   <section class="mz-demo-case">
     <h4><code>placement="top-right"</code></h4>
     <button mzFloatingTrigger="top-right-example" mzButton>Top Right</button>
-    <ng-template mzFloatingTemplate="top-right-example">
-      <div mzFloatingTarget="top-right-example" placement="top-right" class="demo-target">
-        This is a somewhat long tooltip content.
-      </div>
-    </ng-template>
+    <div mzFloatingTarget="top-right-example" placement="top-right" class="demo-target">
+      This is a somewhat long tooltip content.
+    </div>
   </section>
 
   <!-- Bottom left -->
   <section class="mz-demo-case">
     <h4><code>placement="bottom-left"</code></h4>
     <button mzFloatingTrigger="bottom-left-example" mzButton>Bottom Left</button>
-    <ng-template mzFloatingTemplate="bottom-left-example">
-      <div mzFloatingTarget="bottom-left-example" placement="bottom-left" class="demo-target">
-        This is a somewhat long tooltip content.
-      </div>
-    </ng-template>
+    <div mzFloatingTarget="bottom-left-example" placement="bottom-left" class="demo-target">
+      This is a somewhat long tooltip content.
+    </div>
   </section>
 
   <!-- Bottom center -->
   <section class="mz-demo-case">
     <h4><code>placement="bottom"</code></h4>
     <button mzFloatingTrigger="bottom-example" mzButton>Bottom (center)</button>
-    <ng-template mzFloatingTemplate="bottom-example">
-      <div mzFloatingTarget="bottom-example" placement="bottom" class="demo-target">
-        This is a somewhat long tooltip content.
-      </div>
-    </ng-template>
+    <div mzFloatingTarget="bottom-example" placement="bottom" class="demo-target">
+      This is a somewhat long tooltip content.
+    </div>
   </section>
 
   <!-- Bottom right -->
   <section class="mz-demo-case">
     <h4><code>placement="bottom-right"</code></h4>
     <button mzFloatingTrigger="bottom-right-example" mzButton>Bottom Right</button>
-    <ng-template mzFloatingTemplate="bottom-right-example">
-      <div mzFloatingTarget="bottom-right-example" placement="bottom-right" class="demo-target">
-        This is a somewhat long tooltip content.
-      </div>
-    </ng-template>
+    <div mzFloatingTarget="bottom-right-example" placement="bottom-right" class="demo-target">
+      This is a somewhat long tooltip content.
+    </div>
   </section>
 
   <!-- Left -->
   <section class="mz-demo-case">
     <h4><code>placement="left"</code></h4>
     <button mzFloatingTrigger="left-example" mzButton>Left</button>
-    <ng-template mzFloatingTemplate="left-example">
-      <div mzFloatingTarget="left-example" placement="left" class="demo-target">
-        This is a somewhat long tooltip content.
-      </div>
-    </ng-template>
+    <div mzFloatingTarget="left-example" placement="left" class="demo-target">
+      This is a somewhat long tooltip content.
+    </div>
   </section>
 
   <!-- Right -->
   <section class="mz-demo-case">
     <h4><code>placement="right"</code></h4>
     <button mzFloatingTrigger="right-example" mzButton>Right</button>
-    <ng-template mzFloatingTemplate="right-example">
-      <div mzFloatingTarget="right-example" placement="right" class="demo-target">
-        This is a somewhat long tooltip content.
-      </div>
-    </ng-template>
+    <div mzFloatingTarget="right-example" placement="right" class="demo-target">
+      This is a somewhat long tooltip content.
+    </div>
   </section>
 
 </section>
@@ -126,23 +105,12 @@
   <h3>Hover</h3>
 
   <section class="mz-demo-case">
-
-    <!-- Floating trigger #1 -->
     <button mzFloatingTrigger="hover-example" triggerOn="hover" mzButton>
       Come hover here!
     </button>
-
-    <!-- Floating target #1 -->
-    <ng-template mzFloatingTemplate="hover-example">
-      <div
-        mzFloatingTarget="hover-example"
-        placement="top"
-        class="demo-target"
-      >
-        This is a somewhat long tooltip content.
-      </div>
-    </ng-template>
-
+    <div mzFloatingTarget="hover-example" placement="top" class="demo-target">
+      This is a somewhat long tooltip content.
+    </div>
   </section>
 
 </section>
@@ -152,23 +120,19 @@
 
   <section class="mz-demo-case">
 
-    <!-- Floating trigger #1 -->
     <button mzFloatingTrigger="offset-example" mzButton>
       Click me
     </button>
 
-    <!-- Floating target #1 -->
-    <ng-template mzFloatingTemplate="offset-example">
-      <div
-        mzFloatingTarget="offset-example"
-        placement="top-right"
-        [offsetY]="-10"
-        [offsetX]="50"
-        class="demo-target"
-      >
-        This is a somewhat long tooltip content.
-      </div>
-    </ng-template>
+    <div
+      mzFloatingTarget="offset-example"
+      placement="top-right"
+      [offsetY]="-10"
+      [offsetX]="50"
+      class="demo-target"
+    >
+      This is a somewhat long tooltip content.
+    </div>
 
   </section>
 
@@ -198,16 +162,9 @@
       Toggle
     </button>
 
-    <!-- Floating target #1 -->
-    <ng-template mzFloatingTemplate="external-example">
-      <div
-        mzFloatingTarget="external-example"
-        placement="top"
-        class="demo-target"
-      >
-        This is a somewhat long tooltip content.
-      </div>
-    </ng-template>
+    <div mzFloatingTarget="external-example" placement="top" class="demo-target">
+      This is a somewhat long tooltip content.
+    </div>
 
   </section>
 
@@ -224,16 +181,14 @@
     </button>
 
     <!-- Floating target #1 -->
-    <ng-template mzFloatingTemplate="keep-open-example">
-      <div
-        mzFloatingTarget="keep-open-example"
-        [closeOnClick]="false"
-        placement="top"
-        class="demo-target"
-      >
-        This is a somewhat long tooltip content.
-      </div>
-    </ng-template>
+    <div
+      mzFloatingTarget="keep-open-example"
+      [closeOnClick]="false"
+      placement="top"
+      class="demo-target"
+    >
+      This is a somewhat long tooltip content.
+    </div>
 
   </section>
 

@@ -5,4 +5,10 @@ import { Component } from '@angular/core';
 })
 export class DemoDropdownMenuComponent {
   consoleLog = console.log;
+  actionSelected: string | null = null;
+
+  onActionClicked(action: string): void {
+    console.log('actionClicked', action);
+    this.actionSelected = action;
+  }
 }

@@ -2,8 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { MazuFloatingService } from './services';
-import { MazuFloatingHostComponent } from './components';
-import { MazuFloatingTargetDirective, MazuFloatingTriggerDirective, MazuFloatingTemplateDirective } from './directives';
+import { MazuFloatingTargetDirective, MazuFloatingTriggerDirective } from './directives';
 
 @NgModule({
   imports: [
@@ -12,14 +11,10 @@ import { MazuFloatingTargetDirective, MazuFloatingTriggerDirective, MazuFloating
   declarations: [
     MazuFloatingTargetDirective,
     MazuFloatingTriggerDirective,
-    MazuFloatingTemplateDirective,
-    MazuFloatingHostComponent,
   ],
   exports: [
     MazuFloatingTargetDirective,
     MazuFloatingTriggerDirective,
-    MazuFloatingTemplateDirective,
-    MazuFloatingHostComponent,
   ],
   providers: [
     MazuFloatingService,

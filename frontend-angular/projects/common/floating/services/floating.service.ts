@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy, TemplateRef } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { animationFrameScheduler, BehaviorSubject, fromEvent, Subscription } from 'rxjs';
 import { take, tap, throttleTime } from 'rxjs/operators';
 
@@ -8,11 +8,9 @@ import { MazuFloatingPair, MazuFloatingTargetPositionConfig, MazuFloatingTargetP
 @Injectable()
 export class MazuFloatingService implements OnDestroy {
 
-  private _templates$ = new BehaviorSubject<TemplateRef<void>[]>([]);
   private subs: { [sub: string]: Subscription } = {};
 
   pairs: { [name: string]: MazuFloatingPair } = {};
-  templates$ = this._templates$.asObservable();
   positionFunctions: { [name: string]: () => Promise<MazuFloatingTargetPosition> } = {};
 
   ngOnDestroy(): void {
@@ -33,12 +31,6 @@ export class MazuFloatingService implements OnDestroy {
 
   getFloatingPair(name: string): MazuFloatingPair {
     return this.pairs[name];
-  }
-
-  setTemplate(name: string, template: TemplateRef<void>): void {
-    this.createPairIfNeeded(name);
-    this.pairs[name].targetTemplate = template;
-    this.updateTemplates();
   }
 
   setTrigger(name: string, config: Partial<MazuFloatingPairConfig>): void {
@@ -113,18 +105,5 @@ export class MazuFloatingService implements OnDestroy {
         targetTemplate: null,
       };
     }
-  }
-
-  private updateTemplates(): void {
-
-    const templates: TemplateRef<void>[] = [];
-
-    for (const pair of Object.values(this.pairs)) {
-      if (pair.targetTemplate !== null) {
-        templates.push(pair.targetTemplate);
-      }
-    }
-
-    this._templates$.next(templates);
   }
 }

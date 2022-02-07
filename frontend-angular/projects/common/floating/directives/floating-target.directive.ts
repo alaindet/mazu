@@ -41,7 +41,6 @@ export class MazuFloatingTargetDirective implements OnInit, OnDestroy {
 
   open(data: MazuFloatingTargetData): void {
     this.isOpen = true;
-    this.renderer.setStyle(this.host.nativeElement, 'display', 'block');
     this.renderer.setStyle(this.host.nativeElement, 'visibility', 'initial');
     this.updatePosition(data.x, data.y);
   }
@@ -65,6 +64,7 @@ export class MazuFloatingTargetDirective implements OnInit, OnDestroy {
     this.renderer.setStyle(this.host.nativeElement, 'position', 'fixed');
     this.renderer.setStyle(this.host.nativeElement, 'display', 'block');
     this.renderer.setStyle(this.host.nativeElement, 'visibility', 'hidden');
+    this.renderer.setStyle(this.host.nativeElement, 'transform', 'translate3d(0,0,0)');
   }
 
   private initTarget(): void {

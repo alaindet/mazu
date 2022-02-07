@@ -1,0 +1,10 @@
+:host {
+  padding: 0.5rem 1rem;
+  margin: 0.2rem;
+  border-radius: 0.5rem;
+
+  &.--selected {
+    background-color: var(--color-primary-600);
+    color: var(--color-background);
+  }
+}

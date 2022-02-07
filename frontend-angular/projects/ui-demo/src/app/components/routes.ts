@@ -1,6 +1,7 @@
 import { DemoButtonComponent } from './components/button/button.component';
 import { DemoCardComponent } from './components/card/card.component';
 import { DemoCheckboxComponent } from './components/checkbox/checkbox.component';
+import { DemoDropdownMenuComponent } from './components/dropdown-menu/dropdown-menu.component';
 import { DemoFloatingComponent } from './components/floating/floating.component';
 
 export const DEMO_COMPONENTS_ROUTES = [
@@ -18,6 +19,11 @@ export const DEMO_COMPONENTS_ROUTES = [
     path: 'checkbox',
     component: DemoCheckboxComponent,
     data: { label: 'Checkbox' },
+  },
+  {
+    path: 'dropdown-menu',
+    component: DemoDropdownMenuComponent,
+    data: { label: 'Dropdown Menu' },
   },
   {
     path: 'floating',

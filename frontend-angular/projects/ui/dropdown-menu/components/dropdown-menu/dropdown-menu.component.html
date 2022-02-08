@@ -1,9 +1,10 @@
-<!-- Floating target #1 -->
-<aside
+<ul
+  class="mz-dropdown-menu"
   [mzFloatingTarget]="name"
+  [closeOnClick]="false"
   [placement]="floatingPlacement"
-  [offsetY]="offsetY"
   [offsetX]="offsetX"
+  [offsetY]="offsetY"
 >
   <ng-content></ng-content>
-</aside>
+</ul>

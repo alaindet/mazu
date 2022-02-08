@@ -1,16 +1,15 @@
-import { Injectable, OnDestroy } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable()
-export class MazuDropdownMenuService implements OnDestroy {
+export class MazuDropdownMenuService {
+  private _selectedAction$ = new BehaviorSubject<string | null>(null);
 
-  selectedAction$ = new BehaviorSubject<string | null>(null);
-
-  ngOnDestroy(): void {
-    this.selectedAction$.complete();
+  getSelectedAction(): Observable<string | null> {
+    return this._selectedAction$.asObservable();
   }
 
-  selectAction(action: string | null): void {
-    this.selectedAction$.next(action);
+  setSelectedAction(actionName: string | null) {
+    this._selectedAction$.next(actionName);
   }
 }

@@ -1,0 +1,10 @@
+.mz-dropdown-menu {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid var(--color-grey-300);
+  border-radius: 0.5rem;
+  box-shadow: 2px 2px 7px rgba(0,0,0,0.2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}

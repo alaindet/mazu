@@ -39,25 +39,19 @@ export class MazuFloatingTargetDirective implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  open(data: MazuFloatingTargetData): void {
-    this.isOpen = true;
-    this.renderer.setStyle(this.host.nativeElement, 'visibility', 'initial');
-    this.updatePosition(data.x, data.y);
+  // Public API
+  open(): void {
+    this.floatingService.openTarget(this.name);
   }
 
+  // Public API
   close(): void {
-    this.isOpen = false;
-    this.renderer.setStyle(this.host.nativeElement, 'visibility', 'hidden');
+    this.floatingService.closeTarget(this.name);
   }
 
-  updatePosition(x: number | null, y: number | null): void {
-    if (x !== null) {
-      this.renderer.setStyle(this.host.nativeElement, 'left', `${x}px`);
-    }
-
-    if (y !== null) {
-      this.renderer.setStyle(this.host.nativeElement, 'top', `${y}px`);
-    }
+  // Public API
+  toggle(): void {
+    this.floatingService.toggleTarget(this.name);
   }
 
   private initStyle(): void {
@@ -94,16 +88,37 @@ export class MazuFloatingTargetDirective implements OnInit, OnDestroy {
     .subscribe(data => {
 
       if (data.isOpen && !this.isOpen) {
-        this.open(data);
+        this.openTarget(data);
         return;
       }
 
       if (!data.isOpen && this.isOpen) {
-        this.close();
+        this.closeTarget();
         return;
       }
 
       this.updatePosition(data.x, data.y);
     });
+  }
+
+  private openTarget(data: MazuFloatingTargetData): void {
+    this.isOpen = true;
+    this.renderer.setStyle(this.host.nativeElement, 'visibility', 'initial');
+    this.updatePosition(data.x, data.y);
+  }
+
+  private closeTarget(): void {
+    this.isOpen = false;
+    this.renderer.setStyle(this.host.nativeElement, 'visibility', 'hidden');
+  }
+
+  private updatePosition(x: number | null, y: number | null): void {
+    if (x !== null) {
+      this.renderer.setStyle(this.host.nativeElement, 'left', `${x}px`);
+    }
+
+    if (y !== null) {
+      this.renderer.setStyle(this.host.nativeElement, 'top', `${y}px`);
+    }
   }
 }

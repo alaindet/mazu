@@ -7,6 +7,7 @@ import { MazuCardComponentModule } from '@/ui/card';
 import { MazuCheckboxComponentModule } from '@/ui/checkbox';
 import { MazuDropdownMenuComponentModule } from '@/ui/dropdown-menu';
 import { MazuFloatingModule } from '@/common/floating';
+import { MazuFormFieldModule } from '@/ui/form-field';
 
 import { DemoComponentsIndexComponent } from './index/index.component';
 import { DemoComponentsFeatureComponent } from './components.component';
@@ -15,6 +16,7 @@ import { DemoCardComponent } from './components/card/card.component';
 import { DemoCheckboxComponent } from './components/checkbox/checkbox.component';
 import { DemoDropdownMenuComponent } from './components/dropdown-menu/dropdown-menu.component';
 import { DemoFloatingComponent } from './components/floating/floating.component';
+import { DemoFormFieldComponent } from './components/form-field/form-field.component';
 import { DEMO_COMPONENTS_ROUTES } from './routes';
 
 const routes: Routes = [
@@ -40,6 +42,7 @@ const routes: Routes = [
     MazuCheckboxComponentModule,
     MazuDropdownMenuComponentModule,
     MazuFloatingModule,
+		MazuFormFieldModule,
 	],
 	declarations: [
 		DemoComponentsFeatureComponent,
@@ -49,6 +52,7 @@ const routes: Routes = [
     DemoCheckboxComponent,
     DemoDropdownMenuComponent,
     DemoFloatingComponent,
+		DemoFormFieldComponent,
 	],
 })
 export class ComponentsModule {}

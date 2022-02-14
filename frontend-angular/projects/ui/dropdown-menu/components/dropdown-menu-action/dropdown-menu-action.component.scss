@@ -4,8 +4,7 @@
   border-radius: 0.5rem;
   cursor: pointer;
 
-  &:hover,
-  &.--selected {
+  &:hover {
     background-color: var(--color-primary-600);
     color: var(--color-background);
   }

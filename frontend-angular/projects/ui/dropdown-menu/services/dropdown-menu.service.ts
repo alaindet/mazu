@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable()
 export class MazuDropdownMenuService {
-  private _selectedAction$ = new BehaviorSubject<string | null>(null);
+  _selectedAction$ = new BehaviorSubject<string | null>(null);
 
   getSelectedAction(): Observable<string | null> {
     return this._selectedAction$.asObservable();

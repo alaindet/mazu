@@ -3,6 +3,7 @@ import { DemoCardComponent } from './components/card/card.component';
 import { DemoCheckboxComponent } from './components/checkbox/checkbox.component';
 import { DemoDropdownMenuComponent } from './components/dropdown-menu/dropdown-menu.component';
 import { DemoFloatingComponent } from './components/floating/floating.component';
+import { DemoFormFieldComponent } from './components/form-field/form-field.component';
 
 export const DEMO_COMPONENTS_ROUTES = [
   {
@@ -29,5 +30,10 @@ export const DEMO_COMPONENTS_ROUTES = [
     path: 'floating',
     component: DemoFloatingComponent,
     data: { label: 'Floating' },
+  },
+  {
+    path: 'form-field',
+    component: DemoFormFieldComponent,
+    data: { label: 'Form Field' },
   },
 ];

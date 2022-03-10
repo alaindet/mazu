@@ -30,7 +30,6 @@ export class MazuDropdownMenuComponent implements OnChanges, OnInit, OnDestroy {
 
   floatingPlacement: MazuFloatingTargetPlacement = MazuFloatingTargetPlacement.Bottom;
 
-  private emitEvents = true;
   private destroy$ = new Subject<void>();
 
   constructor(
@@ -41,19 +40,13 @@ export class MazuDropdownMenuComponent implements OnChanges, OnInit, OnDestroy {
     if (didInputChange(changes['placement'])) {
       this.floatingPlacement = PLACEMENT[this.placement];
     }
-    if (didInputChange(changes['actionSelected'])) {
-      this.emitEvents = false;
-      this.dropdownMenuService.setSelectedAction(this.actionSelected);
-      setTimeout(() => this.emitEvents = false);
-    }
   }
 
   ngOnInit(): void {
     this.dropdownMenuService.getSelectedAction()
       .pipe(
         takeUntil(this.destroy$),
-        filter(() => this.emitEvents),
-        filter(action => action !== null)
+        filter(action => action !== null),
       )
       .subscribe(action => this.actionClicked.emit(action as string));
   }

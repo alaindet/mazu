@@ -17,4 +17,4 @@
 - [ ] Add autocomplete component
 - [ ] Add list component?
 - [ ] Add footer navbar component
-- [ ] Add closeOnClickOutside to common/floating
+- [x] Add closeOnClickOutside to common/floating

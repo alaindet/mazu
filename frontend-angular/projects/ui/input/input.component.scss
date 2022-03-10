@@ -1,0 +1,42 @@
+.mz-input {
+  font: inherit;
+	transition: 0.15s all ease-in-out;
+	box-sizing: border-box;
+	border: 2px solid transparent;
+
+  &.--size {
+
+    &-small {
+			font-size: 13px;
+			line-height: 14px;
+			padding: 0.4rem 0.75rem;
+      border-radius: 0.4rem;
+		}
+
+		&-medium {
+			font-size: 14px;
+			line-height: 16px;
+			padding: 0.66rem 1.33rem;
+      border-radius: 0.5rem;
+		}
+
+    &-large {
+			font-size: 18px;
+			line-height: 20px;
+			padding: 0.8rem 1.4rem;
+      border-radius: 0.66rem;
+      border-width: 3px;
+		}
+	}
+
+  &.--full-width {
+    width: 100%;
+  }
+
+  &.--disabled,
+	&[disabled] {
+		pointer-events: none;
+		cursor: not-allowed;
+		opacity: 0.5;
+	}
+}

@@ -1,39 +1,35 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
 
 import { InputBoolean } from '@/common';
-import { MazuButtonInput } from './button.input';
+import { MazuInputInput } from './input.input';
 
 @Component({
-  selector: '[mzButton]',
+  selector: 'input[mzInput]',
   template: '<ng-content></ng-content>',
-  styleUrls: ['./button.component.scss'],
+  styleUrls: ['./input.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
-export class MazuButtonComponent {
+export class MazuInputComponent {
 
-  @Input() color: MazuButtonInput['color'] = 'primary';
-  @Input() size: MazuButtonInput['size'] = 'medium';
-  @Input() withIcon?: MazuButtonInput['withIcon'];
+  @Input() size: MazuInputInput['size'] = 'medium';
 
   @Input()
   @InputBoolean()
-  isDisabled?: MazuButtonInput['withFullWidth'] = false;
+  isDisabled?: MazuInputInput['withFullWidth'] = false;
 
   @Input()
   @InputBoolean()
-  withFullWidth?: MazuButtonInput['isDisabled'] = false;
+  withFullWidth?: MazuInputInput['isDisabled'] = false;
 
   @HostBinding('class')
   cssClasses!: string;
 
   ngOnInit(): void {
     const cssClasses = [
-      'mz-button',
-      `--color-${this.color}`,
+      'mz-input',
       `--size-${this.size}`,
       this.withFullWidth ? '--full-width' : null,
-      this.withIcon ? `--with-icon-${this.withIcon}` : null,
       this.isDisabled ? '--disabled' : null,
 		];
 

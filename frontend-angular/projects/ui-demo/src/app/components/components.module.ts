@@ -2,12 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
+import { MazuFloatingModule } from '@/common/floating';
 import { MazuButtonComponentModule } from '@/ui/button';
 import { MazuCardComponentModule } from '@/ui/card';
 import { MazuCheckboxComponentModule } from '@/ui/checkbox';
 import { MazuDropdownMenuComponentModule } from '@/ui/dropdown-menu';
-import { MazuFloatingModule } from '@/common/floating';
 import { MazuFormFieldModule } from '@/ui/form-field';
+import { MazuInputComponentModule } from '@/ui/input';
 
 import { DemoComponentsIndexComponent } from './index/index.component';
 import { DemoComponentsFeatureComponent } from './components.component';
@@ -17,6 +18,7 @@ import { DemoCheckboxComponent } from './components/checkbox/checkbox.component'
 import { DemoDropdownMenuComponent } from './components/dropdown-menu/dropdown-menu.component';
 import { DemoFloatingComponent } from './components/floating/floating.component';
 import { DemoFormFieldComponent } from './components/form-field/form-field.component';
+import { DemoInputTextComponent } from './components/input-text/input-text.component';
 import { DEMO_COMPONENTS_ROUTES } from './routes';
 
 const routes: Routes = [
@@ -37,22 +39,25 @@ const routes: Routes = [
 	imports: [
 		CommonModule,
     RouterModule.forChild(routes),
+
+		MazuFormFieldModule,
     MazuButtonComponentModule,
     MazuCardComponentModule,
     MazuCheckboxComponentModule,
     MazuDropdownMenuComponentModule,
     MazuFloatingModule,
-		MazuFormFieldModule,
+    MazuInputComponentModule,
 	],
 	declarations: [
 		DemoComponentsFeatureComponent,
 		DemoComponentsIndexComponent,
+		DemoFormFieldComponent,
     DemoButtonComponent,
     DemoCardComponent,
     DemoCheckboxComponent,
     DemoDropdownMenuComponent,
     DemoFloatingComponent,
-		DemoFormFieldComponent,
+    DemoInputTextComponent,
 	],
 })
 export class ComponentsModule {}

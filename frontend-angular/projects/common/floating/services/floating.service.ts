@@ -1,6 +1,7 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Inject, Injectable, OnDestroy } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { animationFrameScheduler, BehaviorSubject, fromEvent, Subscription } from 'rxjs';
-import { take, tap, throttleTime } from 'rxjs/operators';
+import { take, throttleTime } from 'rxjs/operators';
 
 import { getPositionFunction, getScrollParent, isElementVisible } from '../functions';
 import { MazuFloatingPair, MazuFloatingTargetPositionConfig, MazuFloatingTargetPosition, MazuFloatingPairConfig, MazuFloatingTargetData } from '../types/types';
@@ -12,6 +13,10 @@ export class MazuFloatingService implements OnDestroy {
 
   pairs: { [name: string]: MazuFloatingPair } = {};
   positionFunctions: { [name: string]: () => Promise<MazuFloatingTargetPosition> } = {};
+
+  constructor(
+    @Inject(DOCUMENT) private document: Document,
+  ) {}
 
   ngOnDestroy(): void {
     Object.values(this.subs).forEach(sub => sub.unsubscribe());
@@ -46,13 +51,13 @@ export class MazuFloatingService implements OnDestroy {
   }
 
   async openTarget(name: string): Promise<void> {
-    this.addExternalListeners(name);
     this.updatePosition(name);
+    this.addExternalListeners(name);
   }
 
   closeTarget(name: string): void {
-    this.removeExternalListeners(name);
     this.pairs[name].data.next({ isOpen: false, x: 0, y: 0 });
+    this.removeExternalListeners(name);
   }
 
   toggleTarget(name: string): void {
@@ -64,27 +69,38 @@ export class MazuFloatingService implements OnDestroy {
   private addExternalListeners(name: string): void {
     this.removeExternalListeners(name);
     const trigger = this.pairs[name].config.triggerElement as HTMLElement;
+    const target = this.pairs[name].config.targetElement as HTMLElement;
     const scrollParent = getScrollParent(trigger);
 
+    // Make target follow trigger on page scroll
     this.subs[`scroll_${name}`] = fromEvent(scrollParent, 'scroll')
-      .pipe(
-        throttleTime(0, animationFrameScheduler),
-        tap(() => {
-          if (!isElementVisible(trigger)) {
-            this.closeTarget(name);
-          }
-        }),
-      )
-      .subscribe(() => this.updatePosition(name));
+      .pipe(throttleTime(0, animationFrameScheduler))
+      .subscribe(() => {
+        if (!isElementVisible(trigger)) {
+          this.closeTarget(name);
+        }
+        this.updatePosition(name)
+      });
 
+    // Close target on page resize
     this.subs[`resize_${name}`] = fromEvent(window, 'resize')
       .pipe(take(1))
       .subscribe(() => this.closeTarget(name));
+
+    // Close target on outside click
+    this.subs[`outside_click_${name}`] = fromEvent(this.document, 'click')
+      .subscribe(event => {
+        const clickTarget = event.target as HTMLElement;
+        if (clickTarget !== trigger && clickTarget !== target) {
+          this.closeTarget(name);
+        }
+      });
   }
 
   private removeExternalListeners(name: string): void {
     this.subs[`scroll_${name}`]?.unsubscribe();
     this.subs[`resize_${name}`]?.unsubscribe();
+    this.subs[`outside_click_${name}`]?.unsubscribe();
   }
 
   private async updatePosition(name: string): Promise<void> {

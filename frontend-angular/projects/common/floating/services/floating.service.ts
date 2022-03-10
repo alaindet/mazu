@@ -78,6 +78,7 @@ export class MazuFloatingService implements OnDestroy {
       .subscribe(() => {
         if (!isElementVisible(trigger)) {
           this.closeTarget(name);
+          return;
         }
         this.updatePosition(name)
       });
@@ -88,13 +89,23 @@ export class MazuFloatingService implements OnDestroy {
       .subscribe(() => this.closeTarget(name));
 
     // Close target on outside click
-    this.subs[`outside_click_${name}`] = fromEvent(this.document, 'click')
-      .subscribe(event => {
-        const clickTarget = event.target as HTMLElement;
-        if (clickTarget !== trigger && clickTarget !== target) {
+    if (this.pairs[name].config.closeOnClick) {
+      this.subs[`outside_click_${name}`] = fromEvent(this.document, 'click')
+        .subscribe(event => {
+          const clickTarget = event.target as HTMLElement;
+
+          if (
+            clickTarget === trigger ||
+            trigger.contains(clickTarget) ||
+            clickTarget === target ||
+            target.contains(clickTarget)
+          ) {
+            return;
+          }
+
           this.closeTarget(name);
-        }
-      });
+        });
+    }
   }
 
   private removeExternalListeners(name: string): void {

@@ -67,6 +67,7 @@ export class MazuFloatingTargetDirective implements OnInit, OnDestroy {
       placement: this.placement as MazuFloatingTargetPlacement,
       offsetX: +(this.offsetX ?? 0),
       offsetY: +(this.offsetY ?? 0),
+      closeOnClick: this.closeOnClick,
     });
   }
 

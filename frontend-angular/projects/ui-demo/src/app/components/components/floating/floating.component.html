@@ -143,7 +143,6 @@
 
   <section class="mz-demo-case">
 
-    <!-- Floating trigger #1 -->
     <button mzFloatingTrigger="external-example" #theTrigger="mzFloatingTrigger" mzButton>
       Click me
     </button>
@@ -167,11 +166,10 @@
     </div>
 
   </section>
-
 </section>
 
 <section class="mz-demo-section">
-  <h3>Keep open on click</h3>
+  <h3>This <strong>only</strong> opens and closes when clicking on the trigger</h3>
 
   <section class="mz-demo-case">
 
@@ -192,4 +190,29 @@
 
   </section>
 
+</section>
+
+<section class="mz-demo-section">
+  <h3>External control + keep open on click</h3>
+  <p>This dropdown is completely controlled either via trigger element or via public API</p>
+
+  <section class="mz-demo-case">
+
+    <button mzFloatingTrigger="controlled-example" #controlled="mzFloatingTrigger" mzButton>
+      Click me
+    </button>
+
+    <hr>
+
+    <button mzButton color="primary-outline" (click)="controlled.open()">Open</button>
+    &nbsp;
+    <button mzButton color="primary-outline" (click)="controlled.close()">Close</button>
+    &nbsp;
+    <button mzButton color="primary-outline" (click)="controlled.toggle()">Toggle</button>
+
+    <div mzFloatingTarget="controlled-example" placement="top" class="demo-target" [closeOnClick]="false">
+      This is a somewhat long tooltip content.
+    </div>
+
+  </section>
 </section>

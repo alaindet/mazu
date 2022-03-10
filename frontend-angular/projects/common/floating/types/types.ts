@@ -21,6 +21,7 @@ export interface MazuFloatingTargetPositionConfig {
   placement?: MazuFloatingTargetPlacement;
   offsetX?: number;
   offsetY?: number;
+  closeOnClick?: boolean;
 }
 
 export type MazuFloatingPositionFunction = (

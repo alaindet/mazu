@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
 @Component({
   selector: 'mz-dropdown-menu-trigger',
   templateUrl: './dropdown-menu-trigger.component.html',
+  styleUrls: ['./dropdown-menu-trigger.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })

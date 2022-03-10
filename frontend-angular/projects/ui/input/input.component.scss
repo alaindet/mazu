@@ -2,30 +2,66 @@
   font: inherit;
 	transition: 0.15s all ease-in-out;
 	box-sizing: border-box;
-	border: 2px solid transparent;
+	border: 2px solid var(--color-grey-400);
+
+  &:hover {
+    border-color: var(--color-primary-300);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--color-primary-500);
+  }
+
+  &.--error {
+    border-color: var(--color-error) !important;
+    color: var(--color-error) !important;
+
+    &:hover {
+      border-color: var(--color-error) !important;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: var(--color-error) !important;
+    }
+  }
+
+  &.--success {
+    border-color: var(--color-success);
+    color: var(--color-success);
+
+    &:hover {
+      border-color: var(--color-success);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: var(--color-success);
+    }
+  }
 
   &.--size {
 
     &-small {
 			font-size: 13px;
 			line-height: 14px;
-			padding: 0.4rem 0.75rem;
+			padding: 0.33rem 0.33rem;
       border-radius: 0.4rem;
 		}
 
 		&-medium {
 			font-size: 14px;
 			line-height: 16px;
-			padding: 0.66rem 1.33rem;
+			padding: 0.5rem 0.8rem;
       border-radius: 0.5rem;
 		}
 
     &-large {
 			font-size: 18px;
 			line-height: 20px;
-			padding: 0.8rem 1.4rem;
+			padding: 0.5rem 1rem;
       border-radius: 0.66rem;
-      border-width: 3px;
 		}
 	}
 

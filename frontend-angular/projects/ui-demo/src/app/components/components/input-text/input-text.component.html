@@ -2,11 +2,78 @@
 
 <section class="mz-demo-section">
   <h3>Basic</h3>
-
   <section class="mz-demo-case">
-
-    <input type="text" mzInput>
-
+    <input type="text" mzInput value="Some content">
   </section>
+</section>
 
+<section class="mz-demo-section">
+  <h3>States</h3>
+  <section class="mz-demo-case">
+    <div>
+      <input type="text" mzInput withError value="Some content">
+    </div>
+    <br>
+    <div>
+      <input type="text" mzInput withSuccess value="Some content">
+    </div>
+  </section>
+</section>
+
+<section class="mz-demo-section">
+  <h3>Sizes</h3>
+  <section class="mz-demo-case">
+    <div>
+      <input type="text" mzInput size="small" value="Some content"> Small
+    </div>
+    <br>
+    <div>
+      <input type="text" mzInput size="medium" value="Some content"> Medium
+    </div>
+    <br>
+    <div>
+      <input type="text" mzInput size="large" value="Some content"> Large
+    </div>
+    <br>
+    <div>
+      Full width (small)
+      <input type="text" mzInput value="Some content" withFullWidth size="small">
+    </div>
+    <br>
+    <div>
+      Full width (medium)
+      <input type="text" mzInput value="Some content" withFullWidth size="medium">
+    </div>
+    <br>
+    <div>
+      Full width (large)
+      <input type="text" mzInput value="Some content" withFullWidth size="large">
+    </div>
+  </section>
+</section>
+
+<section class="mz-demo-section">
+  <h3>Debounced value</h3>
+  <section class="mz-demo-case">
+    <input
+      type="text"
+      mzInput
+      withDebounce="400"
+      value="Some content"
+      (debouncedValue)="consoleLog('debouncedValue', $event)"
+    >
+  </section>
+</section>
+
+<section class="mz-demo-section">
+  <h3>Disabled</h3>
+  <section class="mz-demo-case">
+    <div>
+      <input type="text" mzInput disabled value="Some content">
+    </div>
+    <br>
+    <div>
+      <input type="text" mzInput [isDisabled]="true" value="Some content">
+    </div>
+  </section>
 </section>

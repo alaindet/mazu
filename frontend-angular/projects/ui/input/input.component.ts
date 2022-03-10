@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostBinding, Input, OnDestroy, OnInit, Output, ViewEncapsulation } from '@angular/core';
 
-import { InputBoolean } from '@/common';
-import { MazuInputInput } from './input.input';
+import { InputBoolean, createDebouncedInputEvent } from '@/common';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'input[mzInput]',
@@ -10,29 +10,55 @@ import { MazuInputInput } from './input.input';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
-export class MazuInputComponent {
+export class MazuInputComponent implements OnInit, OnDestroy {
 
-  @Input() size: MazuInputInput['size'] = 'medium';
+  @Input() size: 'small' | 'medium' | 'large' = 'medium';
+  @Input() @InputBoolean() isDisabled?: boolean | string = false;
+  @Input() @InputBoolean() withFullWidth?: boolean | string = false;
+  @Input() @InputBoolean() withError?: boolean | string = false;
+  @Input() @InputBoolean() withSuccess?: boolean | string = false;
+  @Input() withDebounce?: number | boolean | string = false;
 
-  @Input()
-  @InputBoolean()
-  isDisabled?: MazuInputInput['withFullWidth'] = false;
-
-  @Input()
-  @InputBoolean()
-  withFullWidth?: MazuInputInput['isDisabled'] = false;
+  @Output() debouncedValue = new EventEmitter<string>();
 
   @HostBinding('class')
   cssClasses!: string;
 
-  ngOnInit(): void {
+  private debounceSub?: Subscription;
+
+  constructor(
+    private host: ElementRef<HTMLInputElement>,
+  ) {}
+
+  ngOnInit() {
+    this.initStyle();
+    this.initDebounceInputEvent();
+	}
+
+  ngOnDestroy() {
+    this.debounceSub?.unsubscribe();
+  }
+
+  private initStyle(): void {
     const cssClasses = [
       'mz-input',
       `--size-${this.size}`,
+      this.withError ? '--error' : null,
+      this.withSuccess ? '--success' : null,
       this.withFullWidth ? '--full-width' : null,
       this.isDisabled ? '--disabled' : null,
 		];
 
     this.cssClasses = cssClasses.filter(cssClass => cssClass !== null).join(' ');
-	}
+  }
+
+  private initDebounceInputEvent(): void {
+    if (this.withDebounce === false) {
+      return;
+    }
+
+    const delay = this.withDebounce ? +this.withDebounce : 400;
+    this.debounceSub = createDebouncedInputEvent(this.host, delay)
+      .subscribe(inputValue => this.debouncedValue.emit(inputValue));
+  }
 }

@@ -13,7 +13,7 @@ export class DemoComponentsFeatureComponent implements OnInit {
 	routes: { label: string; url: string; }[] = [];
 	isNavVisible = false;
 
-	ngOnInit(): void {
+	ngOnInit() {
     this.version = packageJson.version;
 		this.routes = DEMO_COMPONENTS_ROUTES.map(route => ({
 			label: route.data.label,

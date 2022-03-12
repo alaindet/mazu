@@ -18,7 +18,7 @@ export class MazuFloatingService implements OnDestroy {
     @Inject(DOCUMENT) private document: Document,
   ) {}
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     Object.values(this.subs).forEach(sub => sub.unsubscribe());
   }
 

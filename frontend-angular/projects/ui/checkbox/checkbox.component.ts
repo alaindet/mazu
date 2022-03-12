@@ -37,7 +37,7 @@ export class MazuCheckboxComponent {
 	private onChange!: (val: any) => {};
 	private onTouched!: () => {};
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.setSizeStyle();
   }
 

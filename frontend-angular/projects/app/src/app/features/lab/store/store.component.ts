@@ -46,7 +46,7 @@ export class LabStoreFeatureComponent {
     private store: Store,
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.store.select(selectLists).subscribe(lists => {
       if (!lists || !lists?.length) {
         return;

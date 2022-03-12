@@ -20,7 +20,7 @@ export class MazuFloatingTriggerDirective implements OnInit, OnDestroy {
     private floatingService: MazuFloatingService,
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.floatingService.setTrigger(this.name, {
       triggerElement: this.host.nativeElement,
     });
@@ -35,7 +35,7 @@ export class MazuFloatingTriggerDirective implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
   }

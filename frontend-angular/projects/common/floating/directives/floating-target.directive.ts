@@ -27,14 +27,14 @@ export class MazuFloatingTargetDirective implements OnInit, OnDestroy {
     private floatingService: MazuFloatingService,
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.initStyle();
     this.initCloseOnClick();
     this.initTarget();
     this.updateOnDataChange();
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
   }

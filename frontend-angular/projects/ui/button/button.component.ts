@@ -27,7 +27,7 @@ export class MazuButtonComponent {
   @HostBinding('class')
   cssClasses!: string;
 
-  ngOnInit(): void {
+  ngOnInit() {
     const cssClasses = [
       'mz-button',
       `--color-${this.color}`,

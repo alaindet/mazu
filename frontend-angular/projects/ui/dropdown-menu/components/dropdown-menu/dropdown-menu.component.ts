@@ -36,13 +36,13 @@ export class MazuDropdownMenuComponent implements OnChanges, OnInit, OnDestroy {
     private dropdownMenuService: MazuDropdownMenuService,
   ) {}
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(changes: SimpleChanges) {
     if (didInputChange(changes['placement'])) {
       this.floatingPlacement = PLACEMENT[this.placement];
     }
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.dropdownMenuService.getSelectedAction()
       .pipe(
         takeUntil(this.destroy$),
@@ -51,7 +51,7 @@ export class MazuDropdownMenuComponent implements OnChanges, OnInit, OnDestroy {
       .subscribe(action => this.actionClicked.emit(action as string));
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
   }

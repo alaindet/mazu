@@ -1,3 +1,4 @@
+import { DemoAutocompleteComponent } from './components/autocomplete/autocomplete.component';
 import { DemoButtonComponent } from './components/button/button.component';
 import { DemoCardComponent } from './components/card/card.component';
 import { DemoCheckboxComponent } from './components/checkbox/checkbox.component';
@@ -8,6 +9,11 @@ import { DemoInputTextComponent } from './components/input-text/input-text.compo
 import { DemoInputGroupComponent } from './components/input-group/input-group.component';
 
 export const DEMO_COMPONENTS_ROUTES = [
+  {
+    path: 'autocomplete',
+    component: DemoAutocompleteComponent,
+    data: { label: 'Autocomplete' },
+  },
   {
     path: 'button',
     component: DemoButtonComponent,

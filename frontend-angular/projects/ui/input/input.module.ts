@@ -14,4 +14,4 @@ import { MazuInputGroupComponent } from './input-group/input-group.component';
     MazuInputGroupComponent,
   ],
 })
-export class MazuInputComponentModule {}
+export class MazuInputModule {}

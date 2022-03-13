@@ -4,15 +4,17 @@ import { RouterModule, Routes } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { MazuFloatingModule } from '@/common/floating';
+import { MazuAutocompleteModule } from '@/ui/autocomplete';
 import { MazuButtonComponentModule } from '@/ui/button';
 import { MazuCardComponentModule } from '@/ui/card';
 import { MazuCheckboxComponentModule } from '@/ui/checkbox';
 import { MazuDropdownMenuComponentModule } from '@/ui/dropdown-menu';
 import { MazuFormFieldModule } from '@/ui/form-field';
-import { MazuInputComponentModule } from '@/ui/input';
+import { MazuInputModule } from '@/ui/input';
 
 import { DemoComponentsIndexComponent } from './index/index.component';
 import { DemoComponentsFeatureComponent } from './components.component';
+import { DemoAutocompleteComponent } from './components/autocomplete/autocomplete.component';
 import { DemoButtonComponent } from './components/button/button.component';
 import { DemoCardComponent } from './components/card/card.component';
 import { DemoCheckboxComponent } from './components/checkbox/checkbox.component';
@@ -30,7 +32,7 @@ const routes: Routes = [
 		children: [
 			{
         path: '',
-        component: DemoComponentsIndexComponent
+        component: DemoComponentsIndexComponent,
       },
 			...DEMO_COMPONENTS_ROUTES,
 		]
@@ -43,25 +45,27 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     FontAwesomeModule,
 
+    MazuAutocompleteModule,
 		MazuFormFieldModule,
     MazuButtonComponentModule,
     MazuCardComponentModule,
     MazuCheckboxComponentModule,
     MazuDropdownMenuComponentModule,
     MazuFloatingModule,
-    MazuInputComponentModule,
+    MazuInputModule,
 	],
 	declarations: [
 		DemoComponentsFeatureComponent,
 		DemoComponentsIndexComponent,
 		DemoFormFieldComponent,
+    DemoAutocompleteComponent,
     DemoButtonComponent,
     DemoCardComponent,
     DemoCheckboxComponent,
     DemoDropdownMenuComponent,
     DemoFloatingComponent,
-    DemoInputTextComponent,
     DemoInputGroupComponent,
+    DemoInputTextComponent,
 	],
 })
 export class ComponentsModule {}

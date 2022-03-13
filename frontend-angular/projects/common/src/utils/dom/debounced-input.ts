@@ -15,7 +15,7 @@ export const createDebouncedInputEvent = (
 ): Observable<string> => {
 	return fromEvent<KeyboardEvent>(element.nativeElement, 'input')
 		.pipe(
-			map(event => (<HTMLInputElement>event.target).value),
 			debounceTime(delay),
+			map(event => (<HTMLInputElement>event.target).value as string),
 		);
 };

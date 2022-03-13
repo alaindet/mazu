@@ -1,4 +1,4 @@
-<h2>TODO: Input text</h2>
+<h2>Input text</h2>
 
 <section class="mz-demo-section">
   <h3>Basic</h3>
@@ -59,9 +59,10 @@
       type="text"
       mzInput
       withDebounce="400"
-      value="Some content"
-      (debouncedValue)="consoleLog('debouncedValue', $event)"
+      [value]="debouncedValue"
+      (debouncedValue)="onDebouncedValue($event)"
     >
+    <pre>Input value: {{ debouncedValue }}</pre>
   </section>
 </section>
 

@@ -9,6 +9,9 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./input.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
+  host: {
+    class: 'mz-input',
+  },
 })
 export class MazuInputComponent implements OnInit, OnDestroy {
 
@@ -41,7 +44,6 @@ export class MazuInputComponent implements OnInit, OnDestroy {
 
   private initStyle(): void {
     const cssClasses = [
-      'mz-input',
       `--size-${this.size}`,
       this.withError ? '--error' : null,
       this.withSuccess ? '--success' : null,

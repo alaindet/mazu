@@ -9,6 +9,9 @@ import { MazuButtonInput } from './button.input';
   styleUrls: ['./button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
+  host: {
+    class: 'mz-button',
+  },
 })
 export class MazuButtonComponent {
 
@@ -29,7 +32,6 @@ export class MazuButtonComponent {
 
   ngOnInit() {
     const cssClasses = [
-      'mz-button',
       `--color-${this.color}`,
       `--size-${this.size}`,
       this.withFullWidth ? '--full-width' : null,

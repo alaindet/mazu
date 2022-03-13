@@ -1,0 +1,19 @@
+<div class="mz-input-group__left">
+  <ng-content select="[slot='left']"></ng-content>
+</div>
+
+<div class="mz-input-group__input">
+  <div class="mz-input-group__input__left">
+    <ng-content select="[slot='input-left']"></ng-content>
+  </div>
+  <div class="mz-input-group__input__right">
+    <ng-content select="[slot='input-right']"></ng-content>
+  </div>
+  <div class="mz-input-group__input__center">
+    <ng-content></ng-content>
+  </div>
+</div>
+
+<div class="mz-input-group__right">
+  <ng-content select="[slot='right']"></ng-content>
+</div>

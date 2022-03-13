@@ -5,6 +5,7 @@ import { DemoDropdownMenuComponent } from './components/dropdown-menu/dropdown-m
 import { DemoFloatingComponent } from './components/floating/floating.component';
 import { DemoFormFieldComponent } from './components/form-field/form-field.component';
 import { DemoInputTextComponent } from './components/input-text/input-text.component';
+import { DemoInputGroupComponent } from './components/input-group/input-group.component';
 
 export const DEMO_COMPONENTS_ROUTES = [
   {
@@ -36,6 +37,11 @@ export const DEMO_COMPONENTS_ROUTES = [
     path: 'form-field',
     component: DemoFormFieldComponent,
     data: { label: 'Form Field' },
+  },
+  {
+    path: 'input-group',
+    component: DemoInputGroupComponent,
+    data: { label: 'Input Group' },
   },
   {
     path: 'input-text',

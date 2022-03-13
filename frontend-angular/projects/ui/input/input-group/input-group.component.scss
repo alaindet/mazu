@@ -1,0 +1,48 @@
+.mz-input-group {
+  --input-icon-width: 24px;
+
+  display: flex;
+
+  // &__left:not(:empty) {
+  //   border: 1px solid green;
+  // }
+
+  &__input {
+    flex-grow: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-left: 0.2rem;
+    margin-right: 0.2rem;
+
+    &__left:not(:empty) {
+      border: 1px solid red; // TODO
+      width: var(--input-icon-width);
+      position: absolute;
+      left: 0.33rem;
+    }
+
+    &__right:not(:empty) {
+      border: 1px solid red; // TODO
+      width: var(--input-icon-width);
+      position: absolute;
+      right: 0.33rem;
+    }
+
+    &__center {
+      flex-grow: 1;
+    }
+
+    &__left:not(:empty) ~ &__center .mz-input {
+      padding-left: calc(var(--input-icon-width) + 0.5rem);
+    }
+
+    &__right:not(:empty) ~ &__center .mz-input {
+      padding-right: calc(var(--input-icon-width) + 0.5rem);
+    }
+  }
+
+  // &__right:not(:empty) {
+  //   border: 1px solid green;
+  // }
+}

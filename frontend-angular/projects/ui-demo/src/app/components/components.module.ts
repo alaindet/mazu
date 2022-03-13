@@ -19,6 +19,7 @@ import { DemoDropdownMenuComponent } from './components/dropdown-menu/dropdown-m
 import { DemoFloatingComponent } from './components/floating/floating.component';
 import { DemoFormFieldComponent } from './components/form-field/form-field.component';
 import { DemoInputTextComponent } from './components/input-text/input-text.component';
+import { DemoInputGroupComponent } from './components/input-group/input-group.component';
 import { DEMO_COMPONENTS_ROUTES } from './routes';
 
 const routes: Routes = [
@@ -58,6 +59,7 @@ const routes: Routes = [
     DemoDropdownMenuComponent,
     DemoFloatingComponent,
     DemoInputTextComponent,
+    DemoInputGroupComponent,
 	],
 })
 export class ComponentsModule {}

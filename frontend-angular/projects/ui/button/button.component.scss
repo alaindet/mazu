@@ -4,8 +4,13 @@
 	cursor: pointer;
 	transition: 0.15s all ease-in-out;
 	box-sizing: border-box;
-	border: 3px solid transparent;
+	border: 2.5px solid transparent;
   letter-spacing: 1px;
+
+  &:focus {
+    outline-offset: 2px;
+    outline: 1px dotted black;
+  }
 
 	&.--size {
 
@@ -40,8 +45,11 @@
 
       &:hover,
       &:focus {
-        outline: none;
         background-color: var(--color-primary-700);
+      }
+
+      &:focus {
+        outline-color: var(--color-primary-500);
       }
     }
 
@@ -52,21 +60,28 @@
 
       &:hover,
       &:focus {
-        outline: none;
         background-color: var(--color-primary-700);
         border-color: var(--color-primary-700);
         color: var(--color-background);
       }
+
+      &:focus {
+        outline-color: var(--color-primary-500);
+      }
     }
 
     &-secondary {
-      background-color: var(--color-grey-100);
+      background-color: var(--color-grey-200);
       color: var(--color-foreground);
 
       &:hover,
       &:focus {
-        outline: none;
         background-color: var(--color-grey-300);
+        border-color: rgba(0,0,0,0.1);
+      }
+
+      &:focus {
+        outline-color: var(--color-grey-300);
       }
     }
   }

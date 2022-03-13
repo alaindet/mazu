@@ -5,4 +5,9 @@ import { Component } from '@angular/core';
 })
 export class DemoInputTextComponent {
   consoleLog = console.log;
+  debouncedValue = 'Edit this!';
+
+  onDebouncedValue(value: string): void {
+    this.debouncedValue = value;
+  }
 }

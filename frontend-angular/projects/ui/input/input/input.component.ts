@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs';
   host: {
     class: 'mz-input',
   },
+  exportAs: 'mzInput',
 })
 export class MazuInputComponent implements OnInit, OnDestroy {
 
@@ -40,6 +41,27 @@ export class MazuInputComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.debounceSub?.unsubscribe();
+  }
+
+  // Public API
+  focus(): void {
+    this.host.nativeElement.focus();
+  }
+
+  // Public API
+  clear(): void {
+    this.host.nativeElement.value = '';
+  }
+
+  // Public API
+  clearAndFocus(): void {
+    this.host.nativeElement.value = '';
+    this.host.nativeElement.focus();
+  }
+
+  // Public API
+  setValue(newValue: string): void {
+    this.host.nativeElement.value = newValue;
   }
 
   private initStyle(): void {

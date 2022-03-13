@@ -3,6 +3,8 @@
 	transition: 0.15s all ease-out;
 	box-sizing: border-box;
 	border: 2px solid var(--color-grey-400);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
 
   &:hover {
     border-color: var(--color-primary-300);
@@ -50,7 +52,7 @@
 		&-medium {
 			font-size: 17px;
 			line-height: 17px;
-			padding: 0.5rem 0.8rem;
+			padding: 0.55rem 0.8rem;
       border-radius: 0.5rem;
 		}
 

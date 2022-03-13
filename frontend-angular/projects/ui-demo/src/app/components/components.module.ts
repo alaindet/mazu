@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { MazuFloatingModule } from '@/common/floating';
 import { MazuButtonComponentModule } from '@/ui/button';
@@ -40,6 +41,7 @@ const routes: Routes = [
 	imports: [
 		CommonModule,
     RouterModule.forChild(routes),
+    FontAwesomeModule,
 
 		MazuFormFieldModule,
     MazuButtonComponentModule,

@@ -70,6 +70,33 @@
       }
     }
 
+    &-primary-clear {
+      background-color: var(--color-background);
+      color: var(--color-foreground);
+
+      &:hover,
+      &:focus {
+        background-color: var(--color-primary-700);
+        border-color: var(--color-primary-700);
+        color: var(--color-background);
+      }
+
+      &:focus {
+        outline-color: var(--color-primary-500);
+      }
+    }
+
+    &-primary-clear-reverse {
+      background-color: var(--color-background);
+      color: var(--color-foreground);
+
+      &:hover,
+      &:focus {
+        outline: none;
+        color: var(--color-primary-700);
+      }
+    }
+
     &-secondary {
       background-color: var(--color-grey-200);
       color: var(--color-foreground);
@@ -78,6 +105,21 @@
       &:focus {
         background-color: var(--color-grey-300);
         border-color: rgba(0,0,0,0.1);
+      }
+
+      &:focus {
+        outline-color: var(--color-grey-300);
+      }
+    }
+
+    &-secondary-clear {
+      background-color: var(--color-background);
+      color: var(--color-foreground);
+
+      &:hover,
+      &:focus {
+        background-color: var(--color-grey-200);
+        border-color: rgba(0,0,0,0.05);
       }
 
       &:focus {

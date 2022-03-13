@@ -16,14 +16,14 @@
     margin-right: 0.2rem;
 
     &__left:not(:empty) {
-      border: 1px solid red; // TODO
+      text-align: center;
       width: var(--input-icon-width);
       position: absolute;
       left: 0.33rem;
     }
 
     &__right:not(:empty) {
-      border: 1px solid red; // TODO
+      text-align: center;
       width: var(--input-icon-width);
       position: absolute;
       right: 0.33rem;

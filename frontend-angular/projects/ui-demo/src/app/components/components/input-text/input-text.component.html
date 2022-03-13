@@ -78,3 +78,19 @@
     </div>
   </section>
 </section>
+
+<section class="mz-demo-section">
+  <h3>Controlled via public API</h3>
+  <section class="mz-demo-case">
+    <div>
+      <input type="text" mzInput value="Some content" #myInput="mzInput">
+    </div>
+    <br><br>
+    <div>
+      <button mzButton size="small" (click)="myInput.focus()">Focus</button>&nbsp;
+      <button mzButton size="small" (click)="myInput.clear()">Clear</button>&nbsp;
+      <button mzButton size="small" (click)="myInput.clearAndFocus()">Clear and focus</button>&nbsp;
+      <button mzButton size="small" (click)="myInput.setValue('New content')">Set new content</button>&nbsp;
+    </div>
+  </section>
+</section>

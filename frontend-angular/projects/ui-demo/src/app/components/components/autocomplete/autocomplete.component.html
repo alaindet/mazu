@@ -7,6 +7,18 @@
 
     <input type="search" mzInput #myInput="mzInput">
 
+    <mz-autocomplete
+      [ref]="myInput"
+      [options]="options"
+      #myAutocomplete="mzAutocomplete"
+    >
+      <ng-container *ngFor="let option of myAutocomplete.options$ | async">
+        <mz-autocomplete-item [value]="option.value">
+          {{ option.label }}
+        </mz-autocomplete-item>
+      </ng-container>
+    </mz-autocomplete>
+
     <!-- TODO: Attempt #1 -->
     <!-- <mz-autocomplete
       [ref]="myInput"

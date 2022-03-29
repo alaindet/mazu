@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { FormOption } from '@/common';
-import { MazuInputComponent } from '@/ui/input';
+import { FormOption, MazuInputApi } from '@/common';
 import { MazuAutocompleteService } from '../autocomplete.service';
 
 @Component({
@@ -19,7 +18,7 @@ import { MazuAutocompleteService } from '../autocomplete.service';
 })
 export class MazuAutocompleteComponent {
 
-  @Input() ref!: MazuInputComponent;
+  @Input() ref!: MazuInputApi;
   @Input() options: FormOption[] = [];
 
   // Public API
@@ -29,5 +28,9 @@ export class MazuAutocompleteComponent {
     private autocompleteSvc: MazuAutocompleteService,
   ) {
     this.options$ = this.autocompleteSvc.options$;
+  }
+
+  ngOnChanges() {
+    this.autocompleteSvc._options$.next(this.options);
   }
 }

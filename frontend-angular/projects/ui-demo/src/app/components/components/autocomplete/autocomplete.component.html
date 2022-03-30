@@ -10,6 +10,7 @@
     <mz-autocomplete
       [ref]="myInput"
       [options]="options"
+      (selected)="consoleLog('selected', $event)"
       #myAutocomplete="mzAutocomplete"
     >
       <ng-container *ngFor="let option of myAutocomplete.options$ | async">

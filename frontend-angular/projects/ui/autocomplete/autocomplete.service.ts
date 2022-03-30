@@ -5,15 +5,15 @@ import { FormOption } from '@/common';
 
 @Injectable()
 export class MazuAutocompleteService {
-  private options: FormOption[] = [];
-  private hashedOptions: string[] = [];
-  private _filteredOptions$ = new BehaviorSubject<FormOption[]>([]);
 
   // TODO
   // - Candidate: highlighted option that could be confirmed
   // - Confirmed/selected: user-confirmed option
   private _candidateOption$ = new BehaviorSubject<any | null>(null);
   private _selectedOption$ = new BehaviorSubject<any | null>(null);
+  private _filteredOptions$ = new BehaviorSubject<FormOption[]>([]);
+  private options: FormOption[] = [];
+  private hashedOptions: string[] = [];
 
   filter = '';
 
@@ -48,6 +48,7 @@ export class MazuAutocompleteService {
   setOptions(options: FormOption[]): void {
     this.options = options;
     this.hashedOptions = options.map(opt => JSON.stringify(opt.value).toLowerCase());
+    this.filterOptions(this.filter);
   }
 
   setFilter(filter: string): void {
@@ -62,7 +63,6 @@ export class MazuAutocompleteService {
 
   private filterOptions(filter: string): void {
 
-    // TODO: Not working?!
     const filteredOptions = filter
       ? this.options.filter((_, i) => this.hashedOptions[i].includes(filter))
       : [...this.options];

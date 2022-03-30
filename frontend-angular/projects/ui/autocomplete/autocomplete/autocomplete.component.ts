@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation, SimpleChanges, OnInit, OnChanges, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation, SimpleChanges, OnInit, OnChanges, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
 
 import { createDebouncedInputEvent, didInputChange, FormOption, MazuInputApi } from '@/common';
@@ -22,6 +22,8 @@ export class MazuAutocompleteComponent implements OnInit, OnChanges, OnDestroy {
   @Input() updateInterval = 400;
   @Input() options: FormOption[] = [];
 
+  @Output() selected = new EventEmitter<any>();
+
   private subs: { [sub: string]: Subscription } = {};
   private _options$ = new BehaviorSubject<FormOption[]>([]);
   options$ = this._options$.asObservable(); // TODO: Optimization of first [] event
@@ -41,6 +43,7 @@ export class MazuAutocompleteComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnInit() {
     this.initInputRef();
+    this.initSelectedOption();
   }
 
   ngOnDestroy() {
@@ -51,5 +54,10 @@ export class MazuAutocompleteComponent implements OnInit, OnChanges, OnDestroy {
     const el = this.ref.getNativeElement();
     this.subs['input'] = createDebouncedInputEvent(el, this.updateInterval)
       .subscribe(val => this.autocompleteSvc.setFilter(val));
+  }
+
+  private initSelectedOption(): void {
+    this.subs['selectedOption'] = this.autocompleteSvc.selectedOption$
+      .subscribe(option => this.selected.emit(option));
   }
 }

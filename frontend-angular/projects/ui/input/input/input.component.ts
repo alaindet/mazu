@@ -65,6 +65,11 @@ export class MazuInputComponent implements OnInit, OnDestroy, MazuInputApi {
   }
 
   // Public API
+  getNativeElement(): HTMLInputElement {
+    return this.host.nativeElement;
+  }
+
+  // Public API
   setValue(newValue: string): void {
     this.host.nativeElement.value = newValue;
   }
@@ -87,11 +92,7 @@ export class MazuInputComponent implements OnInit, OnDestroy, MazuInputApi {
     }
 
     const delay = this.withDebounce ? +this.withDebounce : 400;
-    this.debounceSub = createDebouncedInputEvent(this.host, delay)
-      .subscribe(
-        (inputValue: any) => {
-          this.debouncedValue.emit(inputValue)
-        }
-      );
+    this.debounceSub = createDebouncedInputEvent(this.host.nativeElement, delay)
+      .subscribe((inputValue: any) => this.debouncedValue.emit(inputValue));
   }
 }

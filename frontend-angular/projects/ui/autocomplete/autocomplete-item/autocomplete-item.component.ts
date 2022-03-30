@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, Input, ViewEncapsulation } from '@angular/core';
 
 import { MazuAutocompleteService } from '../autocomplete.service';
 
@@ -19,4 +19,10 @@ export class MazuAutocompleteItemComponent {
   constructor(
     private autocompleteSvc: MazuAutocompleteService,
   ) {}
+
+  @HostListener('click')
+  onClick(): void {
+    // TODO
+    // this.autocompleteSvc.selectOption(this.value);
+  }
 }

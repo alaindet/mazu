@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
-import { Observable } from 'rxjs';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation, SimpleChanges, OnInit, OnChanges, OnDestroy } from '@angular/core';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 
-import { FormOption, MazuInputApi } from '@/common';
+import { createDebouncedInputEvent, didInputChange, FormOption, MazuInputApi } from '@/common';
 import { MazuAutocompleteService } from '../autocomplete.service';
 
 @Component({
@@ -16,21 +16,44 @@ import { MazuAutocompleteService } from '../autocomplete.service';
   exportAs: 'mzAutocomplete',
   providers: [MazuAutocompleteService],
 })
-export class MazuAutocompleteComponent {
+export class MazuAutocompleteComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input() ref!: MazuInputApi;
+  @Input() updateInterval = 400;
   @Input() options: FormOption[] = [];
 
-  // Public API
-  options$!: Observable<FormOption[]>;
+  private _options$ = new BehaviorSubject<FormOption[]>([]);
+  options$ = this._options$.asObservable(); // TODO: Optimization of first [] event
+
+  // TODO: Group
+  private inputSub?: Subscription;
+  private optionsSub?: Subscription;
 
   constructor(
     private autocompleteSvc: MazuAutocompleteService,
-  ) {
-    this.options$ = this.autocompleteSvc.options$;
+  ) {}
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (didInputChange(changes['options'])) {
+      this.autocompleteSvc.setOptions(this.options);
+      this.optionsSub?.unsubscribe();
+      this.optionsSub = this.autocompleteSvc.options$
+        .subscribe(options => this._options$.next(options));
+    }
   }
 
-  ngOnChanges() {
-    this.autocompleteSvc._options$.next(this.options);
+  ngOnInit() {
+    this.initInputRef();
+  }
+
+  ngOnDestroy() {
+    this.inputSub?.unsubscribe();
+    this.optionsSub?.unsubscribe();
+  }
+
+  private initInputRef(): void {
+    const el = this.ref.getNativeElement();
+    this.inputSub = createDebouncedInputEvent(el, this.updateInterval)
+      .subscribe(val => this.autocompleteSvc.setFilter(val));
   }
 }

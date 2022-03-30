@@ -6,6 +6,7 @@ import { FormOption } from '@/common';
 @Injectable()
 export class MazuAutocompleteService {
   private options: FormOption[] = [];
+  private hashedOptions: string[] = [];
   private _filteredOptions$ = new BehaviorSubject<FormOption[]>([]);
 
   // TODO
@@ -20,42 +21,51 @@ export class MazuAutocompleteService {
     return this._filteredOptions$.asObservable();
   }
 
+  get selectedOption$(): Observable<any> {
+    return this._selectedOption$.asObservable();
+  }
+
+  get candidateOption$(): Observable<any> {
+    return this._candidateOption$.asObservable();
+  }
+
+  selectOption(value: any): void {
+    this._selectedOption$.next(value);
+  }
+
+  resetSelectedOption(): void {
+    this._selectedOption$.next(null);
+  }
+
+  candidateOption(value: any): void {
+    this._candidateOption$.next(value);
+  }
+
+  resetCandidateOption(): void {
+    this._candidateOption$.next(null);
+  }
+
   setOptions(options: FormOption[]): void {
-    console.log('setOptions', options);
     this.options = options;
-    this.updateOptions();
+    this.hashedOptions = options.map(opt => JSON.stringify(opt.value).toLowerCase());
   }
 
   setFilter(filter: string): void {
     this.filter = filter;
-    this.updateOptions();
+    this.filterOptions(filter);
   }
 
   resetFilter(): void {
     this.filter = '';
-    this.updateOptions();
+    this.filterOptions('');
   }
 
-  private defaultFilterFn = (option: FormOption, filter: string): boolean => {
-    // TODO: Move this when setting options?
-    const haystack = Object.values(option)
-      .map(i => JSON.stringify(i))
-      .join('')
-      .toLowerCase();
-    const needle = filter.toLowerCase();
-    return haystack.includes(needle);
-  };
+  private filterOptions(filter: string): void {
 
-  private updateOptions(): void {
-
-    if (!this.filter) {
-      this._filteredOptions$.next([...this.options]);
-      return;
-    }
-
-    const filteredOptions = this.options.filter(option => {
-      return this.defaultFilterFn(option, this.filter);
-    });
+    // TODO: Not working?!
+    const filteredOptions = filter
+      ? this.options.filter((_, i) => this.hashedOptions[i].includes(filter))
+      : [...this.options];
 
     this._filteredOptions$.next(filteredOptions);
   }

@@ -22,7 +22,6 @@ export class MazuAutocompleteItemComponent {
 
   @HostListener('click')
   onClick(): void {
-    // TODO
-    // this.autocompleteSvc.selectOption(this.value);
+    this.autocompleteSvc.selectOption(this.value);
   }
 }

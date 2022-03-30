@@ -36,8 +36,27 @@ export class MazuAutocompleteService {
     this.updateOptions();
   }
 
+  private defaultFilterFn = (option: FormOption, filter: string): boolean => {
+    // TODO: Move this when setting options?
+    const haystack = Object.values(option)
+      .map(i => JSON.stringify(i))
+      .join('')
+      .toLowerCase();
+    const needle = filter.toLowerCase();
+    return haystack.includes(needle);
+  };
+
   private updateOptions(): void {
-    // TODO...
-    console.log('updateOptions');
+
+    if (!this.filter) {
+      this._filteredOptions$.next([...this.options]);
+      return;
+    }
+
+    const filteredOptions = this.options.filter(option => {
+      return this.defaultFilterFn(option, this.filter);
+    });
+
+    this._filteredOptions$.next(filteredOptions);
   }
 }

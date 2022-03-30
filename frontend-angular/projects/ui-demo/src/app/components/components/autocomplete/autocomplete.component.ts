@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { FormOption } from '@/common';
+
 @Component({
   templateUrl: './autocomplete.component.html',
 })

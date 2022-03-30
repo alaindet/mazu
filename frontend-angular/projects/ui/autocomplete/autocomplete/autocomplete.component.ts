@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation, SimpleChanges, OnInit, OnChanges, OnDestroy } from '@angular/core';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 import { createDebouncedInputEvent, didInputChange, FormOption, MazuInputApi } from '@/common';
 import { MazuAutocompleteService } from '../autocomplete.service';
@@ -22,12 +22,9 @@ export class MazuAutocompleteComponent implements OnInit, OnChanges, OnDestroy {
   @Input() updateInterval = 400;
   @Input() options: FormOption[] = [];
 
+  private subs: { [sub: string]: Subscription } = {};
   private _options$ = new BehaviorSubject<FormOption[]>([]);
   options$ = this._options$.asObservable(); // TODO: Optimization of first [] event
-
-  // TODO: Group
-  private inputSub?: Subscription;
-  private optionsSub?: Subscription;
 
   constructor(
     private autocompleteSvc: MazuAutocompleteService,
@@ -36,8 +33,8 @@ export class MazuAutocompleteComponent implements OnInit, OnChanges, OnDestroy {
   ngOnChanges(changes: SimpleChanges) {
     if (didInputChange(changes['options'])) {
       this.autocompleteSvc.setOptions(this.options);
-      this.optionsSub?.unsubscribe();
-      this.optionsSub = this.autocompleteSvc.options$
+      this.subs['options']?.unsubscribe();
+      this.subs['options'] = this.autocompleteSvc.options$
         .subscribe(options => this._options$.next(options));
     }
   }
@@ -47,13 +44,12 @@ export class MazuAutocompleteComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.inputSub?.unsubscribe();
-    this.optionsSub?.unsubscribe();
+    Object.values(this.subs).forEach(sub => sub.unsubscribe());
   }
 
   private initInputRef(): void {
     const el = this.ref.getNativeElement();
-    this.inputSub = createDebouncedInputEvent(el, this.updateInterval)
+    this.subs['input'] = createDebouncedInputEvent(el, this.updateInterval)
       .subscribe(val => this.autocompleteSvc.setFilter(val));
   }
 }

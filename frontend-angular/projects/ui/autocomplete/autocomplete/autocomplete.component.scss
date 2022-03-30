@@ -8,4 +8,9 @@
   box-shadow: 2px 2px 7px rgba(0,0,0,0.2);
   margin: 0;
   padding: 0;
+  transition: 0.15 opacity ease-out;
+}
+
+.mz-autocomplete:empty {
+  opacity: 0;
 }

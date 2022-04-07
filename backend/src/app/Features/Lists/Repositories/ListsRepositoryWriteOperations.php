@@ -93,4 +93,19 @@ trait ListsRepositoryWriteOperations
         $params = [':listid' => $listId];
         return $this->db->execute($sql, $params);
     }
+
+    public function unmarkAllAsFavorite(): int
+    {
+        $sql = "
+            UPDATE {$this->table}
+            SET is_favorite = :unmarked
+            WHERE list_id IN (
+                SELECT list_id FROM {$this->table} WHERE is_favorite = :marked
+            )
+        ";
+
+        $params = [':unmarked' => 0, ':marked' => 1];
+
+        return $this->db->execute($sql, $params);
+    }
 }

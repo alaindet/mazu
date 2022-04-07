@@ -1,7 +1,7 @@
 # To do
 
 ## Backend
-- [ ] When updating *ANY* list to favorite, remove the other ones as favorite
+- [x] When updating *ANY* list to favorite, remove the other ones as favorite
 - [ ] Add search for items?
 
 ## Frontend

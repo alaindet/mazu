@@ -68,15 +68,14 @@ class ListsService
      */
     public function markAsFavorite($listId, $isFavorite = true): GetListDto
     {
+        // First, unmark all existing favorite lists
+        $this->listsRepo->unmarkAllAsFavorite();
+
         $dtoOut = $this->findById($listId);
         $dtoOut->isFavorite = $isFavorite;
 
-        $marked = $this->listsRepo->markAsFavorite($listId, $isFavorite);
-
-        if ($marked === 0) {
-            $markStatus = $isFavorite ? 'marked' : 'not marked';
-            $message = "List #{$listId} is already {$markStatus} as favorite";
-            throw new ConflictHttpException($message);
+        if ($isFavorite) {
+            $this->listsRepo->markAsFavorite($listId, $isFavorite);
         }
 
         return $dtoOut;

@@ -5,6 +5,7 @@
 - [ ] Add search for items?
 
 ## Frontend
+- [ ] Keyboard control on autocomplete
 - [ ] Change environment apiUrl in production
 - [ ] Inspiration UI: https://demos.creative-tim.com/purity-ui-dashboard/#/admin/dashboard
 - [ ] Inspiration UI: https://www.wework4days.com/
